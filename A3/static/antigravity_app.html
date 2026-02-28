@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antigravity - Creative Vision Board</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .vision-grid {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .vision-item {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(192, 132, 252, 0.1));
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .vision-title {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .vision-body {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .loader {
+            display: none;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .loader span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin: 0 4px;
+            animation: bounce 0.6s infinite alternate;
+        }
+
+        .loader span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loader span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+            to {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>✨ Antigravity Visionary</h1>
+        <div class="card">
+            <div class="form-group">
+                <label for="topic">What's your creative spark?</label>
+                <input type="text" id="topic" placeholder="e.g. A cyberpunk library, a sustainable shoe brand">
+            </div>
+            <button id="generateBtn" onclick="generateVision()">Construct Vision</button>
+
+            <div id="loader" class="loader">
+                <span></span><span></span><span></span>
+                <p>Synthesizing prompts...</p>
+            </div>
+
+            <div id="visionBoard" class="vision-grid">
+                <!-- Vision items appear here -->
+            </div>
+        </div>
+        <nav>
+            <a href="sender.html">← Go to Messaging Service</a>
+        </nav>
+    </div>
+
+    <script>
+        function getApiBase() {
+            if (window.location.protocol.startsWith('http')) {
+                return `${window.location.protocol}//${window.location.host}`;
+            }
+            return 'http://localhost:5000';
+        }
+
+        // Mocking the "Structured Prompts" and "Data Source" logic for the assignment
+        // In a real Antigravity IDE, these would be handled by the platform.
+        // For the submission, we simulate the logic flow.
+
+        async function generateVision() {
+            const topic = document.getElementById('topic').value;
+            const board = document.getElementById('visionBoard');
+            const loader = document.getElementById('loader');
+            const apiBase = getApiBase();
+
+            if (!topic) return;
+
+            loader.style.display = 'block';
+            board.innerHTML = '';
+
+            // Simulate "Structured Prompts" sequence
+            const steps = [
+                { title: "Core Concept", content: `A unique vision centered around "${topic}" with a focus on innovative aesthetics.` },
+                { title: "Visual Language", content: "Deep purples, translucent materials, and floating geometric icons." },
+                { title: "Narrative Hook", content: "Where memories are stored in glass spheres, waiting to be read." }
+            ];
+
+            // Simulate processing time
+            for (let step of steps) {
+                await new Promise(r => setTimeout(r, 800));
+                const item = document.createElement('div');
+                item.className = 'vision-item';
+                item.innerHTML = `
+                    <div class="vision-title">${step.title}</div>
+                    <div class="vision-body">${step.content}</div>
+                `;
+                board.appendChild(item);
+            }
+
+            loader.style.display = 'none';
+
+            // Save to "Data Source" (disk file via backend)
+            try {
+                await fetch(`${apiBase}/saveVision`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ topic, vision: steps })
+                });
+            } catch (e) {
+                console.error("Failed to save history", e);
+            }
+        }
+    </script>
+</body>
+
+</html>
