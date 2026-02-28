@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSE446 Assignment 3 - Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-decoration: none;
+            color: var(--text);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+        }
+
+        .item-info h2 {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+            background: none;
+            -webkit-text-fill-color: initial;
+            text-align: left;
+        }
+
+        .item-info p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .badge {
+            background-color: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 99px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🚀 Assignment 3</h1>
+        <div class="card">
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 1rem;">
+                Integration and Messaging Project
+            </p>
+
+            <div class="menu">
+                <a href="antigravity_app.html" class="menu-item">
+                    <div class="item-info">
+                        <h2>Question 3: Antigravity</h2>
+                        <p>Creative Visionary App with Structured Prompts</p>
+                    </div>
+                    <span class="badge">Optional</span>
+                </a>
+
+                <a href="sender.html" class="menu-item">
+                    <div class="item-info">
+                        <h2>Question 5: Messaging</h2>
+                        <p>RESTful Service - Sender Interface</p>
+                    </div>
+                    <span class="badge" style="background-color: #f59e0b;">Required</span>
+                </a>
+
+                <a href="receiver.html" class="menu-item">
+                    <div class="item-info">
+                        <h2>Question 5: Messaging</h2>
+                        <p>RESTful Service - Receiver Interface</p>
+                    </div>
+                    <span class="badge" style="background-color: #f59e0b;">Required</span>
+                </a>
+            </div>
+        </div>
+        <div style="margin-top: 2rem; text-align: center; color: var(--text-muted); font-size: 0.75rem;">
+            Developed with Google Antigravity IDE
+        </div>
+    </div>
+</body>
+
+</html>

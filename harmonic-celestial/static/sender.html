@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messaging Service - Sender</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>📨 Send a Message</h1>
+        <div class="card">
+            <div class="form-group">
+                <label for="senderID">Your ID (Sender):</label>
+                <input type="text" id="senderID" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label for="receiverID">Receiver ID:</label>
+                <input type="text" id="receiverID" placeholder="Enter recipient name">
+            </div>
+            <div class="form-group">
+                <label for="msg">Message:</label>
+                <textarea id="msg" placeholder="Type your message here..."></textarea>
+            </div>
+            <button id="sendBtn" onclick="sendMessage()">Send Now</button>
+            <div id="status"></div>
+        </div>
+        <nav>
+            <a href="receiver.html">Go to Receiver Page →</a>
+        </nav>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const senderID = document.getElementById('senderID').value;
+            const receiverID = document.getElementById('receiverID').value;
+            const msg = document.getElementById('msg').value;
+            const statusDiv = document.getElementById('status');
+
+            if (!senderID || !receiverID || !msg) {
+                statusDiv.innerHTML = '<p class="error">Please fill in all fields.</p>';
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:5000/sendMsg', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ senderID, receiverID, msg })
+                });
+
+                if (response.ok) {
+                    statusDiv.innerHTML = '<p class="success">Message sent successfully!</p>';
+                    document.getElementById('msg').value = '';
+                } else {
+                    statusDiv.innerHTML = '<p class="error">Failed to send message.</p>';
+                }
+            } catch (error) {
+                statusDiv.innerHTML = '<p class="error">Service not reachable. Make sure app.py is running.</p>';
+            }
+        }
+    </script>
+</body>
+</html>
