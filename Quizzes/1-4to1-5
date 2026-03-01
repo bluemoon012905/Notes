@@ -1,0 +1,117 @@
+Question 1
+1 / 1 pts
+A key idea of RESTful services is to focus on the
+  computing process to automate the Web. 
+  data and resources without computing support. 
+ - data and resources with computing support invisible to the clients. 
+  WSDL standard interface for interoperability. 
+ 
+Correct answer
+Question 2
+1 / 1 pts
+What data formats does a WCF RESTful service support to return a set of data items? Select all that apply.
+  BigTable 
+ - JSON 
+ - RSS 
+  Array of strings 
+ 
+Correct answer
+Question 3
+1 / 1 pts
+When we convert a SOAP service to a RESTful service in WCF, what must be removed?
+  The .cs file that implements the interfaces 
+  The hosting service 
+  The attribute [WebGet] 
+ - The endpoint 
+ 
+Correct answer
+Question 4
+1 / 1 pts
+What is the application level protocol employed in RESTful services?
+ - HTTP 
+  SOAP over HTTP 
+  TCP 
+  TCP over IP 
+ 
+Correct answer
+Question 5
+1 / 1 pts
+A sidecar in a service mesh is 
+  a service implementation. 
+ - a proxy to a microservice service. 
+  container that contains a communication protocol. 
+  a hosting service. 
+ 
+Correct answer
+Question 6
+1 / 1 pts
+To create a complete URI, we often need to combine a base URI address, a parameter name, and a parameter value. What is the proper way to create a complete URI? 
+  
+- Use library classes such as Uri and UriTempalte to create the complete URI.  
+
+  
+Use string appending operation, e.g., completeUri = baseUri + parameterName + paramaterValue;
+
+  
+Use appending and casting, e.g., completeUri = (Uri) baseUri + parameterName + paramaterValue;
+
+  Use completeUri = Convert.ToUri(baseUri + parameterName + paramaterValue);
+ 
+Wrong answer
+Question 7
+1 / 1 pts
+In RESTful service development using WCF template, we must define the UriTemplate if the service has
+  
+no parameter
+
+  
+one parameter
+
+  
+- two parameters
+
+  
+- More than two parameters
+
+ 
+Correct answer
+Question 8
+1 / 1 pts
+The composition architecture style choreography allows all the services to communicate with
+  
+a central process only.
+
+  
+- each other.
+
+  
+no any partner.
+
+  hosting worker only.
+ 
+Correct answer
+Question 9
+1 / 1 pts
+When creating a Web API using ASP .Net Web Application template without using WCF template, what files need to be created or modified?
+
+  Service.cs file 
+  IService.cs file 
+ - configuration file 
+ - Global.asax file 
+ - controller file 
+ 
+Correct answer
+Question 10
+1 / 1 pts
+The composition architecture style orchestration requires all the services to communicate with
+  
+- a central process only.
+
+  
+each other.
+
+  
+no any partner.
+
+  
+hosting worker only.

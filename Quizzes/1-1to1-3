@@ -1,0 +1,107 @@
+Question 1
+1 / 1 pts
+Which statements are correct in the course grading policy? Select all that apply.
+  The lowest assignment score will be dropped. 
+  Two lowest quiz scores will be dropped automatically.
+ - Two lowest unit test scores will be dropped automatically.
+ - The lowest exam score will be dropped automatically.
+ 
+Correct answer
+Question 2
+1 / 1 pts
+The workflow that transforms input to output refers to software integration at the level of
+  architecture 
+  interface 
+ - behavior 
+  system 
+ 
+Correct answer
+Question 3
+1 / 1 pts
+A system is a collection of interconnected components defined at these levels: (Select all that apply)
+ - architecture. 
+ - interface. 
+ - behavior. 
+  requirement. 
+ 
+Correct answer
+Question 4
+1 / 1 pts
+What part of the C# code is used for defining the service contract in the WCF endpoint?
+  class 
+ - interface 
+  method 
+  implementation 
+ 
+Correct answer
+Question 5
+1 / 1 pts
+The endpoints in ASMX and in WCF services are different at programming language level. However, they are the same at the service level. Their interfaces are both described in
+  HTTP 
+  SOAP 
+  WCF 
+ - WSDL 
+ 
+Correct answer
+Question 6
+1 / 1 pts
+What is NOT a part of an endpoint?
+  Service address 
+  Service’s binding protocol 
+  Service contract 
+ - Service hosting 
+ 
+Correct answer
+Question 7
+1 / 1 pts
+What is the benefit of using asynchronous calls, instead of using synchronous calls?
+
+
+  
+Asynchronous calls take shorter time to complete.
+
+  
+- Asynchronous calls do not block the callers.
+
+  
+Asynchronous calls work for RESTful services, while synchronous calls work for SOAP services only.
+
+  
+Asynchronous calls are easier to implement.
+
+ 
+Correct answer
+Question 8
+1 / 1 pts
+What level of behaviors deals with creating multiple instances of a service to process requests?
+ - Service behaviors 
+  Endpoint behaviors 
+  Operation behaviors. 
+  Client behaviors 
+ 
+Correct answer
+Question 9
+1 / 1 pts
+What binding protocol is used for exposing a service to be a RESTful services, instead of SOAP services?
+
+ 
+
+  
+BasicHttpBinding
+
+  
+WsHttpBinding
+
+  
+NetPeerTcpBinding
+
+ - WebHttpBinding
+ 
+Correct answer
+Question 10
+1 / 1 pts
+How can asynchronous communications between a client and a server be implemented in WCF? Select all that apply.
+ - Use two one-way calls. 
+  Use two two-way calls. 
+ - Use a one-way call and then a two-way call. 
+  Use a two-way call and then a one-way call. 
