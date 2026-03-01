@@ -1,0 +1,1360 @@
+CSE 446/598
+Software Integration
+and Engineering
+
+Unit 1
+Service Standards and Service Development
+
+Lecture 1-5
+RESTful Service Development
+and Case Studies
+
+Dr. Yinong Chen
+
+Lecture Roadmap
+
+2
+
+Previous lecture:
+Using WCF template
+
+Developing REST Services Without WCF Template
+ Develop RESTful Web API (CSE445 Review)
+ Develop a gRPC Service and Client
+ Develop a RESTful Service in Python
+ Case Study: Image Verifier in RESTful Service
+ RESTful Service of a Random String Generator
+ RESTful Service of an Image Verifier
+ TryIt page calling RESTful Services
+ RESTful services and Applications in ASP .Net Core
+
+
+Y. Chen
+
+Creating RESTful Web APIs without WCF
+https://www.tutorialsteacher.com/webapi/create-web-api-project
+
+Step 1:
+Choose
+right template:
+
+Step 2:
+
+Step 3:
+3
+Y. Chen
+
+Add Controllers and Configuration Folders
+Right click project name and add two New Folders
+into the project
+ Right click Configuration
+folder and add a class
+Follow MVC
+
+
+HelloWebAPIConfig
+
+Architecture
+Pattern
+
+Configuration folder holds a
+class for registering and
+configuring the service
+ Controller folder holds a class
+that implement the service
+
+
+4
+Y. Chen
+
+Copy the code into HelloWebAPIConfig class
+using System;
+using System.Web.Http;
+namespace HelloWebAPI.Configuration
+{
+public static class HelloWebAPIConfig
+{
+public static void Register(HttpConfiguration config)
+{
+config.MapHttpAttributeRoutes(); // Web API routes
+config.Routes.MapHttpRoute(
+Register
+name: "DefaultApi",
+and define
+routeTemplate: "api/{controller}/{id}",
+the path to
+defaults: new { id = RouteParameter.Optional }
+the code
+);
+}
+}
+5
+}
+Y. Chen
+
+Copy this code into Global.asax file
+using System;
+using System.Web.Http;
+using HelloWebAPI.Configuration;
+namespace MyWebApi
+{
+public class Global : System.Web.HttpApplication
+{
+protected void Application_Start(object sender, EventArgs e)
+{
+GlobalConfiguration.Configure(HelloWebAPIConfig.Register);
+}
+}
+}
+
+Application_Start event handler:
+When the application starts, it runs
+the code to register the api.
+
+6
+Y. Chen
+
+Copy the code into HelloController.cs
+using System;
+using System.Web.Http;
+namespace MyWebApi.Controllers
+{
+public class HelloController : ApiController
+{
+public string Get()
+{
+return "Hello World";
+}
+}
+You can add any
+}
+service code here. For
+
+example, temperature
+conversion service.
+7
+Y. Chen
+
+Build and then Start
+
+• The browser will start at the address: https://localhost:44379/
+ HTTP Error 403.14 - Forbidden
+• You type the full address into your web browser: https://localhost:44379/api/hello
+
+Deployed to venus server:
+http://venus.sod.asu.edu/WSRepository/Webapis/HelloWebApi/api/hello
+
+8
+Y. Chen
+
+Lecture Roadmap
+
+9
+
+Previous lecture:
+Using WCF template
+
+Developing REST Services Without WCF template
+ Develop RESTful Web API (CSE445 Review)
+ Develop a gRPC Service and Client
+ Develop a RESTful Service in Python
+ Case Study: Image Verifier in RESTful Service
+ RESTful Service of a Random String Generator
+ RESTful Service of an Image Verifier
+ TryIt page calling RESTful Services
+ RESTful services and Applications in ASP .Net Core
+
+
+Y. Chen
+
+Creating Google gRPC Service and Client
+in Visual Studio Core
+Please read the slides together with this tutorial:
+https://docs.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-5.0&tabs=visualstudio
+
+
+
+
+
+Create a gRPC Service.
+Create a gRPC client.
+Test the gRPC client service with the gRPC
+Greeter service.
+
+Cloud Endpoints for gRPC
+
+11
+
+1) https://cloud.google.com/endpoints/docs/grpc/about-grpc
+2) https://www.grpc.io/docs/
+
+gRPC is a high performance, open-source universal RPC
+framework, developed by Google.
+ In gRPC, a client application can directly call methods on a
+server (on a different machine) as if it was a local object, making
+it easier to create distributed applications
+and services.
+ gRPC exposes endpoints to
+outside to enable different
+types of clients.
+ gRPC client
+ HTTP / JSON clients
+ Example:
+using Visual Studio to develop a gRPC service and client
+Y. Chen
+
+
+12
+
+A gRPC service supportef languages
+Supported programming languages for developing
+gRPC services include:
+C++
+Node.js (JavaScript)
+C#/.NET
+Objective-C
+Dart
+PHP
+Go
+Python
+Java
+Ruby
+Kotlin
+Swift
+…
+Y. Chen
+
+Creating gRPC Service in Visual Studio
+
+13
+
+https://docs.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore5.0&tabs=visual-studio
+
+Start Visual Studio and select Create a new project.
+ In the Create a new project dialog, select gRPC
+Service and select Next
+
+
+Y. Chen
+
+14
+
+gRPC Service Interface Definition
+
+Define Interface using
+Protocol Buffer (CSE445)
+
+Y. Chen
+
+15
+
+gRPC Service Implementation Code
+
+Write service
+code in C#
+Y. Chen
+
+Start the gRPC service at https://localhost:5001
+
+16
+
+Press Ctrl+F5 or Start Without Debugging
+ Visual Studio displays a dialog for configuring to use
+SSL.
+ Click Yes.
+ A Security Waring dialog for installing security
+certificate
+ Click Yes.
+ Then, Visual Studio will run the service in IIS
+Express. The information will be displayed in
+Console window, showing
+ Now listening on: https://localhost:5001
+
+
+Y. Chen
+
+17
+
+Create Client Project
+
+• Right click Solution and choose to add a New Project
+
+• Name the Project: GrpcGreeterClient
+
+Y. Chen
+
+18
+
+Add Required Packages to Client Project
+• In Visual Studio Menu, Select:
+• Tools  NuGet Package Manager
+ Package Manager Console
+
+Y. Chen
+
+19
+
+Install Three Packages by Commands:
+
+At the lower
+window in
+Visual
+Studio:
+Install-Package Grpc.Net.Client
+Install-Package Google.Protobuf
+Install-Package Grpc.Tools
+
+Y. Chen
+
+Another Way of Installing NuGet Packages
+
+20
+
+Manage NuGet Packages option to install packages
+Right-click the project in Solution Explorer > Manage
+NuGet Packages
+ Select Browse tab and enter Grpc.Net.Client in the search box
+
+
+Select the Grpc.Net.Client package and
+select Install.
+ Repeat for
+Google.Protobuf and Grpc.Tools.
+
+
+Y. Chen
+
+21
+
+Create Client Project (Contd.)
+• Create a Protos folder in the gRPC
+client project
+• Copy the Protos\greet.proto interface
+file from the gRPC Greeter service to
+the gRPC client project.
+• In the Client project, update the
+namespace inside the greet.proto file to
+the project's namespace:
+
+duplicate
+
+option csharp_namespace = "GrpcGreeterClient";
+
+Y. Chen
+
+22
+
+Add greet.proto Interface file
+• Even though greet.proto file is added
+into the client folder Protos, the file is
+not linked to the project.
+• Right click the folder choose “Add” 
+Existing Item …
+
+Y. Chen
+
+Edit the GrpcGreeterClient.csproj project file
+
+23
+
+Right-click Client project and select Edit Project File.
+ Add / or change the new <ItemGroup> element:
+
+
+<ItemGroup>
+<Protobuf Include="Protos\greet.proto" GrpcServices="Client" />
+</ItemGroup>
+
+Y. Chen
+
+Asynchronous Service Call
+
+24
+
+Write the Greeter client code
+using System; using System.Net.Http;
+using System.Threading.Tasks; using Grpc.Net.Client;
+namespace GrpcGreeterClient {
+class Program {
+static async Task Main(string[] args) {
+// The port number(5001) must match the port of the gRPC server.
+using var channel = GrpcChannel.ForAddress("https://localhost:5001");
+var client = new Greeter.GreeterClient(channel);
+var reply = await client.SayHelloAsync(new HelloRequest {Name =
+"GreeterClient"});
+Console.WriteLine("Greeting: " + reply.Message);
+Console.WriteLine("Press any key to exit...");
+Console.ReadKey();
+}
+}
+Y. Chen
+}
+
+Test Service and Client on Localhost
+
+25
+
+
+
+
+
+Right click service project and choose “Set as Startup Project”
+ Start Without Debugging
+
+Right click client project and choose “Set as Startup Project”
+ Start Without Debugging
+
+Y. Chen
+
+Lecture Roadmap
+
+26
+
+Previous lecture:
+Using WCF template
+
+Developing REST Services Without WCF template
+ Develop RESTful Web API (CSE445)
+ Develop a gRPC Service and Client
+ Develop a RESTful Service in Python
+ Case Study: Image Verifier in RESTful Service
+ RESTful Service of a Random String Generator
+ RESTful Service of an Image Verifier
+ TryIt page calling RESTful Services
+ RESTful services and Applications in ASP .Net Core
+
+
+Y. Chen
+
+27
+
+Service Development in Python
+Visual Studio Python Module
+ PyCharm: Intelligent Python IDE with refactorings,
+debugger, code completion, on-the-fly code analysis, and
+coding productivity orientation
+(https://www.jetbrains.com/pycharm/download/).
+ VSCode (Mac)
+ PyDev for Eclipse
+ https://www.pydev.org/manual_101_install.html
+ If your comfortable with Eclipse for Java then there is
+very little learning curve
+
+
+Y. Chen
+
+Creating Python Web Service Using Flask
+
+28
+
+
+Tutorial
+https://docs.microsoft.com/en-us/visualstudio/ide/quickstart-python?view=vs-2022
+
+
+
+Run Visual Studio Installer to install Python
+
+Y. Chen
+
+Create a New Project
+
+29
+
+
+Start Visual Studio 
+
+Y. Chen
+
+30
+
+Project Created
+Right-click the environment and select
+View All Python Environment.
+
+Right-Click
+
+Y. Chen
+
+31
+
+Install Flask Environment
+
+Enter
+
+You may be
+asked to elevate
+the administer
+privilege.
+Elevate it.
+
+Y. Chen
+
+32
+
+Return to Solution: Now, You should see Flask
+
+Y. Chen
+
+33
+
+
+Add an Empty Python File
+
+Right-click Project name “HelloPython” and Choose
+Add New Item
+
+Y. Chen
+
+34
+
+Enter the Service Code into app.py File
+
+from flask import Flask
+# Create an instance of the Flask class that is the WSGI application.
+# The first argument is the name of the application module or
+package,
+# typically __name__ when using a single module.
+app = Flask(__name__)
+# Flask route decorators map / and /hello to the hello function.
+# To add other resources, create functions that generate the page
+contents
+# and add decorators to define the appropriate resource locators for
+them.
+Service
+@app.route('/')
+operation
+@app.route('/hello')
+def hello():
+# Render the page
+Service
+return "Hello Python!"
+hosting
+if __name__ == '__main__':
+# Run the app server on localhost:4449
+app.run('localhost', 4449)
+Y. Chen
+
+35
+
+Define Port Number in Visual Studio
+Right-click the HelloPython project and select Properties.
+Select the Debug tab from the Properties menu, and
+Enter the Port Number property to 4449
+
+Y. Chen
+
+36
+
+Select Debug > Start Without Debugging
+
+Open Web Browser
+
+Service Code from
+the previous page
+
+Y. Chen
+
+Hosting Python Service / Application on Wins Server
+
+37
+
+If your Web service/application is built with a non .Net
+language, you can create Windows containers to host them in
+Windows server or a cloud environment.
+ Create Web application with Flask Web Project.
+ To containerize your Web application, you will need to add
+a Docker file.
+ Test your application locally
+ Push your application to server and register the
+application.
+ Full Tutorial: https://azure.github.io/AppService/2021/03/04/Howto-Host-a-Python-application-with-Windows-Containers-on-AppService.html
+
+
+
+Example:
+
+https://venus.sod.asu.edu/WSRepository/repository.html
+
+Search Python
+
+Y. Chen
+
+Create a New C# Project to Consume the Service
+
+38
+
+
+Start Visual Studio 
+
+Y. Chen
+
+39
+
+Choose Empty Application
+
+Y. Chen
+
+Create A Client to Access Python Service
+
+40
+
+
+Right-click Project name “PythonWsClient” and
+Choose Add New Item
+
+Right-Click
+
+Y. Chen
+
+41
+
+Enter the C# Code to Access RESTful Service
+
+Y. Chen
+
+42
+
+Accessing Python Service in C# Client Code
+
+using System;
+using System.Net; // Contain WebClient class
+namespace PythonWsClient
+{
+public partial class WebForm1 : System.Web.UI.Page
+{
+protected void Page_Load(object sender, EventArgs e)
+{
+}
+protected void btnInvoke_Click(object sender, EventArgs e)
+{
+Uri completeUri = new Uri(txtUrl.Text); //http//localhost/4449
+WebClient channel = new WebClient(); // create a channel
+byte[] abc = channel.DownloadData(completeUri);
+// return byte array
+string str = System.Text.Encoding.Default.GetString(abc);
+// convent to string
+lblResult.Text = str;
+The same code that
+}
+consume a C# service
+}
+}
+Y. Chen
+
+Lecture Roadmap: Case Study 1
+
+43
+
+Developing REST Services:
+ Developing RESTful Service
+ Defining RESTful Service in Python
+ Image Verifier in RESTful Service
+ RESTful Service of a Random String Generator
+ RESTful Service of an Image Verifier
+ TryIt page calling RESTful Services
+ RESTful services in ASP .Net Core
+
+
+Y. Chen
+
+Development of an Image Verifier
+
+44
+
+Image verifier (CAPTCHA) is widely used as a way
+of preventing programmed attached to Web sites.
+ An image verifier consists of a random string
+generator and an image generator.
+
+
+Generate an
+image containing
+a string
+
+Image
+Generator
+
+Random String
+Generator
+
+Enter the string
+shown in the
+image
+
+Y. Chen
+
+45
+
+Architecture Design of the Image Verifier
+
+Composition
+Architecture Styles
+ Choreography
+
+RESTful Service
+
+RESTful Service
+
+Image
+Generator
+
+Random String
+Generator
+
+Services are allowed
+to communicate with
+each other
+
+ Orchestration
+
+ASP .Net Web Application
+
+Y. Chen
+
+46
+
+Architecture Design of the Image Verifier
+
+Composition
+Architecture Styles
+ Choreography
+ Orchestration
+
+RESTful Service
+
+RESTful Service
+
+Image
+Generator
+
+Random String
+Generator
+
+Services communicate
+with a central process
+only
+
+ASP .Net Web Application
+
+Y. Chen
+
+Lecture Roadmap
+
+47
+
+Developing REST Services:
+ Developing RESTful Service
+ Defining RESTful Service in Python
+ Image Verifier in RESTful Service
+ RESTful Service of a Random String Generator
+ RESTful Service of an Image Verifier
+ Synchronous RESTful Service Calls
+ RESTful services in ASP .Net Core
+
+
+Y. Chen
+
+Example: Random String Generator
+
+48
+
+
+A RESTful service deployed at:
+
+http://venus.sod.asu.edu/WSRepository/Services/RandomString/Service.svc/
+
+It has two operations:
+ Take an integer (length) as input, it returns a random
+string of the given length
+ Without providing a parameter, it returns a random
+string with a random length between 4 and 20.
+ The random string will contain an uppercase letter, a
+lowercase letter, a digit, and a special character. It can
+be used as a strong password.
+ They can be accessed in URI:
+
+
+http://venus.sod.asu.edu/WSRepository/Services/RandomString/Service.svc/GetRandomString/5
+http://venus.sod.asu.edu/WSRepository/Services/RandomString/Service.svc/GetRandomString
+
+Y. Chen
+
+Random String Generator: IService.cs
+
+49
+
+using System; using System.ServiceModel;
+We are using the
+using System.ServiceModel.Web;
+style with svc
+[ServiceContract]
+endpoints created
+but disabled
+public interface IService {
+[WebGet(UriTemplate = "/GetRandomString", RequestFormat =
+WebMessageFormat.Xml, ResponseFormat =
+WebMessageFormat.Xml, BodyStyle =
+Name totobe
+Names
+beused
+Names
+WebMessageBodyStyle.Bare)]
+Name
+in URI
+used
+in can
+URIbe
+can
+the
+must be
+must
+be
+string GetRandomString0();
+same
+be
+the same
+different:
+different
+cannot
+overload
+
+[WebGet(UriTemplate = "/GetRandomString/{Length}",
+RequestFormat = WebMessageFormat.Xml, ResponseFormat =
+WebMessageFormat.Xml, BodyStyle =
+WebMessageBodyStyle.Bare)]
+string GetRandomString(string Length);
+}
+Y. Chen
+
+Lecture Roadmap
+
+50
+
+Developing REST Services:
+ Developing RESTful Service
+ Defining RESTful Service in Python
+ Image Verifier in RESTful Service
+ RESTful Service of a Random String Generator
+ RESTful Service of an Image Verifier
+ TryIt page calling RESTful Services
+ RESTful services in ASP .Net Core
+
+
+Y. Chen
+
+Image Verifier Interface: IService.cs
+
+51
+
+using System; using System.IO;
+using System.ServiceModel;
+This operation will call the
+using System.ServiceModel.Web;
+RandomString/Service.svc
+[ServiceContract]
+public interface IService {
+[WebGet(UriTemplate = "/GetVerifierString/{myLength}",
+RequestFormat = WebMessageFormat.Xml, ResponseFormat =
+WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare)]
+string GetVerifierString(string myLength); // generates a string
+[WebGet(UriTemplate = "/GetImage/{myString}", RequestFormat =
+WebMessageFormat.Xml, ResponseFormat =
+WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare)]
+Stream GetImage(string myString); // generates image of the string
+}
+Y. Chen
+
+52
+
+Image Verifier: Service.cs Architecture
+RESTful service
+Class Service
+GetVerifierString (length)
+{
+call remote service;
+return string;
+}
+GetImage(string)
+{
+generate image;
+return image URI;
+}
+
+RESTful service
+Class Service
+/Service.svc/
+GetRandomString
+/Service.svc/
+GetRandomString/5
+
+Y. Chen
+
+53
+
+Image Verifier: Service.cs Code (1)
+
+Notice how
+a RESTful
+service is
+access here
+
+public class Service : IService {
+public string GetVerifierString(string myLength) {
+// Create the base address to the RandomString service
+
+Uri baseUri = new
+Uri("http://venus.sod.asu.edu/WSRepository/Services/RandomString/Service.svc");
+// Define UriTemplate for passing parameter
+
+UriTemplate myTemplate = new UriTemplate("GetRandomString/{Length}");
+// Assign values to variable to obtain the complete URI
+
+Uri completeUri = myTemplate.BindByPosition(baseUri, myLength);
+
+WebClient channel = new WebClient(); // create a channel
+
+byte[] abc = channel.DownloadData(completeUri); // return byte array
+
+Stream strm = new MemoryStream(abc); // convert to mem stream
+
+DataContractSerializer obj = new DataContractSerializer(typeof(string));
+
+string randString = obj.ReadObject(strm).ToString();
+
+return randString;
+The purpose is to create a
+Chen
+language-independent Y.string
+}
+
+Image Verifier: Service.cs Code (1) Explained
+
+54
+
+The service to be called:
+http://venus.sod.asu.edu/WSRepository/Services/RandomString/Service.svc/GetRandomString/5
+
+From the previous page:
+
+1
+2
+3
+
+// Create the base address to the RandomString service
+Uri baseUri = new Uri("http://venus.sod.asu.edu/WSRepository/Services/RandomString/Service.svc");
+// Create the Template to be used by the client
+UriTemplate myTemplate = new UriTemplate("GetRandomString/{Length}");
+// Assign values to variable to obtain the complete URI
+Uri completeUri = myTemplate.BindByPosition(baseUri, myLength);
+
+
+Can we use string appending, instead?
+Uri completeUri = baseUri + myLength;
+Y. Chen
+
+55
+
+Image Verifier: Service.cs Architecture
+RESTful service
+Class Service
+GetVerifierString (length)
+{
+call remote service;
+return string;
+}
+GetImage(string)
+{
+generate image;
+return image URI;
+}
+
+RESTful service
+Class Service
+/Service.svc/
+GetRandomString
+/Service.svc/
+GetRandomString/5
+
+http://venus.sod.asu.edu/WSRepository/Services/ImageVerifier/Service.svc/GetImage/7Mt$@
+Y. Chen
+
+56
+
+Image Verifier: Service.cs Code (2)
+25 * stringLength
+40
+
+// This operation creates image based on the input string
+public Stream GetImage(string myString) {
+WebOperationContext.Current.OutgoingResponse.ContentType =
+"image/jpeg";
+int mapwidth = (int)(myString.Length * 25); // define bitmap width
+Bitmap bMap = new Bitmap(mapwidth, 40); // based on string length
+Graphics graph = Graphics.FromImage(bMap);
+graph.Clear(Color.Azure);
+// background color
+graph.DrawRectangle(new Pen(Color.LightBlue, 0), 0, 0, bMap.Width - 1,
+bMap.Height - 1); // draw a frame
+
+We have two variables: bMap and graph.
+We use graph variable to modify bMap.
+
+Y. Chen
+
+57
+
+Image Verifier: Service.cs Code (3)
+We continue to use graph to
+modify bMap variable.
+
+Random rand = new Random();
+Pen badPen = new Pen(Color.LightGreen, 0);
+for (int i = 0; i < 100; i++) { // create random noise pattern
+int x = rand.Next(1, bMap.Width - 1);
+int y = rand.Next(1, bMap.Height - 1);
+graph.DrawRectangle(badPen, x, y, 4, 3);
+graph.DrawEllipse(badPen, x, y, 2, 3); // position and size
+}
+char[] charString = myString.ToCharArray();
+Font font = new Font("Boopee", 18, FontStyle.Bold);
+Color[] clr = {Color.Black, Color.Red, Color.DarkViolet, Color.Green,
+Color.DarkOrange, Color.Brown, Color.DarkGoldenrod, Color.Plum };
+Define an array of different colors
+
+Y. Chen
+
+Image Verifier: Service.cs Code (4)
+
+58
+
+// Draw the characters in the string onto the graphics object
+for (int i = 0; i < myString.Length; i++) {
+int d = rand.Next(20, 25); // distance between characters
+int p = rand.Next(1, 15); // up and down position
+int c = rand.Next(0, 7); // randomly choose a color
+string str1 = Convert.ToString(charString[i]); //char->string
+Brush b = new System.Drawing.SolidBrush(clr[c]);
+graph.DrawString(str1, font, b, 1 + i * d, p);
+}
+System.IO.MemoryStream ms = new System.IO.MemoryStream();
+bMap.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+ms.Position = 0;
+graph.Dispose(); bMap.Dispose();
+Now, we save bMap into
+memory stream variable ms
+return ms; // return the image generated
+}
+}
+
+Y. Chen
+
+Lecture Roadmap
+
+59
+
+Developing REST Services:
+ Developing RESTful Service
+ Defining RESTful Service in Python
+ Image Verifier in RESTful Service
+ RESTful Service of a Random String Generator
+ RESTful Service of an Image Verifier
+ TryIt page calling RESTful Services
+ RESTful services and Applications in ASP .Net Core
+
+
+Y. Chen
+
+60
+
+GUI Design and Code Behind GUI
+http://venus.sod.asu.edu/WSRepository/Services/ImageVerifierSvc/TryIt.aspx
+
+venus.sod.asu.edu/WSRepository/Services/ImageVerifierSvc/TryIt.aspx
+
+Y. Chen
+
+61
+
+Code Behind the GUI: TryIt.aspx.cs (1)
+using System; using System.Net; using System.IO;
+using System.Runtime.Serialization;
+public partial class TestVerifier : System.Web.UI.Page {
+protected void Page_Load(object sender, EventArgs e) { }
+protected void btnVerifyImage_Click(object sender, EventArgs e) {
+if (Session["generatedStr"].Equals(TextBox1.Text)) {
+Label1.Text =
+"Congratulation. The code you entered is correct!";
+}
+Else {
+Label1.Text = "I am sorry, the string you entered does not match
+the image. Please try again!";
+}
+}
+Y. Chen
+
+62
+
+Code Behind the GUI: TryIt.aspx.cs (2)
+
+protected void btnGetImage_Click(object sender, EventArgs e) {
+// create the base address
+Uri baseUri = new
+Uri("http://venus.sod.asu.edu/WSRepository/Services/ImageVerifier/Service.svc/");
+// define operation name and parameter template
+UriTemplate myTemplate = new
+UriTemplate("GetVerifierString/{myLength}");
+// assign values to variable to complete URI
+Uri completeUri = myTemplate.BindByPosition(baseUri,
+txtBoxlength.Text);
+
+Prepare the URI to call
+the GetImage service
+Y. Chen
+
+Code Behind the GUI: TryIt.aspx.cs (3)
+
+63
+
+call RESTful service
+GetVerifierString
+
+WebClient channel = new WebClient();
+byte[] abc = channel.DownloadData(completeUri);
+Stream strm = new MemoryStream(abc);
+DataContractSerializer obj = new
+DataContractSerializer(typeof(string));
+string generatedString = obj.ReadObject(strm).ToString();
+Session["generatedStr"] = generatedString; // Save
+call the service
+GetImage using
+Image1.Visible = true;
+string as parameter
+Image1.ImageUrl =
+"http://venus.sod.asu.edu/WSRepository/Services/ImageVerifier/Service.svc/GetImage/" + generatedString;
+
+btnGetImage.Text = "Show Me Another Image String";
+}
+}
+
+Read textbook Chapter
+5 on image generation
+for full detail
+
+Y. Chen
+
+Google and Microsoft RESTful Services
+
+64
+
+Example in Text Section 7.3.6
+
+
+Google map services
+
+
+
+
+https://developers.google.com/maps/documentation/webservices/
+
+Microsoft Bing map services
+
+
+http://msdn.microsoft.com/en-us/library/ff701713.aspx
+
+Y. Chen
+
+Google Map Service Call Example
+
+65
+
+
+http://maps.googleapis.com/maps/api/distancematrix/xml?origins=Phoenix+AZ|Tuc
+son+AZ&destinations=Los+Angeles|San+Francisco%&mode=driving&language=e
+n&sensor=false
+Add your API key
+to authenticate
+each request
+
+Distance Los
+San
+/ Time
+Angeles Francisco
+Phoenix
+Tucson
+
+Y. Chen
+
+Lecture Roadmap
+
+66
+
+Developing REST Services:
+ Developing RESTful Service
+ Defining Input and Output Formats
+ Image Verifier in RESTful Service
+ RESTful Service of a Random String Generator
+ RESTful Service of an Image Verifier
+ TryIt page calling RESTful Services
+ RESTful services and Applications in ASP .Net Core
+ Creating cross platforms services and applications
+
+
+Y. Chen
+
+ASP .Net Core Framework
+
+67
+
+WCF
+RESTful
+Service
+WCF
+SOAP
+Service
+
+ASP .Net
+MVC 1
+Application
+
+Web API
+RESTful
+Service
+
+ASP .Net
+Core Web
+Application
+MVC
+
+ASP .Net
+Web
+Application
+
+HTML5
+Single Page Application
+with Client Side
+Computing
+
+Desktop-based Forms
+Application
+
+JavaHTML Script Canvas
+SVG
+CSS
+&
+JQuery WebGL
+
+ASP .Net
+SOAP
+Service
+
+ASP .Net
+Framework
+
+ASP .Net Core
+Framework
+
+Frameworks
+on Mac & Linux
+
+Y. Chen
+
+Using ASP .Net Core Web Application
+
+68
+
+
+New  Project …
+
+Choose your directory for storing your project
+
+Y. Chen
+
+69
+
+Choose Web API Template
+
+Y. Chen
+
+70
+
+Service Templates, Add Your Code …
+
+Y. Chen
+
+Lecture Summary
+
+71
+
+Developing REST Services without using WCF:
+ Developing RESTful API
+ Develop a gRPC Service and Client
+ Developing RESTful Service in Python
+ Case Study: Image Verifier in RESTful Service
+ RESTful Service of a Random String Generator
+ RESTful Service of an Image Verifier
+ TryIt page calling RESTful Services
+ RESTful services in ASP .Net Core
+ Creating cross platforms services and applications
+
+
+Y. Chen
+
+Next Lecture
+
+72
+
+WCF
+RESTful
+Service
+WCF
+SOAP
+Service
+
+ASP .Net
+MVC 1
+Application
+
+Web API
+RESTful
+Service
+
+ASP .Net
+Core Web
+Application
+MVC
+
+ASP .Net
+Web
+Application
+
+HTML5
+Single Page Application
+with Client-Sid, plus
+server-side Computing
+
+Desktop-based Forms
+Application
+
+JavaHTML Script Canvas
+SVG
+CSS
+&
+JQuery WebGL
+
+ASP .Net
+SOAP
+Service
+
+ASP .Net
+Framework
+
+ASP .Net Core
+Framework
+
+Other Frameworks
+on Mac & Linux
+
+Y. Chen
+
+

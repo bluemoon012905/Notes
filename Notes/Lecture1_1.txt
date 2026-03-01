@@ -1,0 +1,1517 @@
+CSE446/598 Spring 2026
+Software Integration and Engineering
+Day One Itinerary: About the Course
+
+Dr. Yinong Chen
+https://myasucourses.asu.edu/
+
+Day One Itinerary
+
+
+About the instructor
+
+
+
+Course objectives & outcomes
+
+
+
+Syllabus discussion
+
+
+
+Course Introduction
+
+2 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Instructor: Yinong Chen
+Joined ASU CSE in 2001
+
+
+This Spring:
+CSE445/598 Distributed Software Development
+CSE446/598 Software Integration and Engineering
+CSE551 Foundation of Algorithms
+FSE598 Emerging Computing Technologies
+
+
+
+3
+
+Before this semester at ASU
+
+ASU 101, F11, F19
+CSE 101/FSE100: Every semester from Fall 06 to Fall 11, S16
+CSE 230: F11, F12, S13, F13, F14
+CSE 220: S2017, S2017, S2018, S2019
+CSE 240: Every semester since F2001
+CSE 310: SS01, F01, SS02
+CSE 225/EEE225: F02, S03, F03, S04; CSE 330: S02, SS 03  CSE230
+CSE 420/598: S01
+CSE 423: (Capstone) S08, F09; CSE485 F15
+CSE 445/598: Almost every Fall and summer since 2006
+CSE 446/598: Every Spring and Summer since 2010.
+CSE 551 Foundations of Algorithms, Spring 2021, Spring 2023, Spring 2025, Spring 2026
+CSE 565 Software Verification, Validation, and Testing, F20, F22
+CSE 598 Foundations of Social Media Mining, Spring 2022
+CSE446/598
+Dr.Emerging
+Yinong Chen
+FSE598
+Computing Technologies, Fall 22, SP 23, SS 23, SP 24, F 24, SP 25
+
+Yinong Chen
+Before joining ASU
+
+
+Taught for six years
+School of Computer Science
+Wits University of Johannesburg, South Africa
+
+
+
+Postdoc at LAAS-CNRS, Toulouse, France
+
+
+
+Ph.D. from Karlsruhe Institute of Technology (KIT),
+Germany
+
+
+
+Contact and more …
+http://www.public.asu.edu/~ychen10/
+
+4 CSE446/598 Dr. Yinong Chen
+
+Heinrich Hertz worked at KIT
+from 1885 to 1888, where he
+discovered electromagnetic
+waves
+
+27 February 2026
+
+Yinong Chen
+• More than 10 books
+• 300 research papers, most are in service-oriented
+computing and computer science education
+• Editor in Chief, Associate Editor, Editorial Board Member
+of international journals
+• Chair of international conferences
+• Keynote, panel talks
+• Taught high school students to program robots in two
+semesters and also in summers
+
+CSE446/598 Dr. Yinong Chen
+
+CSE446 SIE vs. CSE 445 DSD
+CSE446 Software Integration and Engineering
+Catalog Description
+Software development using architecture
+design, composition, workflow, services, data
+resources, data representations, data
+management, and development tools.
+Co-requisite: CSE445 (Does not apply to CSE598)
+Key differences with CSE445
+2022
+• Composition and workflow: architecture-driven software
+integration from existing components, AI, big data, cloud
+computing;
+• Data sources and data management: Integration of
+computing with large data sources – databases and other
+data files, IoT, mobile, big data, and ontologies.
+6 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+ASU Inclusive Text Access
+The Text will be provisioned as an e-book and made available at a discounted
+price, cheaper than if purchased directly from the publisher.
+ If you wish to take advantage of this discounted group price, no additional
+action is needed. Following the drop/add period, the charge will post to your
+student account under the header “Digital Integrated Course Mtrl” and your
+access will continue uninterrupted.
+ If you'd rather purchase the textbook from an alternate source, you may
+choose to opt out of the program by following the instruction in the syllabus.
+
+
+Syllabus and
+Course
+Information
+
+7 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Sections: CSE446 and CSE598
+CSE446
+CSE598
+
+CSE446
+Inperson
+
+Lectures
+in
+Classroom
+
+Mid-Term and
+Final Exam
+in Classroom
+
+8 CSE446/598 Dr. Yinong Chen
+
+GOEE
+CSE598
+Online
+
+Quiz and
+Unit Test
+Online
+
+Assignment
+Submission
+Online
+
+Recorded
+Lectures
+
+Mid-Term and
+Final Exam
+Remotely
+27 February 2026
+
+Objectives and Outcomes
+1. To understand software architecture
+
+and software process
+
+
+
+
+Students understand the requirement and
+specification process in problem solving.
+Students understand software life cycle
+and process management
+Standard
+Students can identify advantages and objective and
+outcomes in
+disadvantages of software
+any software
+architectures and their trade-offs in
+engineering
+course
+different applications
+
+9 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Objectives and Outcomes
+2. To understand and apply composition
+
+approach in software development
+
+
+
+
+
+
+Students can apply software architecture to guide
+software development in the problem-solving
+process.
+Students understand interface requirement of
+software services.
+Students can compose software based on
+interfaces of services and components.
+Students can develop software system using
+different composition methods and tools.
+
+10 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Objectives and Outcomes
+3. To understand and apply data and
+
+information integration in software
+development
+
+
+
+
+Students can compose software systems using
+different data resources in different data formats.
+Students can integrate application logic with
+different databases.
+Students can apply the entire software life cycle to
+develop working software systems.
+
+11 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Weight and Grading Scale
+Quizzes and unit tests will
+be given online for all
+students. You can take them
+in the lecture week.
+
+Percentage
+96.5-100%
+92.5-96.4%
+89.5-92.4%
+
+Symbol
+Grade
+A+
+A
+A-
+
+86.5-89.4%
+82.5-86.4%
+79.5-82.4%
+
+B+
+B
+BC+
+C
+
+Graded Activity
+
+Weight
+
+Assignments*
+
+30%
+
+Weekly Quizzes**
+
+11%
+
+Unit Tests 1, 2, 4, 5, 6*
+
+12%
+
+Mid-Term Exam
+
+22%
+
+75.5-79.4%
+69.5-75.4%
+
+Final Exam
+
+25%
+
+59.5-69.4%
+
+D
+
+Below 60%
+
+E
+
+* The lowest one will be dropped, no make up and no reset
+** The lowest two will be dropped, no make up and no reset.
+12 CSE446/598 Dr. Yinong Chen
+
+No Y-Grade
+
+Canvas: Syllabus and Course Summary
+
+13 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Calendar File (PDF)
+
+Quiz 0
+Practice
+quiz
+
+Assignment
+1 Due
+
+14 CSE446/598 Dr. Yinong Chen
+
+Unit 1 Quizzes
+and Test due
+on Mondays
+27 February 2026
+
+Calendar File (PDF)
+
+Assignments
+Due
+
+15 CSE446/598 Dr. Yinong Chen
+
+quizzes and
+Unit Test due
+on Mondays
+
+27 February 2026
+
+Calendar File (PDF)
+
+Mid-Term
+Exam
+
+quizzes and
+Unit Test due
+on Mondays
+
+16 CSE446/598 Dr. Yinong Chen
+
+Assignments
+Due
+
+27 February 2026
+
+Calendar File (PDF)
+
+17 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Canvas: Modules and Online Lectures
+
+18 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Canvas: Modules and Online Lectures
+
+19 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Canvas: Modules = Units
+
+Each unit
+has 4 or 5
+lectures
+Each unit
+has 2
+quizzes
+There are
+7 units
+
+20 CSE446/598 Dr. Yinong Chen
+
+Each unit
+has 1
+unit test
+Each unit
+has 1
+assignment 27 February 2026
+
+Canvas: Discussion Boards
+Each unit
+has a
+discussion
+forum
+
+21 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Read FAQ document in Course Web
+
+22 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Standard Classroom Expectation
+ Silent your cellular phone; If your phone happens
+
+to ring, stop it immediately and do not answer
+your phone!
+ Use computer for directly related activities only,
+e.g., taking notes during the lectures.
+ Do not talk to each other during the lecture. If you
+have a question that needs to be resolved
+immediately, you must ask the instructor.
+ Enter the classroom before the lecture’s starting
+time.
+ Do not leave the classroom during the lecture,
+unless there is an emergency situation.
+23 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Policies
+ Interaction: You are encouraged to ask the instructor
+
+questions during the lectures.
+ Outside class help welcome and encouraged:
+–
+
+Discussion board (effective and fair);
+
+–
+
+Instructor’s and the TA’s office hours;
+
+–
+
+Request appointments if you can not make the office hours;
+
+–
+
+Email/Canvas mail for personal issues
+
+ Tests and exams: Missing tests and exams will be giving zero
+
+credit and may not be made up.
+ Assignments: Late submission will be accepted with grade
+
+deduction: Please check assignment document for details.
+
+24 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Extra credit, alternative, and inquires
+ No extra credit-activities will be given to any individual.
+
+Extra credit-activities may be given to the entire class.
+ An alternative to a graded activity may be arranged if a
+
+student's absence is caused by documented illness or
+personal emergency. A written explanation (including
+supporting documentation) must be submitted to the
+instructor before the part of work is due or as soon as the
+circumstances are known.
+ Any inquires or appeals on grades of homework, projects, or
+
+tests must be done in writing by completing the "Grade
+Inquiry Form" within a week from the day the grades and/or
+comments were published on-line. State the problem and the
+rationale for any change in grade in your appeal.
+25 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Cooperation and Code of Conduct
+You are encouraged to cooperate in study group on learning course materials.
+ You may not cooperate on preparing the individual assignments. Anything
+you turn in must be your own work. If you use an idea that is found in a book
+or other sources, make sure you acknowledge the source and/or the names of
+the persons in the write-up for each problem.
+ All assignment questions must be asked in the course discussion board.
+Asking assignment questions or making your assignment available in the
+public websites before the assignment due will be considered AIP (Academic
+Integrity Policy) violation.
+ The instructor and the TA/grader are required to CAREFULLY check any
+possible proliferation or plagiarism. We will use the software tools like MOSS
+(Measure Of Software Similarity) to check any assignment. The university
+expects all students to adhere to ASU's policy on Academic Dishonesty. These
+policies can be found in the Code of Student Conduct:
+https://provost.asu.edu/academicintegrity/policy
+
+
+ALL cases of AIP violation will be handed to the AIP office. Penalties
+include a failing grade in the class, a note on your official transcript (XE) that
+shows you were punished for AIP violation .
+
+26 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Announcement and Information
+ Official announcements will be made either in
+
+the course “Announcement” part of the course
+web page.
+ Articles or answers in the discussion board by
+the instructor, the TA, or other students are
+not official announcement.
+ Make sure you regularly (at least once every
+two days) check the course web page for any
+announcements.
+27 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+CSE 445/598 (DSD) vs. CSE446/598 (SIE)
+
+CSE446/598
+Software Integration and
+Engineering
+
+CSE 445/598
+Distributed Software Development
+
+28 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+One Text for Two Courses
+
+SIE
+
+DSD
+
+Part I
+Chapter 1
+Chapter 2
+Chapter 3
+Chapter 4
+Chapter 5
+Chapter 6
+Part II
+Chapter 7
+Chapter 8
+Chapter 9
+Chapter 10
+Chapter 11
+Chapter 12
+Chapter 13
+
+Distributed Service-Oriented Software Development and
+Web Data Management
+Introduction to Distributed Service-Oriented Computing
+Distributed Computing with Multithreading
+Reading
+Essentials in Service-Oriented Software Development
+XML and Web Data Formats
+Assignment 1
+Web Application and Data Management
+Dependability of Service-Oriented Software
+Advanced Service-Oriented Computing and Large System Composition
+Service-Oriented and REST Architecture
+Enterprise Software Development and Integration
+IoT, Robotics, and Device Integration via Visual Programming
+Interfacing Service-Oriented Software with Database
+Big Data and Cloud Computing
+Artificial Intelligence and Machine Learning
+Mobile Computing and Application Development
+
+29 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Topics/Units To be Covered
+
+
+
+
+
+
+
+
+Unit 1 - Chapter 7:
+Introduction, Advanced SOA and REST Architecture
+Unit 2 - Chapters 7 and 8:
+Software Integration: Architecture, Workflow, Copilot
+Unit 3 - Chapter 8:
+Software Integration: Antigravity, BPEL, Messaging & Caching
+Unit 4 - Chapters 9 and 13
+IoT, Robotics, and Mobile Computing
+Unit 5 - Chapter 10:
+Web Application and Data Integration
+Unit 6 - Chapters 11 and 12:
+Big Data and Ontology, AI, and Software as a Service
+Unit 7 – Chapter 11
+Cloud Computing
+
+30 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Unit 1
+Advance SOA and REST Architecture
+1.
+2.
+3.
+4.
+5.
+
+Day 1 Issues and Introduction
+Self-Hosting Services
+Advanced WSDL/SOAP Services,
+including asynchronous services
+REST Concepts
+RESTful Services and Web APIs
+
+31 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Unit 2
+Software Integration: Architecture and Workflow
+1.
+2.
+3.
+4.
+
+Advanced Web Application Architecture
+Enterprise Application Architecture
+Workflow Concepts and Workflow Foundation
+Power Platform:
+1.
+2.
+3.
+4.
+5.
+
+Power Apps,
+Power Automate,
+Power BI,
+Power Pages, and
+Copilot Studio
+
+32 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Unit 3
+Software Integration: LLM, BPEL, Messaging and
+Caching
+1.
+2.
+3.
+4.
+
+Google Antigravity: AI-LLM-Based Development
+BPEL Process
+Message-Based Integration
+Web Caching and Recommendation
+
+33 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Unit 4
+IoT and Mobile App Development and Device
+Integration
+1.
+2.
+3.
+
+Visual IoT/Robotics Programming Language Environment
+Advanced VIPLE Workflow and Application
+Device Integration
+–
+–
+–
+–
+
+4.
+
+Internet of Things
+Service-Oriented Robotics Computing
+Event-Driven Robotics Applications
+Robot as a Service in Cloud Computing
+
+Mobile Computing and Phone App Development, with
+synchronous and asynchronous service accesses.
+–
+–
+–
+
+iOS phone
+Android phone
+Android phone simulator
+
+34 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Unit 5
+Application and Data Integration
+1.
+2.
+3.
+4.
+
+ADO for Database Access
+LINQ to Object
+LINQ to SQL and Functional Programming
+LINQ to XML
+
+35 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Unit 6 Big Data and AI
+1.
+
+Big Data Concepts and Domains
+– Concepts and Infrastructure
+
+2.
+
+Big Data Processing on Hadoop
+– MapReduce, Hadoop, and Analytics
+
+3.
+4.
+
+Big Data Processing in Python
+Introduction to AI and Machine Learning
+– AI Development and Domains
+– Case Study: Image recognition
+– Case Study: Flight pattern training and recognition
+
+5.
+
+Ontology for AI and Semantic Web
+– Ontology Languages RDF and RDF Schema
+– Web Ontology Languages and IDEs
+
+36 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+Unit 7
+1.
+
+Cloud Computing and Software as a Service
+– Software as a Service, Platform as a Service, and
+Infrastructure as a Service,
+– Multi-tenancy
+
+2.
+
+Cloud Computing Case Studies
+–
+–
+–
+–
+
+Google Cloud: from concepts to implementation
+Microsoft Azure from development to deployment
+Oracle Cloud
+Amazon Cloud
+
+37 CSE446/598 Dr. Yinong Chen
+
+27 February 2026
+
+CSE 446 / CSE 598
+Software Integration and Engineering
+
+Unit 1
+Service Standards and Service Development
+Lecture 1-1
+Introduction
+Dr. Yinong Chen
+https://myasucourses.asu.edu/
+
+39
+
+Roadmap of Unit 1
+1. Introduction
+
+
+Software Integration
+
+
+
+Service-Oriented Architecture
+
+
+
+Service-Oriented Computing
+
+
+
+Service-Oriented Development
+
+
+
+Semantic Web and Intelligent Web
+
+2. Self-Hosting Services
+3. Advanced WSDL/SOAP Services
+4. REST Concepts
+5. RESTful Services
+Y. Chen
+
+40
+
+What is a System?
+A system is a collection of interconnected components
+that have some functions or purposes. A system can be
+defined at three levels
+ A system has architecture
+ the overall organization of its components
+ A system has interfaces
+ input/output
+ A system has behaviors
+ declarative relationship between input and output;
+ procedural relationship: transformation from input to
+output.
+Y. Chen
+
+Software Integration at Different Levels
+
+41
+
+
+
+Architecture
+
+
+
+
+
+
+The distinction may or may not be
+Integration of systems
+clear, depending on the context.
+Integration of components
+Integration of computing systems and data sources
+
+Interfaces
+
+
+Integration based on component models
+Object Model (migration or remote objects)
+ Service Model
+
+
+
+
+Integration based on communication model
+Point to point (Remote procedure call and invocation)
+ Bus (object broker and service bus)
+
+
+
+
+Behaviors
+
+
+
+
+Integration based on declarative relationship among inputs and
+outputs: Integration through message exchange among components
+(services and objects).
+Integration based on workflow among the components
+Y. Chen
+
+Integration Case Study: ASU Website
+
+42
+
+Enrollment
+ Application submission
+ Application evaluation
+ My ASU: Canvas
+
+
+Class search and enrollment
+ Class schedule
+ Test and assignment submission
+ Grade book
+ Mail and alert
+
+Application Evaluation
+Number Ranking
+
+
+
+Student database
+ ASU Mail
+ Mail
+ Calendar and schedule
+
+Accept
+
+Reject
+Marginal
+
+More
+stuff
+
+Manual
+reading
+
+Interview
+
+
+
+Manual Ranking
+Accept
+
+Reject
+Y. Chen
+
+Integration Case Study: ASU Website
+
+43
+
+What else can we do to improve our business?
+Application Evaluation
+
+Application Evaluation System
+Application
+stuff
+
+Semantic
+analysis
+
+Web
+Interview
+
+Number Ranking
+Accept
+
+Reject
+Audio
+service
+
+Marginal
+
+Integration
+More
+stuff
+
+Manual
+reading
+
+Interview
+
+Knowledge
+Ontology
+
+Manual Ranking
+Ranking
+Accept
+
+Reject
+
+Audio track
+
+Video track
+
+Transcription
+
+Image process
+
+Semantic analysis
+
+Image database
+
+Machine learning
+Y. Chen
+
+Starting Your Own Business
+
+44
+
+What can you do once you have developed the system?
+Application Evaluation System
+Application
+stuff
+
+Semantic
+analysis
+
+Web
+Interview
+
+Audio
+service
+Knowledge
+Ontology
+
+Ranking
+
+Audio track
+
+Video track
+
+Transcription
+
+Image process
+
+Semantic analysis
+
+Image database
+
+Machine learning
+
+ Start your own HR business to
+help any company to do
+prescreening;
+ Integrate your system into any
+organization’s IT system;
+ Make each component available
+as services to integrate into other
+system, e.g., your ontology,
+transcription service, or image
+processing;
+ Deploy your system into a cloud
+environment, so that you can
+focus on improving your business
+logic, instead of working on
+hosting business.
+ What is the Amazon model?
+
+Y. Chen
+
+Definitions and Terminologies
+
+45
+
+Service Orientation (SO): Umbrella concept for all serviceoriented approaches, including SOA, SOC, and SOD.
+ Service-Oriented Architecture (SOA): Software
+consisting of a collection of loosely coupled and platformindependent services that interact with each other through
+standard interfaces. SOA does not concern developing
+operational software.
+ Service-Oriented Computing (SOC) refers to the paradigm
+that represents computation in SOA. SOC concerns
+interface and behavior, including communication protocols,
+algorithms, and data representations.
+SOA and SOC can be used alternatively if the entire system
+is concerned, without specifically referring to architecture,
+interface, or behavior.
+
+
+Y. Chen
+
+Definitions and Terminologies (contd.)
+
+46
+
+
+
+Service-Oriented Development (SOD)
+ concerns the entire software development life
+cycle based on SOA concepts and SOC paradigm.
+ involves current technologies and tools to
+effectively produce operational software:
+Programming language features,
+ Development environments: VS, Java EE, WebSphere;
+ Standards and Interfaces with components, services, and
+data sources;
+ Deployment and hosting environment: Self-Hosting,
+Servers, AWS hosting, Cloud Infrastructure, such as
+Google App Engine, MS Azure, etc.
+
+
+Y. Chen
+
+47
+
+SOC (adding behavior & Interface)
+
+SOA
+
+proxy
+
+SOAP
+service
+Large System
+
+GUI
+WSDL
+
+SOAP
+
+RESTful
+service
+
+proxy
+WSDL
+
+WSDL
+
+HTTP
+
+SOAP
+service
+
+Orchestration process
+proxy
+
+decomposition
+Component
+
+Interconnection
+
+SOAP
+service
+
+proxy
+
+XML Data
+
+ASPX
+
+SOAP
+
+RESTful
+service
+
+proxy
+HTTP
+
+SOAP
+
+SOAP
+service
+
+Orchestration process
+
+SOD
+
+proxy
+
+DLL
+
+XML data
+SOAP
+
+Development/Hosting Environment
+
+Y. Chen
+
+48
+
+Service Orientation (SO)
+Service-Oriented
+Architecture
+
+SOA
+
+Service-Oriented
+Computing
+
+SOC
+
+Service-Oriented
+Development
+Y. Chen
+
+Why Service Orientation?
+
+49
+
+Service orientation is similar to object orientation
+ There is little difference at architecture level
+ Driven by Development Requirements (developing
+operational software):
+
+
+Large scalable and evolvable enterprise systems
+ Integration among existing systems
+ Interoperable among languages and platforms
+ Manageable complexity
+ Reusable business functions
+ Internet (Web) provisioning of services
+ Reduced cost of doing business
+ Increased dependability (reliability, availability, and security)
+
+
+Y. Chen
+
+50
+
+Why is SO Different from Object Orientation?
+Interface and Environment!
+ OO has evolved into distributed object systems
+CORBA, COM, DCOM, RMI (remote method invocation),
+etc. all try to implement transparent distributed systems
+ Standard interface such as IDL in CORBA
+
+
+
+
+SO standards are jointly developed by major players
+IBM, Microsoft, Oracle, SAP, Sun Microsystems, …
+ SOAP, WSDL, HTTP, UDDI, URI
+
+
+
+
+Loosely coupling instead of tightly coupling
+
+Better for
+integration
+
+Message exchange instead of remote calls
+ Using proxy instead of code integration or migration
+ Infrastructure for Service Publication (Service Brokers)
+ OO does not have standard publication mechanisms
+ SO enable and encourage sharing through standard brokers
+
+
+Y. Chen
+
+51
+
+SOA vs. Object-Oriented Architecture (OOA)
+
+Large System
+
+Large System
+
+decomposition
+
+decomposition
+
+OOA
+
+SOA
+Interconnection
+
+Interconnection
+
+Y. Chen
+
+Interface & Behavior Levels: SOC vs. OOC
+
+52
+
+proxy
+
+SOAP
+service
+
+GUI
+
+RESTful
+service
+
+proxy
+
+SOAP
+
+HTTP
+
+SOAP
+service
+
+Orchestration process
+proxy
+Component
+
+XML Data
+SOAP
+
+From
+library
+
+Place
+holder
+
+Object
+
+GUI
+
+Place
+holder
+
+Code
+integration
+
+From
+library
+
+Code
+integration
+
+Orchestration process
+Place
+holder
+Component
+
+Object
+
+Object
+
+XML Data
+Y. Chen
+
+53
+
+Interface & Behavior Levels: SOC vs. OOC
+proxy
+
+SOAP
+SOAP
+service
+
+GUI
+
+RESTful
+RESTful
+service
+
+proxy
+
+service
+
+service
+
+SOAP
+
+HTTP
+
+SOAP
+SOAP
+service
+service
+
+Orchestration process
+proxy
+Component
+
+XML Data
+SOAP
+
+From
+library
+
+Place
+holder
+
+Object
+
+Object
+
+GUI
+
+Place
+holder
+
+Object
+Object
+
+Code
+integration
+
+From
+library
+Orchestration process
+Place
+holder
+Component
+
+Object
+Object
+
+XML Data
+Y. Chen
+
+Definition of Web Service and SOAP Service
+
+54
+
+
+
+A Web service is an interface that describes a collection of
+operations (Web methods) that are Web-accessible through
+standardized XML messaging
+
+
+
+
+
+
+
+WSDL (Web Service Description Language) is used to describe the
+interface;
+SOAP (Simple Object Access Protocol) is used to exchange messages
+between services and between the applications and services;
+SOAP is typically on HTTP (others are possible)
+UDDI and ebXML are used for service registration/publishing
+
+Web services use XML for representing input and data, as
+well as almost everything: SOAP, WSDL, UDDI, and ebXML
+are all in XML.
+ Web services that use SOAP and WSDL are called “SOAP
+Services”.
+
+
+Y. Chen
+
+Definition of RESTful Service
+
+55
+
+REST: Representational State Transfer
+ A RESTful service is an interface that describes a collection of
+resources that are Web-accessible through standardized resource
+representations
+
+
+
+
+
+
+
+
+
+
+URI (Uniformed Resource Identifier) is used to access the resource under
+the Web;
+HTTP (Hypertext Transport Protocol) is used to exchange messages
+between services and between the applications and services;
+RESTful services use one layer of protocol less (without SOAP), and
+HTTP is even more widely used.
+
+RESTful services use multiple resource representation languages
+for representing input and output data:
+ XML, HTML, XHTML, RSS Feed, Atom Feed, JSON
+ Does not deal with object types, and less related to OO
+Y. Chen
+
+56
+
+Service Protocol Stack
+
+Desktop Application
+Web Application
+URI
+
+WSDL
+SOAP
+
+Virtual
+communication
+
+Web
+Service
+
+RESTful
+service
+
+WSDL
+
+URI
+
+SOAP
+
+HTTP
+
+HTTP
+
+Transport Layer (TCP)
+
+Transport Layer (TCP)
+
+Network Layer (IP)
+
+Network Layer (IP)
+
+Data Link Layer
+
+Data Link Layer
+
+Physical Layer
+Physical
+communication
+
+Physical Layer
+
+Y. Chen
+
+

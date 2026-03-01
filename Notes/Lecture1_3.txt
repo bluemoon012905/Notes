@@ -1,0 +1,1513 @@
+CSE 446 / CSE598
+Software Integration
+and Engineering
+
+Unit 1
+Introduction and Advanced Service Development
+
+Lecture 1-3
+Advanced Service Development
+
+Dr. Yinong Chen
+https://myasucourses.asu.edu/
+
+Lecture Outlines
+
+2
+
+Models of Distributed Computing
+ Channels for Communication and Interfacing
+
+
+One-way
+ Request-Reply
+ Duplex
+
+
+
+
+Reading Textbook, 9th edition
+
+Bindings
+For WSDL-SOAP services
+ For RESTful Services
+ For .Net Remoting
+
+
+
+
+Behaviors and service behaviors
+Instancing
+ Concurrency
+
+
+Y. Chen
+
+CSE445: Multithreading Asynchronous Solution
+Asynchronous caller
+non-blocking
+
+Caller
+Task
+
+var
+
+Callee
+response
+
+In Threading.Tasks namespace, Task class is designed to support asynchronous and
+parallel processing using multithreading model – It uses a pool of threads.
+
+Task class
+
+Started and
+executed in
+main thread
+String Apply
+Permission()
+
+Task
+Main()
+
+Started by Task and
+executed in thread pool
+simultaneously
+
+Task<Car>
+RentCarAsync()
+
+Task<Hotel>
+BookHotelAsync()
+
+Task<Flight>
+BookFlightAsync()
+
+await RentCarAsync()
+
+await
+BookHotelAsync()
+
+await
+BookFlightAsync()
+
+Synchronous
+
+The await operator suspends current thread (free processor) until the
+3
+Y. Chen
+asynchronous operation, which it waits for, completes.
+
+CSE445: State Management in Web Application
+View State and Cookie can store string data on client side:
+ View State: in hidden fields in html page in web browser
+ Cookie: in client machine’s hard drive
+ Session state allows you to store structured objects in the server;
+ The scope of session state is within all pages of the session, but
+not cross different sessions;
+ Application state: Application[“index”] allows you to store an
+object into server memory. All sessions and all pages in each
+session can access the application variable;
+
+
+
+
+These methods cannot be applied Web services
+4
+Y. Chen
+
+Distributed and Service-Oriented Solution
+
+5
+
+Remote Procedure Call (RPC) – Typically, Tightly Coupled/
+Synchronous Communication
+ Remote Invocation with Message Exchange – Intended for
+Loosely Coupled/Asynchronous Communication Synchronous
+
+
+RPC
+
+Two Ways
+Client
+
+Server
+
+SOAP
+Service
+One Way
+
+RESTfull
+Service
+
+Client
+
+...
+Another One Way
+
+Server
+
+communication:
+Have to wait for
+the response,
+even for void
+return type. It
+may hold the
+client for a long
+time.
+Asynchronous
+communication
+without
+blocking the
+client.
+Y. Chen
+
+6
+
+How to Communicate Asynchronously (1)
+If no return result is needed, easy:
+void function(types parameters);
+
+One Way
+Client
+
+Server
+
+Asynchronous
+communication
+without blocking
+the client.
+
+How do we do asynchronous communication requiring
+return results (two-way asynchronous communication)?
+Y. Chen
+
+How to Communicate Asynchronously (2)
+
+7
+
+One Way
+Client
+
+...
+
+Server
+
+Another One Way
+
+
+
+Asynchronous
+communication
+without blocking
+the client.
+
+The sever calls back
+ Pass the callback address when the client calls the service
+ The service calls the client using the callback address
+One Way(callback address)
+Client
+Callback
+endpoint
+
+...
+Another One Way
+(Callback)
+
+Server
+
+Y. Chen
+
+How to Communicate Asynchronously (3)
+
+8
+
+The sever provides a regular service for synchronous calls with
+return value;
+ The Client (main thread) makes one-way call to the service by
+spawning a child thread.
+ The main thread will exit the call as if it is a one-way call,
+while the child thread will wait for the result.
+ Once receiving the result, the child thread will write the result
+into a variable that the main thread can also access.
+ The main thread access the variable later.
+
+
+main
+Client
+
+Child thread
+
+Server
+with a
+regular
+service
+
+WCF Duplex
+Model
+
+Two ways
+Y. Chen
+
+How to Communicate Asynchronously (4)
+
+9
+
+The sever provides a stateful service and keeps the data for
+another call from the client;
+ The service is split into two services: BeginOperation (one
+way) and EndOperation (two ways).
+ The Client makes two calls to initiate the request and then to
+retrieve the result.
+ The service has to be specifically designed.
+
+
+One Way
+Client
+
+...
+
+Server
+with
+stateful
+service
+
+Another Two Ways
+Y. Chen
+
+Interfacing
+
+10
+
+Remote Procedure Call (RPC) – Typically: Language-based
+ Remote Invocation with Message Exchange – Typically: WSDL/URI
+
+
+RPC
+
+Two Ways
+Client
+
+Java
+C#
+WSDL
+
+Server
+
+URI
+
+SOAP
+Service
+One Way
+
+RESTfull
+Service
+
+Client
+
+...
+
+Java
+C#
+WSDL
+
+Another One Way
+
+Server
+
+URI
+
+Y. Chen
+
+Communication Protocols
+
+11
+
+Remote Procedure Call (RPC) – Typically: TCP/IP Channel:
+Connection oriented
+ Remote Invocation with Message Exchange – SOAP/HTTP:
+Package oriented
+
+
+RPC
+
+TCP/IP
+Client
+
+Server
+
+SOAP
+Service
+SOAP/HTTP/TCP/IP
+
+RESTfull
+Service
+
+Client
+
+...
+
+Server
+
+Y. Chen
+
+WCF Protocol Channel Stack
+
+12
+
+http://msdn.microsoft.com/en-us/library/ms729840.aspx
+
+A channel provides a programming model for sending
+and receiving messages between a client and a server.
+ WCF (Win Comm Foundation) channel stack is a
+layered communication stack with one or more
+channels that process messages:
+ SOAP (Simple Object Access Protocol)
+ WCF channel shapes
+ The transport channel is responsible for adapting
+the channel stack to the underlying transport, for
+example, TCP, HTTP, SMTP and other types of
+transport protocols.
+Y. Chen
+
+
+13
+
+WCF Communication Models
+
+Channel Stack
+
+and Protocol Channel Stack
+WCF Client
+
+WCF Server
+
+Application/Client
+
+Service
+
+Object Channel
+
+Object Channel
+
+WCF Communication models
+Transport Channel Adapter
+
+WCF Communication models
+Transport Channel Adapter
+
+HTTP / TCP
+
+HTTP / TCP
+
+...
+Physical Layer
+
+SOAP
+Channel
+Shapes
+and
+adapter
+
+...
+Physical Layer
+
+Y. Chen
+
+WCF Communication Models
+
+14
+
+
+
+WCF supports three communication models
+Request-reply (Two-way synchronous communication)
+ One-way (asynchronous communication without returning
+result)
+ Duplex (asynchronous communication with returning result)
+
+
+
+
+To support these models, without changing the remote
+services, a set of channel shapes are implemented:
+IInputChannel
+ IOutputChannel
+ IDuplexChannel
+ IRequestChannel
+ IReplyChannel
+
+
+Y. Chen
+
+WCF One-Way Communication Model
+
+15
+
+One-way communication model is used in the situation where
+the client sends a message to the server without requesting a
+return value
+ The channel shapes IOutputChannel and IInputChannel are used
+to implement the one-way communication:
+
+message
+
+IInputChannel
+
+Client
+
+IOutputChannel
+
+
+
+Server
+
+Y. Chen
+
+WCF Request-Reply Model (Default)
+
+16
+
+Request-reply communication model combines two one-way
+channel shapes into IRequestChannel and IReplyChannel
+ The model is used for synchronous communications:
+1. Client sends a request and block-waits for response,
+2. Server processes the request and sends response back to
+client.
+
+message
+
+IInputChannel
+IOutputChannel
+
+message
+
+IReplyChannel
+
+IRequestChannel
+
+IInputChannel
+
+Client
+
+IOutputChannel
+
+
+
+Server
+
+Y. Chen
+
+WCF Duplex Communication Model
+
+17
+
+Duplex communication model uses two one-way channel shapes to
+compose a new shape called IDuplexChannel
+ This model facilities asynchronous exchange. Different options:
+
+
+two calls
+
+message
+Callback
+
+IInputChannel
+
+IDuplexChannel
+
+one call and spawn a child
+
+IOutputChannel
+
+message
+IDuplexChannel
+
+Client
+
+IOutputChannel
+
+The client makes one-way call, spawning a child to wait for result.
+The client makes two calls. First call requests, the second call retrieves result.
+Client sends a request to server, and the service handles the request. It may
+take a long time to complete/calculate the result. After completion, the
+service calls back to provide results. Client needs to create a public URI as a
+callback endpoint using ClientBaseAddress.
+The service does not
+
+IInputChannel
+
+1.
+2.
+3.
+
+need to be changed
+to facilitate
+asynchronous call.
+
+Server
+with
+stateful
+service
+Y. Chen
+
+Transport Channel  HTTP and TCP
+
+18
+
+Transport Channel
+
+
+
+HTTP
+TCP
+
+HTTP and TCP are the main transport channels
+ HTTP automatically supports request-reply model
+ TCP supports one-way and duplex
+ In order to do one-way and duplex on HTTP, a shapechanging layer is needed, which involves a number of
+classes for specification and binding:
+ OperationContractAttribute Class
+ OneWayBindingElement class for one-way
+ CompositeDuplexBindingElement class for duplex
+
+
+Y. Chen
+
+WCF Duplex Channel Stack: Example
+
+Channel Stack
+
+19
+
+Client
+
+WCF Server
+
+Application
+
+Service
+
+SOAP
+
+SOAP
+
+CompositeDuplex
+BindingElement
+
+CompositeDuplex
+BindingElement
+
+Shape
+change
+
+HTTP
+
+HTTP
+
+HTTP
+
+...
+
+...
+
+Physical Layer
+
+Physical Layer
+
+Y. Chen
+
+How Do We Write Asynchronous Service?
+
+20
+http://msdn.microsoft.com/en-us/library/system.servicemodel.operationcontractattribute.aspx
+
+[ServiceContractAttribute]
+public class ChannelModelExample
+{ // The client waits until a response message appears.
+[OperationContractAttribute]
+public int MethodOne (int x, int y) { return x+y; }
+// The client generates asynchronous calls.
+[OperationContractAttribute(IsOneWay=true)]
+
+Request-rely
+by default
+Synchronous,
+block waiting
+one-way model
+
+Use
+void
+
+public void MethodTwo (int x) { f(x); return; }
+[OperationContractAttribute(AsyncPattern = true)]
+Duplex model
+public void MethodThree (int x, out int y) {
+y = complexFunction(x); return }
+Output variable
+// The client returns as soon as an outbound message is dispatched
+// to the service; no response is generated or sent from the service.
+// A child thread will wait and put the result in y, which will be accessed later.
+
+}
+Y. Chen
+
+21
+
+Properties of OperationContractAttribute
+
+Action
+
+Gets or sets the WS-Addressing action of the request message.
+
+AsyncPattern
+= true
+
+Indicates that an operation is implemented asynchronously using
+a Begin<methodName> and End<methodName> method pair in a service
+contract.
+HasProtection Gets a value that indicates whether the messages for this operation must be
+Level
+encrypted, signed, or both.
+IsInitiating
+Gets or sets a value that indicates whether the method implements an
+operation that can initiate a session on the server (if such a session exists).
+IsOneWay
+= true
+IsTerminating
+
+Gets or sets a value that indicates whether or not an operation returns a reply
+message.
+Gets or sets a value that indicates whether the service operation causes the
+server to close the session after the reply message, if any, is sent.
+
+Name
+
+Gets or sets the name of the operation.
+
+Protection
+Level
+ReplyAction
+
+Gets or sets a value that specifies whether the messages of an operation must
+be encrypted, signed, or both.
+
+TypeId
+
+Gets or sets the value of the SOAP action for the reply message of the
+operation.
+When implemented in a derived class, gets a unique identifier for
+this Attribute. (Inherited from Attribute.)
+
+Y. Chen
+
+Two-Call Interface of Async
+
+22
+
+http://msdn.microsoft.com/en-us/library/system.servicemodel.operationcontractattribute.asyncpattern.aspx
+
+[ServiceContract]
+public interface IAddTwoNumbers
+{ // If the asynchronous method pair appears on the client channel,
+// the client can call them asynchronously to prevent blocking.
+[OperationContract (AsyncPattern=true)]
+IAsyncResult BeginAdd(int a, int b, AsyncCallback cb, AsyncState s);
+
+Give
+implementation
+in another
+file
+
+out
+
+A full working example
+
+[OperationContract]
+of asynchronous call
+int EndAdd(IAsyncResult r); // 2nd call to obtain the will
+result
+be given in a later
+lecture.
+
+// This is a synchronous version of the BeginAdd and EndAdd pair.
+// It can be generated in the client channel code using utility tool.
+[OperationContract]
+int Add(int a, int b);
+}
+
+Y. Chen
+
+23
+
+Lecture Outlines
+Models of Distributed Computing
+ Channels for Communication and Interfacing
+
+
+One-way
+ Request-Reply
+ Duplex
+
+
+
+
+Bindings
+For WSDL-SOAP services
+ For RESTful Services
+ For .Net Remoting
+
+
+
+
+Behaviors and service behaviors
+Instancing
+ Concurrency
+
+
+Y. Chen
+
+Advanced Bindings
+
+24
+
+Bindings are pre-configured channel stacks;
+ Bindings are the communication agreement between
+the client and service;
+ A binding includes:
+ Protocols (stack) involved
+ Transport
+ Encryption and encoding, such as object to string,
+JSON, or to XML
+ Common applications have pre-defined bindings, see
+next page:
+
+
+Y. Chen
+
+Basic WSDL Document’s Elements
+
+25
+
+definitions, service name, namespaces
+service
+Endpoint
+
+port
+(URL)
+binding
+(SOAP/HTTP)
+
+...
+
+port
+(URL)
+binding
+(SOAP/HTTP)
+
+portType
+
+portType
+
+operation
+
+operation
+message, in
+
+...
+
+message, in
+
+type
+
+type
+
+message, out
+
+message, out
+
+type
+
+type
+
+Y. Chen
+
+26
+
+WSDL Document’s Elements and WCF Extensions
+WCF
+Endpoint
+
+definitions
+service
+
+Address
+(URL)
+
+port
+Endpoint
+(URL)
+binding
+(SOAP/HTTP)
+
+Binding
+(Many options)
+Contract
+(Interface)
+
+portType
+operation
+message, in
+type
+message, out
+type
+
+basicHttpBinding
+basicHttpsBinding
+wsHttpBinding
+wsDualHttpBinding
+webHttpBinding
+netTcpBinding
+netNamedPipeBinding
+netMsmqBinding
+netPeerTcpBinding
+Policy
+ProtectedToken
+RequireDerivedKeys
+SignatureParts
+EncryptedParts
+EncryptSignature
+MustSupportIssuedTokens
+SecureConversationToken
+Y. Chen
+
+27
+
+Bindings for Common Services
+Binding
+
+Description
+
+BasicHttpBinding
+and
+BasicHttpsBinding
+
+A binding that is suitable for communicating with WSBasic Profile conformant Web services, for example, .svc
+and .asmx-based services. This binding uses HTTP as the
+transport and text/XML as the default message encoding.
+BasicHttpsBinding uses HTTPS, instead of HTTP.
+WsHttpBinding
+A secure and interoperable binding that is suitable for
+non-duplex service contracts, for example RESTful
+service. Encoding methods include XML, POX, JSON
+Ws2007HttpBinding A secure and interoperable binding that provides support
+for the correct versions of the Security, ReliableSession,
+and TransactionFlow binding elements.
+WsDualHttpBinding A secure and interoperable binding that is suitable for
+duplex service contracts or communication through SOAP
+over HTTP channel stack.
+Y. Chen
+
+28
+
+Bindings for Common Services (contd.)
+Binding
+
+Description
+
+NetTcpBinding
+
+A secure and optimized binding suitable for crossmachine communication between WCF applications
+(.Net Remoting)
+NetNamedPipeBinding A secure, reliable, optimized binding that is suitable for
+on-machine communication between WCF applications
+(.Net Remoting).
+NetMsmqBinding
+A queued binding that is suitable for cross-machine
+communication between WCF applications
+(.Net Remoting).
+NetPeerTcpBinding
+A binding that enables secure, multi-machine
+communication (peer).
+WebHttpBinding
+A binding used to configure endpoints for WCF Web
+services that are exposed through HTTP requests
+(RESTful services) instead of SOAP messages.
+Y. Chen
+
+29
+
+Binding
+
+Binding Features
+Interoperability
+standards
+
+Mode of
+Session
+(Default)
+Security
+(Default)
+Transactions
+(Default)
+Basic Profile 1.1
+None, (None)
+(None), No
+BasicHttp
+(None),
+Binding
+Transport,
+Message, Mixed
+WS-I
+(None), Yes
+WSHttp
+None,
+(None),
+Binding
+Transport,
+Transport,
+Reliable Session
+(Message),
+Mixed
+(None), Yes
+WS2007Http WS-Security, WS- None,
+(None),
+Binding
+Trust, WSTransport,
+Transport,
+Reliable Session
+SecureConversation, (Message),
+WS-SecurityPolicy Mixed
+(None), Yes
+WSDualHttp WS-I
+None,
+(Reliable
+Binding
+(Message)
+Session)
+Y. Chen
+
+30
+
+Binding Features (contd.)
+
+Binding
+
+InterMode of Security
+operability (Default)
+
+Session (Default) (Default)
+Transactions
+
+NetTcp Binding
+
+.NET
+
+None, (Transport),
+Message,
+
+Reliable Session, (None), Yes
+(Transport)
+
+Mixed
+None,
+
+None, (Transport) (None), Yes
+
+NetNamed
+PipeBinding
+
+.NET
+
+NetMsmq
+Binding
+
+.NET
+
+None, Message,
+(Transport), Both
+
+(None)
+
+(None), Yes
+
+NetPeerTcp
+Binding
+
+Peer
+
+None, Message,
+(Transport), Mixed
+
+(None)
+
+(None), No
+
+None, (Transport)
+
+(None)
+
+(None), Yes
+
+(Transport)
+
+MsmqIntegration MSMQ
+Binding
+
+Y. Chen
+
+31
+
+Define Binding in Web.config File
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+<system.serviceModel>
+<bindings>
+<wsHttpBinding>
+<binding name="WSHttpBinding_ICalculator“ />
+</wsHttpBinding>
+</bindings>
+<client>
+<endpoint address="http://localhost:8000/"
+binding="wsHttpBinding"
+bindingConfiguration="WSHttpBinding_ICalculator"
+contract="Microsoft.ServiceModel.Samples.ICalculator"
+name="WSHttpBinding_ICalculator">
+</endpoint>
+</client>
+</system.serviceModel>
+</configuration>
+
+Y. Chen
+
+32
+
+Lecture Outlines
+Models of Distributed Computing
+ Channels for Communication and Interfacing
+
+
+One-way
+ Request-Reply
+ Duplex
+
+
+
+
+Bindings
+For WSDL-SOAP services
+ For RESTful Services
+ For .Net Remoting
+
+
+
+
+Behaviors and service behaviors
+Instancing
+ Concurrency
+
+
+Y. Chen
+
+Behaviors
+
+33
+
+Behaviors here refer to the WCF classes that affect
+runtime operations, for example, the ServiceHost
+class.
+ There are three levels of behaviors:
+ Service behaviors: concern instancing and overall
+transactions;
+ Endpoint behaviors: inspecting and taking actions
+on incoming and outgoing messages;
+ Operation behaviors: manipulation, serialization
+(convert object to string), transaction flow, and
+parameter handling.
+
+
+Y. Chen
+
+34
+
+Service
+Behavior
+
+Three Levels of Behaviors
+Service Behaviors (Instancing and Concurrency)
+Endpoint
+behaviors
+Message
+inspection
+
+Endpoint
+Behavior
+
+Operation behaviors
+Operation invoker
+Operation 1 Parameter inspection
+Message formatting
+.
+.
+.
+
+Operation
+Service
+Behavior
+Operation behaviors
+
+Endpoint
+behaviors
+Message
+inspection
+
+Operation invoker
+Operation N Parameter inspection
+Message formatting
+
+Y. Chen
+
+Service Behaviors: Concurrency and Instancing
+
+35
+
+WCF Service Behaviors offer two modes to control
+the service level behaviors:
+ InstanceContextMode
+ ConcurrencyMode
+ The target of instancing mode is for the state
+management
+ The target of concurrency mode is for increasing the
+number of tasks completed in the given time period to
+achieve higher throughput via the multithreading and
+parallel computing
+
+
+Y. Chen
+
+36
+
+State Management in ASP .Net Applications
+Web applications are stateless by default. However, the
+following mechanisms can be used to achieve stateful
+applications (clients):
+ View State: Save data in the browser page for
+multiple accesses of the data
+ Session State: Save the data in Session[“nameIndex”]
+for all instances of the same browser session to
+repeatedly access.
+ Application State: Save the data in
+Application[“nameIndex”] for all instances of all
+browser sessions to repeatedly access.
+ These methods cannot be used in Web services!
+
+Y. Chen
+
+37
+
+State Management in WCF for Services
+InstanceContextMode implements state management in
+web services. It can take one of the values
+ PerCall: one instance is created for each incoming
+request. This mode creates stateless service;
+ PerSession: one instance is created for each client
+session. This mode corresponds to session state at
+application level;. Information can be shared within a
+session
+ Single: one instance of the service class handle all
+incoming requests (singleton service). This mode
+corresponds to application state at application level.
+Design pattern
+
+Y. Chen
+
+38
+
+RESTful Example of Using InstanceContextMode
+
+using System; using System.ServiceModel;
+namespace WcfRestService4 {
+[ServiceContract]
+[AspNetCompatibilityRequirements(RequirementsMode =
+AspNetCompatibilityRequirementsMode.Allowed)]
+[ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
+public class Service1 {
+[OperationContract]
+[WebGet(UriTemplate = "add2?x={x}&y={y}", ResponseFormat =
+WebMessageFormat.Json)] // Add this HTTP GET attribute/directive
+public int addition(int x, int y) {
+return (x+y);
+}
+}
+}
+Y. Chen
+
+39
+
+SVC Example of Using InstanceContextMode
+http://venus.sod.asu.edu/WSRepository/Services/Singleton/service.svc
+using System;
+using System.ServiceModel;
+[ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+public class Service : IService {
+// IService.cs
+int sNumber = 1000;
+using System;
+using System.ServiceModel;
+public Int32 getNumber()
+[ServiceContract]
+{
+public interface Iservice {
+No specific
+return sNumber;
+[OperationContract]
+web states
+Int32 getNumber();
+}
+are defined
+[OperationContract]
+public Int32 takeOne()
+Int32 takeOne();
+{
+}
+sNumber = sNumber-1;
+No specific
+return sNumber;
+web states
+}
+are defined
+}
+Deployed service address:
+http://venus.sod.asu.edu/WSRepository/Services/NumberGuess/Service.svc
+
+Y. Chen
+
+40
+
+Client that Accesses the Singleton Service
+http://venus.sod.asu.edu/WSRepository/Services/singletonTryIt/
+using System;
+public partial class _Default : System.Web.UI.Page {
+protected void Page_Load(object sender, EventArgs e) { }
+protected void btnStock_Click(object sender, EventArgs e) {
+singletonService.ServiceClient myProxy = new
+singletonService.ServiceClient();
+Int32 sNumber = myProxy.getNumber();
+No application
+states are
+lblStock.Text = Convert.ToString(sNumber);
+defined
+myProxy.Close();
+}
+protected void btnBuy_Click(object sender, EventArgs e) {
+singletonService.ServiceClient myProxy = new
+singletonService.ServiceClient();
+No application
+Int32 sNumber = myProxy.takeOne();
+lblRemain.Text = Convert.ToString(sNumber); states are
+defined
+myProxy.Close();
+}
+Y. Chen
+}
+
+41
+
+TryIt from Multiple Computers
+http://venus.sod.asu.edu/WSRepository/Services/singletonTryIt/
+
+From one computer
+From another computer
+Y. Chen
+
+Service Behaviors: Concurrency and Instancing
+
+42
+
+ConcurrencyMode: Used to control threading within
+one service instance. It can take one of the values:
+Single: Only one thread at a time can access the
+service instance.
+ Reentrant: Only one thread at a time can access the
+service instance, but the thread can leave the instance
+and reenter later to continue.
+ Multiple: multiple application threads can access the
+service instance simultaneously. This setting
+implements parallel computing and requires the
+service class to be thread-safe (with
+synchronization/lock mechanisms.
+
+
+Y. Chen
+
+43
+
+Program Example: Single Thread
+using System;
+using System.ServiceModel;
+
+• This service takes URL in
+string and return the Web page
+at the URL as a string;
+• Assuming cache is valid;
+• How do we caching and what
+to cache? Text 5.5.
+• Only one instance is running.
+Multiple request will be
+queued.
+
+[ServiceContract]
+public interface IHttpFetcher {
+[OperationContract]
+string GetWebPage(string address);
+}
+[ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single)]
+class SingleCachingHttpFetcher : IHttpFetcher {
+public string GetWebPage(string address) {
+if (this.cachedAddress == address) {
+return this.cachedWebPage; }
+// else fetch page and save cache • How do we improve
+performance without
+}
+queuing?
+Y. Chen
+}
+
+44
+
+Program Example: Multiple Threads
+[ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple)]
+class MultipleCachingHttpFetcher : IHttpFetcher {
+string cachedWebPage;
+string cachedAddress;
+readonly SlowHttpFetcher slow;
+Multiple
+readonly object ThisLock = new object();
+public MultipleCachingHttpFetcher() {
+this.slow = new SlowHttpFetcher();
+}
+public string GetWebPage(string address) {
+lock (this.ThisLock)
+Lock, because multiple
+{
+pages can access the
+// <-- Can assume cache is valid.
+same resource.
+if (this.cachedAddress == address)
+Required only in
+{
+“.Multiple” mode
+return this.cachedWebPage;
+// <-- Must guarantee that cache is valid because
+// the operation returns and releases the lock.
+}
+Y. Chen
+
+45
+
+Program Example: Multiple Threads
+
+// <-- Must guarantee that cache is valid here because
+// the operation releases the lock.
+If cache is not
+}
+valid, get the
+string webPage = slow.GetWebPage(address);
+lock (this.ThisLock)
+page, and save
+{
+into cache.
+// <-- Can assume cache is valid.
+// <-- Cache is no longer valid because the operation
+// changes one of the values.
+this.cachedAddress = address;
+this.cachedWebPage = webPage;
+// <-- Cache is valid again here.
+// <-- Must guarantee that cache is valid because
+// the operation releases the lock.
+}
+return webPage;
+}
+}
+Y. Chen
+
+InstanceContextMode vs. ConcurrencyMode
+InstanceContextMode
+
+For state management
+
+Single
+
+PerSession
+
+PerCall
+
+Single
+
+Reentrant
+
+Multiple
+
+Instances
+
+46
+
+ConcurrencyMode
+
+For concurrency
+Y. Chen
+
+47
+
+Finer Performance Management
+In currency modes:
+ Single
+Decided at programming time
+ Reentrant
+ Multiple
+Can we dynamically decide the values?
+ Automatically switching between the values
+Cloud
+Computing:
+Loadbalancer
+Y. Chen
+
+48
+
+Summary of the Lecture
+Models of Distributed Computing
+ Communication Channels
+
+
+
+
+
+
+
+
+Bindings
+
+
+
+
+
+
+One-way for asynchronous
+Request-reply for synchronous
+Duplex for asynchronous
+For WSDL services
+For RESTful services
+For .Net remoting
+
+Behaviors and service behaviors
+
+
+
+
+Instancing for state management
+Concurrency for multithreading
+Cloud computing: automated management based on
+performance requirement
+
+Y. Chen
+
+

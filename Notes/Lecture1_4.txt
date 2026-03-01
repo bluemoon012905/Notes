@@ -1,0 +1,1203 @@
+CSE 446 / 598
+Software Integration
+and Engineering
+
+Unit 1
+Introduction and Advanced Service Development
+
+Lecture 1-4
+REST and Microservice
+Concepts and Architectures
+
+Dr. Yinong Chen
+https://myasucourses.asu.edu/
+
+Lecture Outline
+
+2
+
+HTTP, REST Concepts and Services
+ From SOAP service to RESTful Service
+ When to use SOAP services and when to use
+RESTful services?
+ Processing URI string in RESTful service
+ Output formats
+ Microservice concepts and frameworks
+ RESTful services and microservices
+ Microservice frameworks
+
+
+Y. Chen
+
+HTTP (Version 1.1)
+
+3
+
+http://www.w3.org/Protocols/rfc2616/rfc2616.html
+
+HTTP is an application-level protocol for distributed,
+collaborative, and hypermedia information systems.
+ HTTP messages are always two ways: requests from
+client to server and responses from server to client.
+HTTP-message = Request | Response
+Syntax
+ Request: Request-Line =
+
+
+Method SP Request-URI SP HTTP-Version CRLF
+
+
+Response: Status-Line =
+HTTP-Version SP Status-Code SP Reason-Phrase CRLF
+
+where, SP: Space and CRLF: end of line mark
+Y. Chen
+
+4
+
+HTTP Methods
+The Method indicates the operation to be performed on the resource
+identified by the Request-URI. The method is case-sensitive.
+ GET
+ retrieves the information (entity) identified by Request-URI.
+ If the Request-URI refers to a data-producing process
+(operation), the produced data shall be returned in the
+response.
+ HEAD
+ The HEAD method is identical to GET, except that the server
+MUST NOT return a message-body in the response.
+ Used to obtain meta-information about the entity implied by
+the request without transferring the entity-body itself.
+ Use for making one-way call – no message body to return.
+Y. Chen
+
+HTTP Methods (contd.)
+
+5
+
+PUT: For creating and modifying/replacing resource. It requests
+the enclosed entity to be stored under the supplied Request-URI.
+ POST: used to request the server to accept the (data) entity
+enclosed in the request as a new subordinate of the resource
+identified by the Request-URI in the Request-Line.
+ POST and PUT have some similarity, but are used in different
+situations:
+ POST: append;
+ PUT: replace or create
+
+
+append
+
+replace
+
+Y. Chen
+
+HTTP Methods (contd.)
+
+6
+
+DELETE: requests that the origin server deletes the resource
+identified by the Request-URI.
+ The client cannot be guaranteed that the operation has been
+carried out, even if the status code returned from the origin
+server indicates that the action is successful. Why?
+ However, the server SHOULD NOT indicate success unless, at
+the time the response is given, it intends to delete the resource
+or move it to an inaccessible location.
+Not to hold the
+client for too long
+ TRACE: invoke a remote, application-layer
+loop-back of the request message.
+ CONNECT: for use with a proxy that can dynamically switch to a
+tunnel (e.g. SSL tunneling)
+
+
+Y. Chen
+
+REST and RESTful Service
+
+7
+
+REST (Representational State Transfer) is a style of software
+architecture for distributed hypermedia systems such as
+the World Wide Web.
+ Proposed by Roy Thomas Fielding in his doctoral dissertation
+"Architectural Styles and the Design of Network-based
+Software Architectures" in 2000.
+ Fielding is one of the principal authors of the HTTP
+specification versions 1.0 (1996) and 1.1 (1999).
+ Services developed based on REST concept and conforming
+to the REST constraints are referred to as RESTful services.
+http://en.wikipedia.org/wiki/Representational_State_Transfer
+
+
+Y. Chen
+
+REST Concept
+
+8
+
+REST concept is about how communication is done between clients
+and servers using HTTP at the application level. REST concept is
+defined by these principles:
+A client initiates a request to a server;
+ The server processes the request and returns a response:
+ The response can be a static data
+ The return value of an operation
+ Communication is stateless;
+ Communication is about the "representations" transfer of
+"resources" between a client and a server;
+ Each resource (or a set of resources) is given a unique identifier,
+called URI (Universal Resource Identifier).
+
+
+Y. Chen
+
+REST Architecture and REST Constraints
+
+9
+
+REST architecture is a software development style that
+follows these design constraints and guidelines:
+Client-server separation: Clients and servers are
+logically separated and communicate through a uniform
+interface conforming to HTTP.
+ Stateless: Every request from a client is considered
+from a new client by the server.
+ Client-side cacheable: The response delivered from the
+sever must contain the complete information for the
+client to reuse the response, if the client requests the
+same URI. – Output Caching on client side (Lecture 3-4
+and Textbook 5.5).
+Y. Chen
+
+
+REST Architecture and REST Constraints (contd.)
+
+10
+
+Layered architecture: A server is a logical unit with a
+layered architecture.
+ A client identifies a server by an URI.
+ The resource may or may not reside on the server
+that the client is communicating with.
+ The request can be redirected to another server
+transparently.
+ Multiple redirections are possible.
+ Code on demand: A server may process the request by
+executing a program on the server side or sending the
+code (script) to the client side to process.
+
+
+Y. Chen
+
+What is New?
+
+11
+
+The concept, the principles, and the constraints all
+sound familiar.
+ We have been applying them to design Web 1.0 (Static
+Web presenting data);
+ What is about Web 2.0 (Web as the computing
+platform)? Move from data Web to computing Web.
+ SOAP/WSDL Web services: create computing-based
+Web.
+ RESTful services: create data-oriented computing Web
+ Spiral: Data Web (no computing)  Computing Web
+ Data Web (with invisible computing behind)
+
+
+Y. Chen
+
+12
+
+Spiral Advancement
+Models of Technology
+
+Data Web with
+invisible
+computing
+
+Distributed:
+Edge Computing and
+Fog Computing
+
+Centralized Computing
+(Cloud Computing) with
+invisible distributed computing
+Computing
+Web
+Distributed
+Computing
+Data Web
+without
+computing
+
+Centralized
+Computing
+(mainframe)
+
+Y. Chen
+
+SOAP-Service vs. RESTful Service
+
+13
+
+
+Providing a service generally involves two issues:
+
+
+
+
+
+SOAP-Services:
+
+
+
+
+
+
+
+
+Performing (verb) a certain task for a client, and
+the result (noun) of performing the task;
+Focus on the verb “performing” the task;
+Access a remote method/procedure;
+Based on class concept of object-oriented language, developed by
+OO people.
+Heavy-weighted services, just like classes.
+
+RESTful Services:
+
+
+
+
+
+
+Focus on the noun “result” or return value of performing the task;
+Access a “resource” instead of a method,
+Based on communication protocol and developed by HTTP people;
+Can be called even in script languages.
+Light-weighted service: no class/object involved.
+Y. Chen
+
+RESTful Services are More Web Oriented
+
+14
+
+They are based on HTTP and Web browser;
+ They can be accessed in Web browser;
+ Just like a Web page, they can be viewed and
+bookmarked in a browser;
+ The results can be cached and reused, through
+browser’s built-in caching mechanism;
+ RESTful services can be called in any programming
+languages, including script languages, that can make
+HTTP call.
+
+
+Y. Chen
+
+Developing a Basic RESTful Service in WCF
+
+15
+
+
+
+CSE445/598 Review: Converting a WCF SOAP
+service to RESTful service
+ Develop a WCF service
+ Make a few changes to obtain RESTful service
+
+Y. Chen
+
+From a SOAP Service to a RESTful Service
+
+16
+
+Textbook Chapter 7.3 on RESTful services
+
+Create a SOAP-based Service in WCF;
+ Use a client to test the service to make sure it works;
+ Convert the SOAP-based Service into a RESTful
+service in follow steps:
+
+
+1. Add “using Sytem.ServiceModel.Web” in file IService.cs;
+2. Add attribute [WebGet] for each operation contract
+3. Add the following line in the service’s markup source
+code for hosting
+Factory="System.ServiceModel.Activation.WebServiceHostFactory"
+
+4. Remove SOAP endpoint for access, so that HTTP can be
+directly used for accessing the service.
+Y. Chen
+
+17
+
+From a SOAP Service to a RESTful Service
+
+//IService.cs
+1
+using System.ServiceModel;
+using System.ServiceModel.Web; // Add this namespace
+[ServiceContract]
+public interface Iservice {
+2 [OperationContract]
+[WebGet] // Add this HTTP GET attribute/directive
+string GetData(int value);
+[OperationContract]
+[WebGet] // Add this HTTP GET attribute/directive
+double PiValue();
+[OperationContract]
+[WebGet] // Add this HTTP GET attribute/directive
+int absValue(int intValue);
+}
+1
+
+Service.cs
+file remains
+unchanged
+
+[1] if not available, you need to use Add Reference and find it in framework library. Y. Chen
+
+Use WebServiceHostFactory for Hosting
+
+18
+
+Right-click the file Service.svc and choose “View
+Markup”. The markup source code of the file is open,
+as shown below:
+
+
+Add one line of code in the source file, which results in
+the code below:
+
+<%@ ServiceHost Language="C#" Debug="true"
+Service="Service" CodeBehind="~/App_Code/Service.cs"
+Factory="System.ServiceModel.Activation.WebServiceHostFactory" %>
+
+3
+
+WebServiceHostFactory will automatically
+search all the methods in the service to match
+the requirement of the incoming URI
+Y. Chen
+
+Remove SOAP Endpoint
+
+19
+
+4
+
+Open Web.config file, remove the entire
+<system.serviceModel> element, which will remove
+the SOAP endpoints.
+ RESTful services do not support the SOAP-endpointbased access.
+ Removing this element will immediately disable the
+accesses from service proxies from all kinds of SOAP
+clients.
+
+
+Y. Chen
+
+20
+
+Remove SOAP Endpoint in Configuration
+4
+
+<system.serviceModel>
+<services>
+<service name="Service" behaviorConfiguration="ServiceBehavior">
+<!-- Service Endpoints -->
+<endpoint address="" binding="wsHttpBinding" contract="IService">
+<identity>
+<dns value="localhost"/>
+</identity>
+</endpoint>
+<endpoint address="mex" binding="mexHttpBinding"
+contract="IMetadataExchange"/>
+</service>
+</services>
+</system.serviceModel>
+Y. Chen
+
+Consuming the RESTful Service
+
+21
+
+Now, if you choose: Debug  Start Without Debugging,
+it will start a browser, and the browser will open a page
+at the address: http://localhost:14763/Service.svc
+ It displays a message of “Endpoint not found”.
+ It is because that the endpoints have been removed in the
+Web.config file and the service is no longer a SOAP
+service.
+ You need to use HTTP protocol to consume a RESTful
+service.
+
+
+Y. Chen
+
+22
+
+Creating RESTful Service without Using IService
+We can define interface in Service.cs
+using System; using System.ServiceModel; // Service.cs file
+using System.ServiceModel.Activation; using System.ServiceModel.Web;
+namespace RestService {
+[ServiceContract]
+[AspNetCompatibilityRequirements(RequirementsMode =
+AspNetCompatibilityRequirementsMode.Allowed)]
+[ServiceBehavior(InstanceContextMode =
+InstanceContextMode.PerCall)]
+//public class Service1 {
+// Continued to next page
+
+No end point will be created if IService.cs
+file is removed. You do not need to open
+Web.config file to remove endpoint.
+Y. Chen
+
+Testing the Service in Browser
+
+23
+
+
+
+
+After starting the service, the simplest way of
+consuming a RESTful service is to type the URI in a
+browser, with the method name and parameter value as a
+part of the URI.
+Test the service in browser
+
+
+http://localhost:14763/Service.svc/PiValue
+it returns: <double>3.1415926535897931</double>
+
+
+
+http://localhost:14763/Service.svc/absValue?x=-27
+
+
+
+it returns: <int>27</int>
+
+
+
+http://localhost:14763/Service.svc/add2?x=15&y=17
+it returns: 32
+[WebGet(UriTemplate = "add2?x={x}&y={y}",
+ResponseFormat = WebMessageFormat.Json)]
+
+Hide the method name:
+Focus on the resource,
+instead of operationsY. Chen
+
+Is the Service Developed a RESTful Service?
+
+24
+
+The developed service has removed SOAP, and it uses
+HTTP method GET to access the resources (operations);
+ It can be accessed using in a browser;
+ However, it still focuses on operations (methods),
+instead of the results and data: We put the service name,
+method name and parameters in the URI:
+
+
+http://localhost:14763/Service.svc/PiValue
+http://localhost:14763/Service.svc/absValue?intValue=-25
+
+
+We can hide the method name to make it more like a
+RESTful service.
+We will show more development
+details in the next lecture. Now, we
+continue to explain the concept.
+
+Y. Chen
+
+The Key Ideas of RESTful Services
+
+25
+
+Use HTTP directly without another layer of SOAP. As
+the focus is on exposing the resources, the HTTP verbs
+GET, PUT, POST, DELETE, and HEAD are sufficient
+for accessing the RESTful services.
+ Focus on exposing data and resources instead of Web
+methods. Each resource is given a URI, and a set of
+resources can also be assigned to a URI.
+ RESTful service development is about identifying
+resources to be exposed and organizing them so that the
+resources can be exposed efficiently in different ways:
+individually or in sets.
+
+
+Y. Chen
+
+Co-Exist of SOAP and RESTful Services
+
+26
+
+
+
+We can use either (SOAP or RESTful) to do both
+(access methods and access data/resource);
+
+SOAP service
+way
+
+WebMethod
+
+Data/Resource
+
+Data/Resource
+
+WebMethod
+
+RESTful service
+way
+
+We should use SOAP services for computationoriented tasks: Solving equations, find the shortest
+path, etc.
+ We should use RESTful services for data and resourceoriented tasks: finding photos, finding books, etc. Y. Chen
+
+
+Example: A Book Management System
+
+27
+
+We can save the information of all the books in a
+relational database with a schema,
+(authors, title, isbn, year, publisher, keywords)
+authors
+
+title
+
+isbn
+
+year
+
+publisher
+
+keywords
+
+Aaron
+
+OS
+
+123456789
+
+2010
+
+Kendall
+
+Linux
+
+John
+
+Database
+
+987654321
+
+1999
+
+Apress
+
+relational
+
+Chen
+
+Programming
+
+0757529747
+
+2006
+
+Kendall
+
+Language
+
+Chen
+
+Protocol testing
+
+3181460109
+
+1993
+
+VDI Verlag
+
+Communication
+
+...
+
+Y. Chen
+
+Example: a Book Management System
+SOAP-Service Approach
+
+28
+
+For a given schema:
+(authors, title, isbn, year, publisher, keywords)
+you define a class with the following operations/methods:
+search_by_author(string author);
+Define WSDL
+interface:
+ search_by_title(string title);
+• Service
+• Endpoints
+ search_by_isbn(string isbn);
+• Operation
+• Input message
+ search_by_year(string year);
+• Output message
+ search_by_publisher(string publisher);
+ search_by_year_publisher(string year, string publisher);
+
+
+Two parameters
+
+Y. Chen
+
+29
+
+Example: Book Management System
+RESTful Service Approach
+
+Represent the resources in a resource tree, which is a rooted
+tree with the root representing all resources, and each tree
+node representing a subset of resources of its parent node:
+/ (root)
+authors/
+titles/
+isbns/
+years/
+publishers/
+keywords/
+
+titles/
+years/
+authors/
+authors/
+titles/
+publishers/
+authors/
+titles/
+isbns/
+years/
+
+authors/
+titles/
+
+Y. Chen
+
+Mapping Tree Nodes to Resource Sets
+
+30
+
+You do not need to
+expose the “method”
+name at all!
+{all books}  http://mylib.asu.edu/
+
+/ (root)
+authors/
+titles/
+isbns/
+years/
+publishers/
+
+year/publishers/
+
+{books | author = Aaron}  http://mylib.asu.edu/authors/{author=Aaron}
+…
+{books | author = Zeta}  http://mylib.asu.edu/authors/{author=Zeta}
+{books | title = OS}  http://mylib.asu.edu/titles/{title = OS}
+…
+{books | title = SOA}  http://mylib.asu.edu/titles/{title = SOA}
+{book | year= 1900}  http://mylib.asu.edu/years/{year= 1900}
+…
+{books | year=2018}  http://mylib.asu.edu/years/{year= 2018}
+
+{books | year=2024}/{publishers | publisher=Kendallhunt}
+ http://mylib.asu.edu/years/{year= 2024}/publishers/{publisher=Kendallhunt}
+Y. Chen
+
+31
+
+
+
+Using URI to Access Resources
+Method-Oriented Resource Access in URI:
+http://localhost:51952/WCFService/Service.svc/absValue?intValue=-25
+http://mylib.asu.edu/bookService.svc/search_by_author?author=Aaron
+
+
+
+Result-Oriented Resource Access in URI:
+http://mylib.asu.edu/authors/{author=Aaron}
+map
+
+How is this
+URI mapped to
+resource: all
+books written
+by Aaron?
+
+How to map?
+
+search_by_author(string author);
+
+Y. Chen
+
+How to map URI to a Method behind?
+
+32
+
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+
+String-process the incoming URI and obtains words in the string;
+Match URI to the service
+Identify the method that can process the request.
+Find any variables and variable values in the URI and map them
+to the method parameters and parameter values.
+Determine the HTTP method (GET, POST, PUT, etc.) used in the
+request and whether it’s allowed for the resource.
+Read the resource representation found in the entity body (if any).
+Combine all of this information to perform the underlying service
+logic (or call the corresponding method).
+Generate an appropriate HTTP response, including the proper
+status code, description, and outgoing resource representation in
+the response entity body (if any).
+Y. Chen
+
+WCF Support to URI Process
+
+33
+
+http://msdn.microsoft.com/en-us/library/bb675245.aspx
+
+We could implement RESTful service concept without a
+programming environment support, e.g., string processing. The
+program will be extreme long & tedious.
+ Find library functions or APIs to help
+ WCF provides mechanisms and classes to facilitate the
+implementation of RESTful services, for example
+ Uri: convert a string into a URI object
+ UriTemplate: Define the template of input URI
+ UriTemplateMatch: Match two URIs
+ Example: to match the built-in and incoming URIs:
+
+
+http://mylib.asu.edu/years/{year=2010}/authors/{author=Aaron}
+http://mylib.asu.edu/years/publishers/authors,
+Y. Chen
+
+Example: URI Processing
+
+34
+
+UriTemplate Class
+
+
+The built-in URI template:
+http://mylib.asu.edu/years/{year=2010}/authors/{author=Aaron}
+
+UriTemplateMatch
+
+http://mylib.asu.edu/years/publishers/authors
+(Client entered this URI in a browser)
+Y. Chen
+
+35
+
+Example: Analyze the Incoming URI String
+
+using System;
+using System.ServiceModel.Web;
+class ConsoleAppUriMatch {
+Build our
+internal template
+static void Main(string[] args) {
+Uri baseUri = new Uri("http://mylib.asu.edu");
+UriTemplate myTemplate = new
+UriTemplate("/{years}/{publishers}/{authors}");
+Console.WriteLine("Built-in URI path segments are");
+foreach (var segName in myTemplate.PathSegmentVariableNames) {
+Console.WriteLine(segName);
+}
+Console.WriteLine("Please enter the Incoming URI with path segments ");
+string clientUri = Console.ReadLine();
+// enter this URI: http://mylib.asu.edu/years/publishers/authors
+Y. Chen
+
+Example: Analyze the Incoming URI String
+
+36
+
+// CONTINUED FROM LAST PAGE
+Uri incomeUri = new Uri(clientUri); // convert string into URI format
+UriTemplateMatch myMatch = myTemplate.Match(baseUri, incomeUri);
+if (myMatch != null) {
+var matched = myMatch.BoundVariables;
+Generate a list of
+string myVars;
+matched keys
+foreach (var k in matched.Keys) {
+myVars = k.ToString();
+Console.WriteLine("{0} = {1}", myVars, matched[myVars]);
+}
+}
+else
+Console.WriteLine("The incoming URI does not match the built-in URI");
+}
+}
+Y. Chen
+
+Output of the Program
+
+37
+
+
+Executing the program with a matching incoming URI:
+
+
+
+For another input
+
+Y. Chen
+
+38
+
+Composing URI Using WCF Built-in Classes
+
+// create the base address
+Uri baseUri = new Uri("http://mylib.asu.edu");
+// create the path from tree root to the child node
+UriTemplate myTemplate = new
+UriTemplate("years/{year}/publishers/{publisher}");
+// Assign values to variable to complete URI
+Uri newBooksUri =
+myTemplate.BindByPosition(baseUri, "2010", "Kendallhunt");
+// create the path from tree root to the child node
+myTemplate = new UriTemplate("authors/{author}");
+// Assign values to variable to complete URI
+newBooksUri = myTemplate.BindByPosition(baseUri, "Aaron");
+Y. Chen
+
+Define the Map from URI to Methods
+
+39
+
+[ServiceContract]
+public partial class BookService {
+[WebGet(UriTemplate = "{author}?tag={tag}")] //search by author
+[OperationContract]
+Books search_by_author(string username, string tag) {...}
+[WebGet(UriTemplate = "{title}?tag={tag}")] //search by title
+[OperationContract]
+Books search_by_title(string title, string tag) {...}
+//search by year and by publisher
+[WebGet(UriTemplate = “years/{year}/publishers/{publisher}")]
+[OperationContract]
+Books search_by_year_publisher(string year, string publisher) {...}
+...
+}
+
+Y. Chen
+
+Resource Representations
+
+40
+
+In many cases, a URI request will return a set of items.
+ For example, the URI
+http://mylib.asu.edu/years/{year=1999} will return all
+books in 1999 in the library.
+ How do we present the data to the user who made the
+request?
+
+
+XML: Requires XML schema
+ POX (Plain Old XML): A simple XML with given schema
+ RSS, Atom Feed, and AtomPub
+ JSON (JavaScript Object Notation)
+ To specify the output form, add format requirement, for example:
+
+
+http://mylib.asu.edu/years/{year=2010}&{format=rss}
+Y. Chen
+
+Lecture Outline
+
+41
+
+HTTP, REST Concepts and Services
+ From SOAP service to RESTful Service
+ When to use SOAP services and when to use
+RESTful services?
+ Processing URI string in RESTful service
+ Output formats
+ Microservice concepts and frameworks
+ RESTful services and microservices
+ Microservice frameworks
+
+
+Y. Chen
+
+42
+
+
+Why Microservices?
+Microservices and microservice application architecture
+are a software development technique, a variant of SOA style. It
+helps organizing large number of services in a more organized way.
+ If an application comprises of a dozen services, no worries about
+how these services connect to each other. We can use the
+existing software architectures: blackboard, pipeline, bus, pointto-point, etc.
+ If an application comprises of a hundred or thousand (typically,
+smaller or micro) services, what should we do?
+ Using the current architecture is possible, but it may become
+too complex.
+ New architectures that are more regular, with certain
+restrictions to the flexibility of connections, e.g., connect to
+neighboring nodes only.
+Y. Chen
+
+Microservice Architecture
+
+43
+
+A Web application is a collection of loosely coupled (smaller)
+service instances, created from microservice templates, which are
+fine-grained with lightweight protocols.
+ Service mesh is a configurable infrastructure layer for
+microservices. It makes communication between service
+instances flexible, reliable, and fast.  Analogy: Using FPGA to
+define circuit.
+ (Small) SOAP and RESTful services can be microservices.
+ Since RESTful services are typically lighter weighted services
+and are more often used as microservices.
+ Small APIs and library functions that do not belong to SOAP and
+RESTful (HTTP) services can be used as microservices too.
+
+
+Y. Chen
+
+From Microservices to Service
+
+44
+
+
+
+
+Microservices platforms define and organize the microservices
+in such a way that they become standard components for composition.
+Some computer organizations have a few micro instructions:
+Analogy:
+IF, ID, EX, MEM, WB
+
+microinstruction
+vs. instruction
+
+A program consists of microinstructions
+
+
+Service Mesh: You select microservices combination to define your application
+
+Sidecar or Proxies
+
+https://www.redhat.com/en/topics/microservices/what-is-a-service-mesh
+
+Y. Chen
+
+45
+
+
+Microservices Platforms
+Istio is an opensource service mesh platform that provides a way to control how
+microservices share data with one another.
+https://www.redhat.com/en/topics/microservices/what-is-istio. It includes
+ APIs that let Istio integrate into any logging platform.
+ Its architecture is divided into the data plane and the control plane to
+implement the slidecar (proxy) and service container concepts.
+ Changing an application is about changing the mesh network
+service
+container
+
+data
+plane
+slidecar
+
+slidecar
+
+control
+plane
+https://istio.io/latest/about/service-mesh/
+
+Y. Chen
+
+46
+
+Microservices Platforms
+https://spring.io/projects/spring-cloud
+
+
+
+
+
+Spring Framework / Spring Cloud: A Java-based microservice architecture that
+supports Servlet API, WebSocket API, JSON Binding API, RESTful service,
+etc., integration;
+ It provides tools for developers to quickly build some of the common
+patterns in distributed systems (e.g. configuration management, service
+discovery, circuit breakers, intelligent routing, micro-proxy, control bus,
+one-time tokens, global locks, leadership election, distributed sessions,
+cluster state).
+ Coordination of distributed systems leads to boilerplate patterns (frequently
+used code), and it can quickly create services and applications that
+implement those patterns.
+AI
+Spring AI is an application framework
+domain
+can apply Spring ecosystem design
+principles to the AI domain.
+Spring
+ecosystem
+
+Y. Chen
+
+47
+
+Microservices Platform: MS Service Fabric
+https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-overview
+
+
+
+
+
+Service Fabric runs everywhere. You can create clusters for Service Fabric in
+many environments, including Azure, On Premises, Windows Server, or Linux.
+You can even create clusters on other public clouds.
+Stateless and stateful microservices for Service Fabric
+
+Y. Chen
+
+AWS Platform: Apollo GraphOS
+
+48
+
+https://aws.amazon.com/marketplace/pp/prodview-rql3to5zjpxs2?sr=0-1&ref_=beagle&applicationId=AWSMPContessa
+
+
+
+
+
+
+
+
+
+Apollo GraphOS unifies APIs and microservices in a modular graph.
+A platform to manage, operate, and evolve the supergraph - a modular layer in
+the app development stack that unifies existing APIs, data, and services into a
+single graph
+With GraphOS, app developers can access any service they need with a single
+GraphQL query. GraphQL will be further discussed in a later lecture.
+On the backend, teams can continue to work independently by connect existing
+services to the supergraph with modules called subgraphs, avoiding the
+bottlenecks caused by monolithic
+API architectures.
+Example: Netflix streaming service
+is based on AWS GraphOS.
+
+Supergraph Image source:
+https://x.com/Werner/status/741673514567143424?mx=2
+Y. Chen
+
+Netflix Streaming Service Platform on AWS
+
+49
+
+https://medium.com/refraction-tech-everything/how-netflix-works-the-hugely-simplified-complex-stuff-that-happens-every-time-you-hit-play-3a40c9be254b
+
+
+
+
+
+
+
+Netflix service streams around 250 million hours of video per day to around 98
+million paying subscribers in 190 countries (2017 data).
+About 700 hundred microservices forms one giant service.
+ One microservice stores what all shows you watched;
+ One deducts the monthly fee from your credit card;
+ One provides your device with the correct video files that it can play;
+ One takes a look at your watching history and uses algorithms to guess a
+list of movies that you will like;
+ One will provide the names and images of these movies to be shown in a
+list on the main menu.
+ …
+Netflix software engineers can make changes to any service while ensuring that
+nothing else in the entire service breaks down.
+
+Y. Chen
+
+50
+
+Netflix Streaming Service Architecture
+https://medium.com/refraction-tech-everything/how-netflix-works-the-hugely-simplified-complex-stuff-that-happens-every-time-you-hit-play-3a40c9be254b
+
+Content Delivery Network
+
+Y. Chen
+
+51
+
+Uber’s Microservices Architecture
+https://dzone.com/articles/microservice-architecture-learn-build-and-deploy-a
+API Client
+
+API Client
+
+Web Client
+
+Y. Chen
+
+52
+
+NVIDIA Microservices for Deploying AI Models
+https://developer.nvidia.com/blog/streamline-generative-ai-development-with-nvidia-nemo-on-gpu-accelerated-google-cloud/
+
+Y. Chen
+
+Lecture Summary
+
+53
+
+Microservices are a variation of web service
+architecture.
+ Microservices are typically RESTful services
+ Microservice architecture key concepts
+ We can use smaller microservices to form larger
+services
+ When we have many services, we use
+microservice framework to simply the
+origination.
+
+
+Y. Chen
+
+

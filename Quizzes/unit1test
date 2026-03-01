@@ -1,7 +1,7 @@
 Question 1
 1 / 1 pts
 What is NOT a part of a WCF endpoint?
-  messageType 
+ - messageType 
   Service address 
   Service’s binding protocol 
   Service contract 
@@ -10,7 +10,7 @@ Correct answer
 Question 2
 1 / 1 pts
 The synchronous communication between the client and server requires
-  the client to block-wait for the response. 
+ - the client to block-wait for the response. 
   an independent callback after each request. 
   a second call to retrieve the data. 
   no return value. 
@@ -22,14 +22,14 @@ What concept of service orientation involves most detail?
   Service-Oriented Architecture 
   Service-Oriented Design 
   Service-Oriented Computing 
-  Service-Oriented Development 
+ - Service-Oriented Development 
  
 Correct answer
 Question 4
 1 / 1 pts
 In what WSDL element is the “address” part of a WCF endpoint contained?
   binding 
-  port 
+ - port 
   portType 
   operation 
  
@@ -37,17 +37,17 @@ Correct answer
 Question 5
 1 / 1 pts
 The standards and protocols SOAP, WSDL, UDDI and XML are mostly related to
-  Web services 
+ - Web services 
   RESTful services 
   Remote procedure call 
   Multithreading 
  
 Question 6
-0.5 / 1 pts
+1 / 1 pts
 What are the main reasons of paradigm shift from object orientation to service orientation? Select all that apply.
-  Internet provisioning of services 
+ - Internet provisioning of services 
   Code migration among subsystems 
-  Interoperability among different platforms 
+ - Interoperability among different platforms 
   Architecture-level improvement 
  
 Correct answer
@@ -57,22 +57,22 @@ What template cannot be used for developing a client to consume a WCF service?
   ASP .Net Windows form application 
   ASP .Net Web site application 
   Console application 
-  WCF 
+ - WCF 
  
 Question 8
 0.5 / 1 pts
 How are asynchronous communications implemented in WCF? Select all that apply
   A two-way call from client to server. 
   A two-way call from client to server, and another two-way call from server to client. 
-  A one-way call from client to server, and an independent call back from the server. 
-  A pair of one-way calls from the client to server. 
+ - A one-way call from client to server, and an independent call back from the server. 
+ - A pair of one-way calls from the client to server. 
  
 Correct answer
 Question 9
 1 / 1 pts
 Which layer in the WCF Channel Stack is responsible for a shape change?
   Transport Channel 
-  CompositeDuplexBindingElement 
+ - CompositeDuplexBindingElement 
   HTTP over TCP 
   SOAP over HTTP 
   IInputChannel/IOutputChannel 
@@ -102,7 +102,7 @@ hide data representation from client.
 remove computation from the service.
 
   
-hide computation from client.
+- hide computation from client.
 
   hide both data representation and computation from client.
  
@@ -111,7 +111,7 @@ Question 12
 1 / 1 pts
 A RESTful service can return
   one resource only. 
-  a set of resources. 
+ - a set of resources. 
   a leave node of a resource tree only. 
   the root node of a resource tree only. 
  
@@ -122,23 +122,23 @@ Service mesh in microservice platforms is a configurable infrastructure layer th
   the translation possible between a RESTful service and multiple microservices. 
   the integration possible between service instances and a database. 
   data storage among service instances flexible, reliable, and fast. 
-  communication between service instances flexible, reliable, and fast. 
+ - communication between service instances flexible, reliable, and fast. 
  
 Correct answer
 Question 14
 1 / 1 pts
 Which of the following statements are correct? Select all that apply.
-  SOAP services focus on "performing". 
+ - SOAP services focus on "performing". 
   SOAP services focus on "result". 
   RESTful services focus on "performing". 
-  RESTful services focus on "result". 
+ - RESTful services focus on "result". 
  
 Correct answer
 Question 15
 1 / 1 pts
 Which HTTP method is most frequently used for RESTful service calls?
   DELETE 
-  GET 
+ - GET 
   HEAD 
   POST 
   PUT 
@@ -147,7 +147,7 @@ Wrong answer
 Question 16
 0 / 1 pts
 What separator is used for separating the RESTful service method name and the parameter in the default parameter passing style?
-  ? 
+ - ? 
   / 
   &
   Space 
@@ -162,7 +162,7 @@ You are given the operation contract definition of a RESTful service:
 What is the correct way of embedding the parameters into the URI?
 
   add2?x=7&x=12
-  add2/7/12 
+ - add2/7/12 
   add2(x=5, y=12) 
   add2(5, 12) 
  
@@ -171,7 +171,7 @@ Question 18
 1 / 1 pts
 The BindByPosition(baseUri, parameterValue) method in UriTemplate
 
-  puts the parameterValue in the place where the parameter name is given in the URI template.
+ - puts the parameterValue in the place where the parameter name is given in the URI template.
   appends baseUri and parameter name. 
   appends baseUri and parameterValue. 
   downloads data from the complete URI, which is baseUri + parameterValue.
@@ -190,4 +190,4 @@ The service call in this code is
   one-way synchronous call 
   two-way synchronous call 
   one-way asynchronous call 
-  two-way asynchronous call 
+ - two-way asynchronous call 
