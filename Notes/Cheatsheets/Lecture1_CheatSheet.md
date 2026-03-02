@@ -3,7 +3,7 @@
 Use this as a searchable reference for Quiz 1 / Unit 1 style questions.
 
 ## Quick Search Tags
-`endpoint` `ABC` `WSDL` `SOAP` `REST` `HTTP` `WebHttpBinding` `async` `sync` `one-way` `request-reply` `duplex` `service behaviors` `endpoint behaviors` `operation behaviors` `instancing` `concurrency` `UriTemplate` `BindByPosition` `orchestration` `choreography` `service mesh` `sidecar` `Global.asax` `controller` `configuration`
+`endpoint` `ABC` `WSDL` `SOAP` `REST` `HTTP` `WebHttpBinding` `BasicHttpBinding` `WsDualHttpBinding` `NetTcpBinding` `ServiceMetadataBehavior` `HttpGetEnabled` `async` `sync` `one-way` `request-reply` `duplex` `service behaviors` `endpoint behaviors` `operation behaviors` `instancing` `concurrency` `UriTemplate` `UriTemplateMatch` `BindByPosition` `orchestration` `choreography` `service mesh` `sidecar` `Global.asax` `controller` `configuration`
 
 ## Lecture 1-1 Core Foundations
 
@@ -56,6 +56,7 @@ Not part of endpoint:
 
 ## Proxy / Consumption
 - If WSDL is unavailable, proxy generation is not available in the typical SOAP workflow.
+- In self-hosting, `ServiceMetadataBehavior` (e.g., `HttpGetEnabled=true`) is used to publish metadata (`WSDL`) for proxy/client access.
 
 ## Lecture 1-3 Advanced Service Development
 
@@ -78,9 +79,13 @@ Correct patterns include:
 
 ## Channel Stack / Shape Change
 - `CompositeDuplexBindingElement` handles channel shape change (important MCQ item).
+- `OneWayBindingElement` is the corresponding one-way shape/binding element.
 
 ## Binding Choices
 - For REST endpoints in WCF use `WebHttpBinding`.
+- Common SOAP/WSDL-oriented bindings: `BasicHttpBinding` / `BasicHttpsBinding`.
+- For duplex over HTTP stack: `WsDualHttpBinding`.
+- For .NET remoting-style scenarios: `NetTcpBinding`, `NetNamedPipeBinding`, `NetMsmqBinding`.
 
 ## Behavior Layers (quiz-critical)
 - `Service behaviors`: instancing, concurrency, stateful service concerns.
@@ -95,6 +100,7 @@ Common tested mappings:
 ## Instancing vs Concurrency
 - `Instancing`: how service object instances are created/used.
 - `Concurrency`: how many threads/requests can execute concurrently.
+- Cloud/load-balancer context: concurrency can be tuned for performance-based scaling behavior.
 
 ## Lecture 1-4 REST + Microservice Concepts
 
@@ -130,7 +136,11 @@ Path-style template example:
 
 Building full URI safely:
 - Use `Uri` + `UriTemplate` classes (not string concatenation).
+- `UriTemplateMatch` is used to match incoming URI against template and extract bound variables.
 - `BindByPosition(baseUri, ...)` fills values into template placeholders by position.
+
+Resource output representations often shown:
+- `XML`, `POX`, `RSS/Atom`, `JSON` (set using format options/attributes).
 
 ## Composition Styles
 - `Orchestration`: services communicate through a central process.
@@ -139,6 +149,7 @@ Building full URI safely:
 ## Microservices / Service Mesh
 - A service mesh is infrastructure that makes service-to-service communication flexible/reliable/fast.
 - `Sidecar` = proxy adjacent to a microservice instance.
+- Microservices are often RESTful, but small SOAP services and even non-HTTP small APIs/library functions can also be microservices.
 
 ## Lecture 1-5 RESTful Development and Cases
 
@@ -150,10 +161,15 @@ Key files to create/modify:
 
 Typical route pattern:
 - `api/{controller}/{id}`
+- `config.MapHttpAttributeRoutes()` enables attribute-based routing in Web API setup.
 
 ## gRPC Recognition (from quiz style)
 Code with `await client.SayHelloAsync(...)` indicates:
 - `two-way asynchronous call`.
+
+## Additional Lecture 1-5 Coverage
+- REST development examples included cross-platform service work (e.g., Python/Flask and ASP.NET Core contexts).
+- Lecture also covered synchronous RESTful service calls in addition to async cases.
 
 ## High-Yield Quiz Answer Bank
 

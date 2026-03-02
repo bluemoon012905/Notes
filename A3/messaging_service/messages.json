@@ -1,1 +1,16 @@
-[]
+[
+    {
+        "senderID": "Yuda_send",
+        "receiverID": "Yuda_receive",
+        "msg": "Hello! this is a message that contains different lines: \nThis is a different line\nThere are also special characters: \n!@#$%^&*(){:>}\"[;.]'?\nand even more special characters: \n\u9e1f\u98de\u53cd\u4e61\uff0c\u5154\u8d70\u5f52\u7a9f\uff0c\u72d0\u6b7b\u9996\u4e18\uff0c\u5bd2\u5c06\u7fd4\u6c34\uff0c\u5404\u54c0\u5176\u6240\u751f",
+        "timestamp": "2026-03-01T19:22:59.187944",
+        "received": true
+    },
+    {
+        "senderID": "Yuda_sender",
+        "receiverID": "Yuda_recieve",
+        "msg": "This message is for the purge test",
+        "timestamp": "2026-03-01T19:27:00.093081",
+        "received": false
+    }
+]

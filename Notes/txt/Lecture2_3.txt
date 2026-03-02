@@ -1,0 +1,1157 @@
+CSE446 / CSE598
+Software Integration
+and Engineering
+
+Unit 2
+Software Architecture and Integration
+Lecture 2-3
+Workflow Concepts and Workflow Foundation
+Reading: Text Chapter 8, Sections 8.1 and 8.2
+
+Dr. Yinong Chen
+
+2
+
+Unit 2 Outline
+
+Software Development by
+Composition and Integration
+
+Unit 2-1 Advanced Web App Architecture
+Unit 2-2 Enterprise Architecture and Business Process
+Unit 2-3 Workflow Concepts and Workflow Foundation
+Unit 2-4 Software Integration Using Power Platform
+
+Y. Chen
+
+Lecture 2-3 Outline
+Previous lecture focused on the architecture design
+and management
+ Workflow for Architecture and Process Integration
+ Cover the Gap between Architecture (CSE360)
+and Development (Programming Courses)
+ Key Ideas of Workflow-based Application
+Development
+ Workflow Foundation Constructs and Activities
+
+
+Creating WF Workflow Application
+ Event-Driven Approach and State Machine in WF
+
+
+Y. Chen
+
+What is Workflow?
+
+4
+
+Performance Reference Model
+
+Workflow is a new solution to an old
+problem: Integrating, managing, and
+supporting business process.
+ Workflow offers a new model for the
+division of labor between people and computer:
+ People do only those that computers cannot: What we want.
+ Workflow better matches the business process/logic that
+customers require, and thus the customers can better understand
+the solution offered by the software engineers / architects.
+ Workflow better separates the tasks of software architects and
+programmers.
+ Graphic (Visual) Programming makes programming easier.
+ SOA makes executable workflow possible.
+
+
+Business Reference Model
+
+Y. Chen
+
+Kepler Project
+
+5
+
+https://kepler-project.org/
+
+One of the
+early efforts
+first released
+in 2005
+
+Operate on data stored in a variety of formats,
+locally and over the internet;
+ Integrating disparate software components, such as
+merging scripts with compiled code;
+ Facilitating remote, distributed execution of models.
+ Select and then connect relevant analytical
+components and data sources to create a "scientific
+workflow" — an executable representation of the
+steps required for generating results;
+ Share and reuse data, workflows, and components
+developed by the community to address common
+All these ideas are implemented in
+needs.
+Y. Chen
+
+
+Power Platform in next lecture.
+
+Kepler Workflow System
+
+6
+
+http://edutechwiki.unige.ch/en/Kepler_workflow_system
+
+Director
+
+
+Kepler Workflow Style
+
+Directors (define computing
+and communication models)
+ Actors
+ Ports
+ Attributes
+ Relations
+ Example:
+Integration of
+a template,
+a data set
+
+
+Y. Chen
+
+Traditional Software Development Process
+
+7
+
+
+
+Architecture Design
+
+
+
+Flowchart / Process
+
+
+
+Coding / Debugging
+
+Programmers
+
+
+
+Testing / Verification
+
+Testers
+
+
+
+Deployment / Maintenance
+
+Software Architects
+Software Engineers
+
+After Sale Supporters
+Y. Chen
+
+Architecture and Process Integration
+
+8
+
+Application Builders
+
+
+Architecture Design
+
+
+
+Flowchart / Process
+
+Integration Tools
+ Kepler
+ BPEL (Next Unit)
+ Workflow Foundation
+For integration
+ For creating services
+
+
+Component / Service
+Repository
+
+Service
+Providers
+
+Service
+Providers
+
+Service
+Providers
+
+Why do we need
+this?
+Y. Chen
+
+Why Do We Need Workflow for Coding?
+
+9
+
+Low coding/no coding approach: AI makes more feasible.
+ Adding a layer of abstraction (graphical approach) to
+make application development faster and easier.
+ It makes the application’s main logic more visible.
+ By providing a straightforward picture of what is going
+on, the architect can help developers more quickly to
+understand an application’s structure.
+ It helps to maintain the deployed applications, since
+learning a new application well enough to change it can be
+a time-consuming process.
+ Allows traditional programming style to seamlessly
+integrate with workflow.
+Y. Chen
+
+
+10
+
+From Tiered Architecture Perspectives
+Presentation
+Layer (GUI)
+
+Presentation
+Layer (GUI)
+
+Application
+Processing Layer,
+with Low-Level Code
+
+Workflow Layer
+for High-Level
+Composition
+
+Service and
+Component Layer
+
+Data Management
+Layer
+
+Service and
+Component Layer
+
+WF Activities for
+Low-Level Code
+
+Data Management
+Layer
+
+Y. Chen
+
+11
+
+Example: How Do you Write Code to Send a Web Mail
+to a Client within your Web Application?
+MService.ServiceClient TestSvcProxy = new MService.ServiceClient();
+string EmailAddress = "account@gmail.com";
+string Password = "password";
+MService.CARRIER PROVIDER = MService.CARRIER.NAME;
+string address, Message;
+Mail Service
+System.Console.Write("Please enter an address: ");
+Address = System.Console.ReadLine();
+You need to
+System.Console.Write("Please enter the service provider: ");
+design a GUI
+System.Console.ReadLine();
+page
+System.Console.WriteLine("\nPlease enter a message: ");
+email address
+Message = System.Console.ReadLine();
+Message
+bool Result = TestSvcProxy.SMS(EmailAddress, Password,
+address, PROVIDER, Message);
+send
+if (Result)
+Write code
+System.Console.WriteLine("\n\nMessage has been sent."); behind button
+Y. Chen
+
+12
+
+Example: Drag and Drop Designer in WF
+http://msdn.microsoft.com/en-us/library/ee342461.aspx
+
+Define
+parameter
+types
+
+Configure
+your
+service
+
+Y. Chen
+
+13
+
+WF Built-in Activities: Control Flow (1)
+http://msdn.microsoft.com/en-us/library/dd647759.aspx
+
+DoWhile: executes an activity, then checks a
+condition, and repeats until the condition is false.
+ ForEach: executes an activity for each object in a
+collection.
+ If: creates a branch of execution.
+ Parallel: forks multiple activities.
+ ParallelForEach: Enumerates the elements of a
+collection and executes an embedded statement for
+each element of the collection in parallel.
+ Pick: allows waiting for a set of PickBranch events,
+then executing only the activity associated with the
+first event to occur; event-driven programming!
+ PickBranch: a member of Pick activity.
+Y. Chen
+
+
+14
+
+ParallelForEach and ForEach
+http://msdn.microsoft.com/en-us/library/ee342461.aspx
+
+Example: Call many URLs in
+parallel:
+ Take a list of URLs and
+asynchronously get all RSS
+feeds using Foreach
+<URL>.
+ After the feed is returned, the
+Foreach<item> is used to
+iterate over the feed items
+and process them.
+Y. Chen
+
+15
+
+WF Built-in Activities: Control Flow (2)
+Sequence: groups together a set of activities that
+are executed sequentially. Sequence is also useful
+inside workflows. For example, a While activity
+can contain only one other activity. If that activity
+is a Sequence, a developer can execute an
+arbitrary number of activities within the while
+loop.
+ Switch: provides a multi-way branch of
+execution.
+ While: executes activities iteratively as long as a
+condition as true.
+
+
+Y. Chen
+
+16
+
+WF Built-in Activities: Flowchart (3)
+Flowchart: groups together a set of activities that
+are executed sequentially, but also allows control
+to return to an earlier step. It creates a local
+component.
+ FlowDecision: Branches execution based on a
+Boolean condition, similar to If, but applied at the
+flowchart level.
+ FlowSwitch: Branches execution based on an
+exclusive switch, similar to Switch in C#, but
+applied at the flowchart level.
+
+
+Y. Chen
+
+17
+
+WF Built-in Activities: Messaging (4)
+http://msdn.microsoft.com/en-us/library/dd487617.aspx
+
+CorrelationScope: Provides implicit
+CorrelationHandle for child messaging activities.
+The CorrelationHandle is only visible to child
+activities, which associates activities together in a
+correlation by representing a particular
+shared InstanceKey or transient context in the
+workflow. Used for asynchronous communication.
+ Receive: An activity that receives a message via
+WCF service.
+ ReceiveAndSendReply: Creates a sequence of two
+communications.
+ Send: An activity that sends a message via WCF.
+ SendAndReceiveReply: Creates an asynchronous
+communication sequence.
+
+
+Y. Chen
+
+Creating Asynchronous Service in WF
+
+18
+
+SendAndReceiveReply: is a template used for creating a
+pair of pre-configured Send and ReceiveReply activities
+within a Sequence activity
+ Send and Receive are correlated as part of an
+asynchronous request/response message exchange
+pattern on the client. SendAndReceiveReply also
+
+
+Configures the OperationName, ServiceContractName
+properties of the Send activity.
+ Binds the Request property of the ReceiveReply activity to
+the Send activity.
+ Creates a CorrelationHandle as a variable in the parent activity.
+
+
+Y. Chen
+
+19
+
+WF Built-in Activities (5)
+Persist: explicitly requests the WF runtime to
+persist the workflow, to allow a workflow to be
+re-loaded later on the machine or even on another
+machine, if necessary. Save all states.
+ Assign: assigns a value to a variable in the
+workflow.
+ InvokeMethod: Invokes a method on the object,
+synchronously or asynchronously.
+ Compensate: An activity used to explicitly
+invoke the compensation handler of
+a CompensableActivity. It provides a way of
+handling a problem that occurs in a long-running
+transaction.
+ TransactionScope: Makes a code block
+transactional. This class cannot be inherited. Y. Chen
+
+
+20
+
+WF Built-in Activities (6)
+AddToCollection, ClearCollection,
+ExistInCollection, RemoveFromCollection:
+allow to add, remove, clear, and check
+membership of a collection.
+ Rethrow: throws a previously thrown exception
+from within a Catch activity.
+ Throw: raises an exception.
+ TryCatch: allows creating a try/catch block to
+handle exceptions. In the block, it contains
+workflow elements to be executed by the
+workflow runtime within an exception handling
+block.
+
+
+Y. Chen
+
+21
+
+A Typical Workflow of Client Service
+http://msdn.microsoft.com/en-us/library/dd851337.aspx
+
+Y. Chen
+
+22
+
+WF Designer, Markup and Code Behind
+Design
+view
+
+Code
+behind
+design
+
+Markup
+view in
+XAML
+
+Mobile
+app uses
+XMAL
+too
+Y. Chen
+
+Creating a Workflow Service
+
+23
+
+Building business logic as a service often makes
+sense, for example, when the same set of operations
+must be accessed from a
+ Console application
+ Windows forms application;
+ Website application.
+ Implementing this logic as a service consisting of a
+set of operations that can make the service to
+interoperate with other operations;
+ WCF interface can be used for creating SOAP and
+REST interface for WF service.
+
+
+Y. Chen
+
+24
+
+WF Using WCF for Creating Services
+Use WF to
+process the
+request from
+client
+
+A
+B
+C
+Asynchronous
+communication
+
+Use WCF to
+create the
+.svc service
+interface for
+the client.
+Y. Chen
+
+Hosting WF Service
+
+25
+
+
+
+Similar to WCF, WF services can be hosted in
+different ways:
+Self-hosting
+ IIS hosting: running a thread of a worker process
+ “Dublin” hosting
+
+
+
+
+“Dublin” hosting is based on IIS with extensions for
+additional support:
+Persistence management: Saving the process (code and
+states for later access) and waiting for the second part of
+service call persistently;
+ Tracking and monitoring
+ Other utility services
+
+
+Y. Chen
+
+26
+
+Hosting WF Service with Dublin
+
+IIS provide basic
+hosting service
+Dublin is the code
+name for extended IIS
+and WAS (Website
+Administration
+Services) for WF
+service hosting
+The primary goal of
+“Dublin” is to make
+IIS and WAS more
+attractive as a host for
+workflow services.
+ Persistence
+ Tracking
+
+IIS
+
+Dublin
+extensions
+
+Y. Chen
+
+27
+
+ASP .Net GUI for WF Services
+
+GUI
+
+Why do we use WF service behind ASP .Net? We could use code
+behind ASP .Net page to implement the functionality.
+• Tier design: separating presentation layer from application logic layer;
+• WF can manage states and asynchronous communication easier than ASP .Net
+• With parallel construct and parallel threading, WF is easier for implementing
+parallel computing.
+Y. Chen
+
+28
+
+Concurrent Objects for WF Services
+
+Multiple instances can be created for a single client’s multiple requests
+
+Y. Chen
+
+29
+
+Add Workflow Foundation into Visual Studio 2019/2022
+
+Another way to install:
+You open the sample WF
+project in the assignment
+folder, Visual Studio will
+detect the missing
+components and install them
+automatically.
+Y. Chen
+
+30
+
+Getting Started With WF Visual Studio 2022: Hello
+
+Y. Chen
+
+31
+
+Choose Project Name and Location
+
+Y. Chen
+
+32
+
+Project Created: Main Class
+
+The workflow is considered
+a thread and started by the
+Main method.
+
+Y. Chen
+
+33
+
+Adding a Flowchart Item into Workflow
+1. Drag and drop Flowchart into the design surface
+2. Right click project name “WorkflowHelloWorld” and Choose “Add New Item”
+
+Y. Chen
+
+34
+
+Adding a Sequence into Flowchart
+2. Drag and drop Sequence into Flowchart. Make sure that an arrow
+appear from Start to Sequence
+3. Double-click Sequence to view (open) Sequence
+
+Y. Chen
+
+35
+
+Adding activities into Sequence
+4. After expanding Sequence
+add the activities into the
+sequence.
+Note the nested structure and
+the layers of the activities.
+
+Y. Chen
+
+36
+
+Define Variable
+5. We use an integer
+variable i in the while
+loop. We need to
+define the variable.
+6. Click Variables” at the
+bottom of the design
+surface.
+7. Create variable I and
+choose type to be Int32
+
+Y. Chen
+
+37
+
+Build and Start without Bebugging
+Build the project
+
+Start without Debugging
+
+Y. Chen
+
+38
+
+Keep Console Window Open
+If the Console window closes automatically after execution, do the followings:
+Visual Studio Menu:
+Tools  Options  Debugging
+
+Y. Chen
+
+39
+
+A More complex Example
+In Visual Studio 2019 (FSE Apporto Virtual Lab)
+
+Creating Workflow
+Application, now!
+Creating Workflow
+Web Service, next.
+Y. Chen
+
+40
+
+Workflow Console Application
+In Workflow Console Application template,
+The Main() method in Program.cs is the entry point
+The workflowInvoker invokes the Workflow1.xaml file
+
+The workflow is considered
+a thread and started by the
+Main method.
+
+Y. Chen
+
+41
+
+Graphic Development of Workflow.xaml
+1
+2
+4
+
+3
+
+5
+
+6
+7
+
+Y. Chen
+
+42
+
+A Flowchart is an Instant Component
+
+A Flowchart creates
+an instant component
+in a workflow! The
+custom component
+does not appear in
+toolbox
+
+A Switch is a construct
+only. It has a fixed
+Y. Chen
+structure.
+
+Workflow: Support Control Flow and Data Flow
+
+43
+
+Control flow model: Assuming one processor will
+process the entire program, and thus, the code are
+organized in a sequence;
+ It is possible to use multithread programming to
+perform parallel computing, but not easy.
+ Data flow model: Assuming multiple processors will
+process different part of the program. A piece of code
+will be executed when the input data is ready.
+ Workflow supports multiple computing models
+ Sequence construct
+ Parallel construct
+ Finite State Machine Model
+Y. Chen
+
+
+44
+
+Adding Constructs for Parallel Computing
+
+Y. Chen
+
+Finite State Machine Model and Event-Driven Programming
+45
+
+http://venus.sod.asu.edu/WSRepository/CoffeeMachine/
+soda
+15
+
+dime
+
+nickel
+
+nickel
+
+nickel
+return
+0
+
+10
+
+soda
+
+35
+
+nickel
+20
+
+nickel
+dime
+
+5
+
+soda
+
+dime
+nickel
+
+dime nickel
+
+30
+
+nickel
+
+40
+
+soda
+
+dime
+
+dime
+
+nickel
+
+45
+
+dime nickel
+
+soda
+quarter
+
+25
+
+quarter
+
+50
+
+return
+return
+quarter
+
+If (Sum>75) Sum = Sum – 75
+release soda
+If Sum < 75, do nothing
+
+dollar
+
+soda
+0
+
+If (Sum== 75)
+release soda
+
+return
+
+>
+0
+
+dollar
+
+quarter
+
+Sum = Sum + 25
+Sum = Sum + 100
+
+Y. Chen
+
+46
+
+Implementing a State Machine
+
+quarter
+
+If (Sum>75) Sum = Sum – 75
+release soda
+If Sum < 75, do nothing
+
+dollar
+
+soda
+0
+
+>0
+
+dollar
+
+quarter
+
+If (Sum== 75)
+release soda
+
+return
+
+Sum = Sum + 25
+Sum = Sum + 100
+
+Y. Chen
+
+47
+
+Event-Driven and State Machine
+for eBusiness Application
+http://msdn.microsoft.com/en-us/magazine/cc163281.aspx
+Submitted
+
+A Simplified
+Ordering
+Process
+
+Assigned
+approve
+Approved
+
+Rejected
+
+reassign
+
+cancel
+Ordered
+
+Completed
+Y. Chen
+
+48
+
+Using the State Machine Template
+
+Y. Chen
+
+49
+
+State Machine Template and Services
+
+Y. Chen
+
+Define States
+
+50
+
+Submitted
+Assigned
+approve
+Approved
+
+Rejected
+
+reassign
+
+cancel
+Ordered
+
+Completed
+
+Y. Chen
+
+51
+
+Connecting States Through Target State
+
+Y. Chen
+
+52
+
+States are Connected
+
+Y. Chen
+
+53
+
+Architecture-Drive
+Development
+
+All
+Connected
+Submitted
+Assigned
+approve
+Approved
+
+Rejected
+
+reassign
+
+cancel
+Ordered
+
+Completed
+Y. Chen
+
+Summary the Lecture
+
+54
+
+Key Ideas of Workflow-based Application
+Development
+ WF Constructs and Activities
+ Creating WF workflow Application
+ Integrating WF and WCF
+ Creating WF Services
+ Event-Driven Approach and State Machine in WF
+ Workflow Supports
+
+
+Low-Code App Development: Power App on AI/Copilot
+ Architecture-Drive Development
+ Control flow and Dataflow
+ Synchronous and Asynchronous communications
+Y. Chen
+
+
+Addition Slides (Not required)
+
+Application Requirement (Scenarios)
+
+56
+
+Contoso Housing is a real estate company that sells
+houses.
+ To provide better customer service and an end-to-end
+buying experience, Contoso partners with three
+mortgage companies that assist potential customers
+with their mortgage needs.
+ Each mortgage company offers different interest
+rates.
+ Contoso prioritizes mortgage vendors by their interest
+rates to ensure that customers get the best deal (using
+the assumption that a better rate makes the house
+more likely to sell)
+
+
+Y. Chen
+
+57
+
+Overview of the Application and Service
+Source: http://msdn.microsoft.com/en-us/magazine/ff646977.aspx
+
+What are the
+ABCs ?
+
+Y. Chen
+
+58
+
+Case Study: Mortgage Application (Client)
+
+Source: http://msdn.microsoft.com/en-us/magazine/ff646977.aspx
+Y. Chen
+
+59
+
+Case Study: Mortgage Application (Client)
+You can combine the
+image verifier
+Where
+do I gethere.
+the ID?
+
+Y. Chen
+
+60
+
+Case Study: Mortgage Application (Client)
+
+What is a persistence service?
+
+Y. Chen
+
+61
+
+Workflow Service
+
+Conceptual
+Diagram
+
+It uses sequential
+checks. You
+could use parallel
+
+Y. Chen
+
+Workflow
+62
+Diagram
+
+The Mortgage Approval
+Process as a Flowchart
+
+Y. Chen
+
+63
+
+Define the Properties of Receive Activity
+
+Define the WCF
+Endpoint:
+Operation Contract:
+Parameters in & out
+Define the WCF
+Endpoint:
+Operation Contract:
+Operation Name
+Y. Chen
+
+64
+
+Configuring Input Parameters
+
+Y. Chen
+
+65
+
+Adding the “Initial Screening” Flowchart
+
+Y. Chen
+
+66
+
+Each Outbound Arrow in the Switch Represents
+a Case in the Switch
+
+Y. Chen
+
+Ask Vendor CodeActivity
+67
+
+Y. Chen
+
+68
+
+Service Deployed at
+http://venus.sod.asu.edu/WSRepository/Services/WFService/MortgageService/Service1.xamlx
+
+Note that a workflow service generates a WSDL interface!
+
+Y. Chen
+
+69
+
+
+Testing the Mortgage Example
+The code can be downloaded at
+http://msdn.microsoft.com/en-us/magazine/ff646977.aspx
+
+
+
+The code is deployed at:
+The client application (TryIt Page):
+https://venus.sod.asu.edu/WSRepository/WFService/
+Services:
+https://venus.sod.asu.edu/WSRepository/Services/WFService/MortgageService/Service1.xamlx
+https://venus.sod.asu.edu/WSRepository/Services/WFService/VendorService/Vendor1.svc
+https://venus.sod.asu.edu/WSRepository/Services/WFService/VendorService/Vendor2.svc
+https://venus.sod.asu.edu/WSRepository/Services/WFService/VendorService/Vendor3.svc
+
+
+
+Only the basic functions, including the ASP .Net Client
+App, the workflow-based mortgage service, and the three
+vendor services are deployed. The CRM and the database
+services are deployed.
+Y. Chen
+
+

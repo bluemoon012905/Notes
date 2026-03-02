@@ -1,0 +1,1765 @@
+CSE 446 / 598
+Software Integration
+and Engineering
+
+Unit 2
+Software Architecture and Integration
+Lecture 2-2
+Enterprise Architecture and Business Process
+
+Dr. Y. Chen
+https://myasucourses.asu.edu/
+
+2
+
+Unit 2 Outline
+
+Software Development by
+Composition and Integration
+
+Unit 2-1 Advanced Web App Architecture
+Unit 2-2 Enterprise Architecture and Business Process
+Unit 2-3 Workflow Concepts and Workflow Foundation
+Unit 2-4 Software Integration Using Power Platform
+
+Y. Chen
+
+3
+
+Why to be a Software Architect/Engineer?
+
+Software Engineers and CS Occupations (There are many more)
+in U.S. DoL Occupational Outlook Handbook
+Employment Employment
+in 2008
+in 2018
+
+Occupational title
+
+Change in
+number
+
+Change in
+percentage
+
+Software engineers /
+Software Architect
+
+909,600
+
+1,204,800
+
+295,200
+
+32
+
+Computer systems analysts
+
+532,200
+
+640,300
+
+108,100
+
+20
+
+Computer network, systems, and
+database administrators
+
+961,200
+
+1,247,800
+
+286,600
+
+30
+
+Computer programmers
+
+426,700
+
+414,400
+
+-12,300
+
+-3
+
+565,700
+
+643,700
+
+78,000
+
+14
+
+293,000
+
+342,500
+
+49,500
+
+17
+
+Computer support specialists
+Computer and information
+systems managers
+http://www.bls.gov/ooh/
+
+IT Jobs:
+4,875,600.00 (78%)
+All other eng. jobs: 1,368,200.00 (22%)
+
+Y. Chen
+
+4
+
+Computer and IT Jobs 2021 - 2031
+U.S. DoL Occupational Outlook Handbook http://www.bls.gov/ooh/
+
+Occupational title
+
+Employment
+in 2021
+
+Employment
+in 2031
+
+Change in
+number
+
+Change in
+percentage
+
+Computer and Information Research
+Scientists
+
+33,500
+
+40,600
+
+7,100
+
+21%
+
+Computer Network Architects
+
+174,800
+
+182,300
+
+7,500
+
+4%
+
+Computer programmers
+
+174,400
+
+156,600
+
+-17,800
+
+-10%
+
+Computer support specialists
+
+875,700
+
+932,100
+
+56,400
+
+6%
+
+Computer Systems Analysts
+
+538,800
+
+589,700
+
+50,900
+
+9%
+
+Database Admins and Architects
+
+144,500
+
+157,300
+
+12,800
+
+9%
+
+Information Security Analysts
+
+163,000
+
+219,500
+
+56,500
+
+35%
+
+Software Developers, QA Analysts,
+and Testers
+
+1,622,200
+
+2,033,600
+
+411,400
+
+25%
+
+Web Developers & Digital Designers
+
+197,100
+
+242,500
+
+45,400
+
+23%
+Y. Chen
+
+100 Best Jobs US News 2021
+https://money.usnews.com/careers/best-jobs/rankings/the-100-best-jobs
+
+Job Title
+
+Job #
+
+Median Salary
+
+Degree needed
+
+1. Physician Assistant
+
+39,300
+
+112,260
+
+Master’s
+
+2. Software Developer
+
+316,000
+
+107,510
+
+Bachelor’s
+
+3. Nurse Practitioner
+
+110,700
+
+109,820
+
+Master’s
+
+4. Medical and Health Services Manager
+
+133,200
+
+100,980
+
+Bachelor’s
+
+5. Physician
+
+18,500
+
+206,500
+
+Doctorate
+
+6. Statistician
+
+14,800
+
+91,160
+
+Master’s
+
+7. Speech-Language Pathologist
+
+40,500
+
+79,120
+
+Master’s
+
+8. Data Scientist
+
+10,300
+
+94,280
+
+Bachelor’s
+
+9. Dentist
+
+3,700
+
+155,600
+
+Doctorate
+
+10. Veterinarian
+
+14,200
+
+95,460
+
+Doctorate
+
+11. Orthodontist
+
+200
+
+208,000
+
+Doctorate
+
+12. IT Manager
+
+48,100
+
+146,360
+
+Bachelor’s
+
+Summary: Medical related jobs
+
+280,500
+
+Summary: Computing related jobs
+
+389,200
+
+Master/Doctor
+x 1.39
+
+Bachelor
+Y. Chen
+
+100 Best Jobs US News 2023
+
+https://money.usnews.com/careers/best-jobs/rankings/the-100-best-jobs
+
+Job Title
+
+Job #
+
+Median
+Salary
+
+Degree needed
+
+1. Software Developer
+
+370,600
+
+120,730
+
+Bachelor’s
+
+2. Nurse Practitioner
+
+112,700
+
+120,680
+
+Master’s
+
+3. Medical and Health Services Manager
+
+136,200
+
+101,240
+
+Bachelor’s
+
+4. Physician Assistant
+
+38,400
+
+121,530
+
+Master’s
+
+5. Information Security Analyst
+
+56,500
+
+102,600
+
+Bachelor’s
+
+6. Physical Therapist
+
+40,400
+
+95,620
+
+Doctorate
+
+7. Financial Manager
+
+123,100
+
+131,710
+
+Bachelor’s
+
+8. IT Manager
+
+82,400
+
+159,010
+
+Bachelor’s
+
+9. Web Developer
+
+28,900
+
+77,030
+
+Bachelor’s
+
+10. Dentist
+
+7,700
+
+160,370
+
+Doctorate
+
+11. Lawyer
+
+80,200
+
+127,990
+
+Doctorate
+
+12. Veterinarian
+
+16,800
+
+100,270
+
+Doctorate
+
+Summary: Medical related jobs
+
+352200
+
+Summary: Computing related jobs
+
+538400
+
+Master/Doctor
+x 1.53
+
+Bachelor
+
+Y. Chen
+
+25 Best Jobs US News 2024
+https://money.usnews.com/money/careers/articles/the-25-best-jobs
+Job Title
+
+Median Salary
+
+New Job #
+
+Job growth %
+
+1. Nurse Practitioner
+
+$121,610
+
+118,600
+
+45.5%
+
+2. Financial Manager
+
+$139,790
+
+126,600
+
+16%
+
+3. Software Developer
+
+$127,260
+
+410,400
+
+25.7%
+
+4. IT Manager
+
+$164,070
+
+85,900
+
+15.4%
+
+5. Physician Assistant
+
+$126,010
+
+39,300
+
+26.6%
+
+6. Medical and Health Services Manager
+
+$104,830
+
+144,700
+
+28.4%
+
+7. Information Security Analyst
+
+$112,000
+
+53,300
+
+31.6%
+
+8. Data Scientist
+
+$103,500
+
+59,300
+
+35.1%
+
+9. Actuary
+
+$113,990
+
+6,900
+
+23%
+
+10. Speech-Language Pathologist
+
+$84,140
+
+33,100
+
+19.3%
+
+11. Marketing Manager
+
+$140,040
+
+23,700
+
+6.6%
+
+12. Statistician
+
+$98,920
+
+10,600
+
+31.8%
+
+Summary: Medical related jobs
+
+$105,074
+
+335,700
+
+Summary: Computing related jobs
+
+$121,150
+
+619,500
+
+x 1.85
+Y. Chen
+
+25 Best Jobs US News 2025
+https://money.usnews.com/money/careers/articles/the-25-best-jobs
+Job Title
+
+Median Salary
+
+New Job #
+
+Unemploy rate
+
+$126,260
+
+135,500
+
+0.6%
+
+$169,510
+
+106,900
+
+1.4%
+
+$130,020
+
+43,700
+
+1.6%
+
+$156,100
+
+138,300
+
+1.4%
+
+$132,270
+
+303,700
+
+2.4%
+
+6. Information Security Analyst
+
+$120,360
+
+59,100
+
+0.5%
+
+7. Medical and Health Services Manager
+
+$110,680
+
+160,600
+
+1.5%
+
+8. Data Scientist
+
+$108,020
+
+73,100
+
+N/A
+
+33,300
+
+1.6%
+
+6,600
+
+N/A
+
+31,700
+
+3.3%
+
+$119,100
+
+16,800
+
+0.2%
+
+Summary: Medical related jobs
+
+$121,515
+
+356,600
+
+Summary: Computing related jobs
+
+$108,432
+
+549,400
+
+1. Nurse Practitioner
+2. IT Manager
+3. Physician Assistant
+4. Financial Manager
+5. Software Developer
+
+Why do you want
+to be a software
+architect/
+engineer?
+
+9. Speech-Language Pathologist How do you become $89,290
+10. Actuary
+11. Marketing Manager
+12. Veterinarian
+
+a software architect/ $120,000
+engineer, instead of a
+$157,620
+programmer?
+
+x 1.54
+Y. Chen
+
+Lecture 2-2 Outline
+
+9
+
+Architecture-Level Integration
+
+How do you become a Software Architect/Engineer?
+
+Enterprise Architecture and Business Process
+
+
+Business and Technology Interaction
+
+
+
+Enterprise Architecture Integration (EAI)
+
+
+
+Enterprise Architecture Framework (EAF)
+
+
+
+Business Process Management (BPM)
+
+
+
+Development Life Cycle
+
+
+
+Dynamic Application Architecture for Dynamic
+Business
+Y. Chen
+
+eBusiness and Technology Interaction
+
+10
+e-business
+
+Core business
+Maintain a
+on Web with
+Computerized
+multi page
+database and
+establishment
+Web site; Use
+Web-enabled
+of e-business
+Web-form and
+execution of
+with basic
+Web-email for
+business
+information
+data exchange
+process and
+exchange with
+with clients
+transaction.
+clients
+
+Early stage of
+Internet:
+Email
+FTP
+Technology
+
+80s
+
+Static Web 1.0
+with HTML
+forms and
+web mail
+support
+
+90s
+
+Web-based
+computing
+model and
+Web database
+integration
+
+00-04
+
+Enterprise
+level
+collaboration
+& integration,
+Dynamic
+business
+composition,
+EAI, BPM
+
+Web 2.0,
+WSDL, Web
+3.0, SOA, SOC,
+SOD, ESB,
+
+Dynamic
+application
+architecture
+
+* From technology perspective
+05-09
+From user’s perspective: Web 3.0
+
+User-provided
+contents,
+Dynamic
+discovery,
+Social
+networking,
+Social
+integration
+
+On Demand
+e-business
+with AIbased realtime
+reconfigureation,
+resilient, &
+automated
+evolution
+
+Web 4.0*,
+HTML5, REST
+services, Cloud
+computing, Big
+Data, Social
+computing and
+networking
+platforms
+
+Web 5.0*
+with
+proactive
+artificial
+intelligent
+services and
+applications
+
+10-19
+
+20- Y. Chen
+
+Enterprise Architecture Integration (EAI)
+
+11
+
+Enterprise
+level
+collaboration
+& integration,
+Dynamic
+business
+composition,
+EAI, BPM
+
+Architecture: The fundamental organization
+of a system, its components, and the
+relationships among the components;
+ Enterprise Architecture: An architecture of a
+system involves one or more enterprises,
+including their business processes, data and
+information, as well as the technologies;
+ Enterprise Architecture Integration (EAI): Seamless
+integration of architectures, business processes, data
+and information, as well as the infrastructure /
+technologies within an enterprise and across
+enterprises.
+
+
+Y. Chen
+
+Purposes of EAI
+
+12
+
+Architecture Integration: Defining architecture framework for
+managing the development and maintenance of architecture
+descriptions.
+ Data (information) Integrity: Ensuring that information in
+multiple systems is kept consistent.
+ Application Integration: Different applications can
+communicate with each other, and are ready for integration.
+ Vendor Independence: If a business application is replaced
+with a different vendor's application, the business rules do not
+have to be re-implemented.
+ Common Façade: An EAI system could be a cluster of
+different applications. It can provide a single consistent access
+interface to these applications and shielding users from having
+to learn to interact with different software packages.
+
+
+Y. Chen
+
+Enterprise Architecture Integration (EAI)
+
+13
+
+EAI is composed of a collection of technologies and
+services.
+ A middleware to enable integration of systems and
+applications within and across the enterprises.
+ Examples
+
+
+
+
+
+
+
+
+
+
+ASU Website, involving application, admission, students database,
+course delivery, financial management, …;
+Supply chain management applications (for managing inventory;
+shipping, and interaction with other enterprises);
+Customer relationship management applications (for managing current
+and potential customers);
+Business intelligence applications (for finding patterns from existing
+data generated from operations). Big data and machine learning are
+major tools for today’s business intelligence applications.
+
+Y. Chen
+
+Enterprise Architecture Framework (EAF)
+
+14
+
+EAF jobs
+
+EAF is a standard developed by the U.S. NIST,
+dealing with architecture integration.
+ EAF is an organizing mechanism for managing the
+development and maintenance of architecture
+descriptions.
+ EAF provides a structure for organizing resources and
+describing related activities.
+ EAF follows Enterprise Architecture Model (EAM)
+ The other layers of integration in EAM (data,
+application, and infrastructure) will be discussed in
+the following lectures.
+
+
+Y. Chen
+
+National Institute of Standards and Technology (NIST)
+15
+
+Enterprise Architecture Model (EAM)
+
+https://en.wikipedia.org/wi
+ki/NIST_Enterprise_Archi
+tecture_Model
+EAM jobs
+
+Infrastructure
+
+Y. Chen
+
+Federal Enterprise Architecture Framework (FEAF)
+
+16
+
+https://obamawhitehouse.archives.gov/sites/default/files/omb/assets/egov_docs/fea_v2.pdf 2013, 434 pages
+
+Developed by The Chief Information Officers Council
+ Follow the NIST Enterprise Architecture Model
+ Purposes of developing this framework:
+
+
+Organize Federal information and promote Federal
+interoperability;
+ Promote information sharing among Federal organizations;
+ Help Federal organizations developing their architectures;
+ Help Federal organizations quickly developing their IT
+investment processes;
+ Serve customer needs better, faster, and more cost effectively;
+ Provide potential for Federal and Agency to reduce costs.
+
+
+Y. Chen
+
+17
+
+Federal Enterprise Architecture Framework (FEAF)
+Development in Five Steps
+
+Y. Chen
+
+18
+
+Federal Enterprise Architecture Framework (FEAF)
+Organization
+
+Y. Chen
+
+5.
+6.
+7.
+8.
+
+Architecture Drivers: business and design stimuli
+Current Architecture (View): the "as is" enterprise architecture
+Future Architecture (View): the "to-be-built" enterprise architecture
+Strategic Direction – Overall guidelines to the development from current
+architecture to the target architecture
+Transition Plan – Concrete support to the migration from the current to
+the target architecture
+Architectural Segments - Enterprises within the total Federal Enterprise.
+Architectural Models - business and design models that describe the
+segments of the enterprise
+Standards - All standards and
+references (some of which may 1
+2
+3
+be mandatory), and best
+Architecture
+Drivers
+practices
+6
+7
+Architectural Models
+
+1.
+2.
+3.
+4.
+
+Eight Key Components of the FEAF
+
+Architectural
+Segments
+
+19
+
+4
+
+Strategic
+Direction
+
+5
+8
+
+Y. Chen
+
+FEAF Level I View (from 20,000 feet)
+
+20
+
+
+The eight components needed for developing and
+maintaining the Federal Enterprise Architecture
+
+1
+
+4
+
+Architecture
+Drivers
+
+6
+
+7
+
+Architectural
+Models
+
+3
+Architectural
+Segments
+
+2
+
+Strategic
+Direction
+
+5
+8
+
+Y. Chen
+
+21
+
+Architectural Segments in FEAF
+Each architectural segment is an enterprise within the total Federal Enterprise.
+
+6
+
+Architectural
+Segments
+
+Common
+services
+cross
+enterprises
+
+Y. Chen
+
+FEAF Level II View (from 10,000 feet)
+
+22
+
+
+The business and design pieces of the Federal
+Enterprise Architecture and how they are related
+
+4
+
+Business
+Drivers
+Design
+Drivers
+
+2
+6
+
+Architectural
+Segments
+
+1
+3
+Business
+Architecture
+
+7
+
+Vision
+
+Strategic
+Direction
+Principles
+
+Design
+Architecture
+
+5
+8
+
+Y. Chen
+
+FEAF Level III View (from 5,000 feet)
+
+
+Business
+Drivers
+Design
+Drivers
+
+Expand design pieces of the framework to show the three
+design architectures: data, applications, & infrastructure
+
+Vision
+
+6 Architectural
+Segments
+
+23
+
+Business
+Service
+Data and
+Information
+Enabling
+Applications
+Host
+Infrastructure
+
+Strategic
+Direction
+Principles
+
+Y. Chen
+
+24
+
+Architecture Standards and
+Reference Models
+
+FEAF design is based on Architecture Standards and
+Reference Models
+
+Y. Chen
+
+FEAF Level IV View (from 500 feet)
+
+25
+
+How is the business architecture supported by the three design
+architectures based on architecture reference models?
+ Zachman，EAP，TOGAF
+ Zachman Model: IBM Systems Journal 1987 article: "A Framework
+for Information Systems Architecture":
+
+
+
+
+
+
+
+
+It is a model for bridging the business architecture to the three design models
+(data, application, and infrastructure models).
+The cost involved and the success of the business depend increasingly on its
+information systems, and a disciplined approach to the management of those
+systems is required.
+Architecture framework is simply a logical structure for classifying and
+organizing the descriptive representations of an enterprise that are significant to
+the management of the enterprise, as well as to the development of the
+enterprise's systems.
+Y. Chen
+
+FEAF Level IV View Based on Zachman Model
+
+26
+
+
+The Framework enables communication among the
+various participants involved in developing or
+changing the structure
+
+Y. Chen
+
+From Zachman Model to EAP
+
+27
+
+The Zachman Model tells what need to be done, how,
+where, when, why, and by whom.
+ It categorizes and organizes the artifacts: data,
+function, network, organization, schedule, and strategy.
+ Enterprise Architecture Planning (EAP), proposed by
+Dr. Steven Spewak,
+ defines the process of completing Zachman model;
+ focuses on defining what data, applications, and
+technology architectures are appropriate for
+supporting the overall enterprise.
+
+
+Y. Chen
+
+28
+
+Enterprise Architecture Planning (EAP)
+
+Y. Chen
+
+Open Group Architecture Framework (TOGAF)
+
+29
+
+TOGAF describes another architectural process;
+ It elaborates Zachman model. Zachman tells you how
+to categorize your artifacts. TOGAF gives you a
+process for creating them;
+
+
+Y. Chen
+
+BPM: Business Process Management
+
+30
+
+http://en.wikipedia.org/wiki/Business_process_management
+
+is an EAI technology at the design/process level;
+ is a management approach focusing on aligning all
+aspects of an organization with the wants and needs of
+clients;
+ allows organizations to abstract business process from
+technology infrastructure;
+ goes beyond automating business processes or solving
+business problems using software;
+ enables business to respond to changing consumer,
+market, and regulatory demands faster than
+competitors - creating a competitive advantage.
+
+
+Y. Chen
+
+BPM Lifecycle (Before Service Orientation)
+
+31
+
+Process Design: encompasses both the identification of
+existing processes and the design of "to-be" processes.
+ Modeling: takes the theoretical design and introduces
+combinations (relationships) of variables or parameters;
+ Execution: develops an application that executes the required
+steps of the process;
+ Monitoring: tracks processes and statistics on the performance
+of one or more processes;
+ Optimization: retrieves information from modeling or
+monitoring phase; identifying the potential or actual
+bottlenecks and the potential opportunities for cost savings or
+other improvements; and then, applying those enhancements in
+the design of the process.
+
+
+Y. Chen
+
+32
+
+BPM Suite (BPMS) Development Framework
+BPM Suite contains four critical components
+ Process Engine – a robust platform for modeling &
+executing process-based applications and business rules;
+ Business Analytics — enables managers to identify
+business issues, trends, and opportunities with reports
+and dashboards and react accordingly;
+ Content Management — provides a system for storing
+& securing documents, images, and other files;
+ Collaboration Tools — removes intra- and
+interdepartmental communication barriers through
+discussion forums, dynamic workspaces, and message
+boards.
+Y. Chen
+
+33
+
+BPM Suite and Its Implementing a Business Process
+http://en.wikipedia.org/wiki/Business_process_management
+Presentation Tier
+
+Business Process Tier
+
+Data Mgmt Tier
+
+Y. Chen
+
+34
+
+Service-Oriented Applications Architecture
+(SOAA) at the Process Level
+
+Service Broker
+Business
+Applications
+Architecture
+Data
+Centers
+
+Service Providers
+
+ESB
+Cloud
+Computing
+
+Y. Chen
+
+Ontology
+
+Extended Service Broker with
+Applications Templates and
+Other items
+
+Service
+Application Architecture Repository
+
+35
+
+Application
+Builder
+Database
+
+Extended Service Broker
+Y. Chen
+
+Extended Broker
+
+36
+
+Publish architecture templates;
+Help in
+application
+ Publish application template/workflow;
+architecture
+design
+ Publish collaboration templates;
+ Publish SOAP services with collaboration templates;
+ Publish data and information services (RESTful
+services)
+ Publish test scripts
+ Publish user interfaces
+ Publish Data: a typical example is Data-Centric SOA
+(DCSOA) and data center in cloud computing
+
+
+Y. Chen
+
+Service-Oriented Application Architecture
+and Case Studies
+
+37
+
+Dynamic Reconfigurable Application Architecture
+Organizing services in application;
+ Different architectures:
+Web 2.0, Web
+ SAP Netweaver
+3.0, SOA,
+ Oracle SOA Suite
+SOC, SOD,
+ESB,
+ IBM ESB
+
+
+Dynamic
+application
+architecture
+
+Y. Chen
+
+38
+
+General Service-Oriented Application Architecture
+
+Control Center
+Composition
+manager
+Application
+configuration
+Workflow
+specification
+
+ Composition manager specifies and controls the application composition
+configuration via a workflow specification.
+ The application composition configuration/workflow specification defines
+how the services shall be connected together to deliver the desired application
+and how the messages are transferred among the services
+ The Communication Backbone is a logic view. It can be a bus or not a bus.
+Y. Chen
+
+Static vs. Dynamic Architecture
+
+39
+
+Static architecture
+with integrated
+components
+Configuration 1
+
+Control Center
+Configuration 2
+
+Composition
+manager
+Application
+configuration
+Workflow
+specification
+
+Configuration 3
+Workflow Editor
+Y. Chen
+
+40
+
+Lifecycle Reference Model
+with Dynamic Application Architecture
+
+Fault-Tolerant Communication Backbone
+
+Communication Backbone
+is a logic view. It can be a
+bus or not a bus.
+
+Y. Chen
+
+41
+
+Microservice vs. Dynamic Architecture
+
+Control Center
+Composition
+manager
+Sidecar or
+Proxies
+
+Application
+configuration
+Workflow
+specification
+Workflow Editor
+
+Y. Chen
+
+42
+
+Lifecycle Reference Model of SOAA
+Based on BPM and with additional implementation detail
+
+Requirement
+Modeling
+Specification
+
+Reconfiguration
+
+Verification
+
+Evaluation
+
+Simulation
+Code generation
+
+Assembling
+Deployment
+
+Validation
+
+Operation
+Monitoring
+
+Y. Chen
+
+Dynamic Architecture Case Studies
+ SAP Netweaver
+ Oracle SOA Suite
+ IBM ESB
+
+44
+
+Application Architecture Development Tools
+Project Name
+SAP NetWeaver
+
+Architecture Style
+Layered
+architecture
+
+Characteristics
+
+Oracle Dynamic Visual
+Business Process architecture in
+workflow
+
+Providing integration with the traditional
+applications, with the SOA applications on
+Microsoft .Net and IBM WebSphere
+platforms
+Separate architecture from business process;
+allowing dynamically revising architecture
+and process on the fly.
+
+IBM WebSphere
+Reference
+Architecture
+
+Layered
+Architecture
+
+Merging the SOA application development
+and the SOA application operation into one
+single infrastructure based on ESB
+
+Microsoft
+Workflow
+Foundation
+
+Visual
+architecture in
+workflow
+
+Aiming at providing an integrated platform
+for specifying architecture, modeling, code
+generation, and execution of SOA
+applications
+Y. Chen
+
+SAP NetWeaver
+
+45
+
+Proposes a concept "Enterprise Services Architecture"
+(ESA), which provides an architecture framework for
+process modeling and service applications;
+ Provides integration with the traditional applications,
+such as SAP R/3 and mySAP, with the SOA
+applications on J2EE, Microsoft .Net, and IBM
+WebSphere platforms;
+ Provides interoperability and integration with other
+applications by following standards established by
+W3C.
+
+
+Y. Chen
+
+46
+
+SAP NetWeaver Architecture
+
+Y. Chen
+
+SAP NetWeaver BPM
+
+47
+
+
+
+One of the key modules in SAP Netweaver is the
+BPM, consisting of the following components:
+ Integration Builder: supports BPEL process
+ Integration Repository,
+ Integration Directory,
+ Business Process Engine
+
+Y. Chen
+
+48
+
+SAP BPM Supporting Dynamic Application Architecture
+
+3. Integration
+1. User modifies
+business process
+on the fly
+
+SOAP
+
+RESTful
+
+4. Execution
+
+2. Modification of
+business process updates
+the integration directory
+
+What do you do if
+you implemented
+the model in code?
+
+Y. Chen
+
+49
+
+Oracle SOA Suite for BPEL
+https://docs.oracle.com/middleware/1213/core/INSOA/planning.htm#INSOA352
+
+Y. Chen
+
+50
+
+Oracle SOA Suite for Dynamic Architecture
+
+Y. Chen
+
+Oracle SOA Suite for Dynamic Architecture
+
+51
+
+An analyst uses a custom designer to graphically
+(visually) model the business process.
+ The business process definition is stored in a database.
+ The BPEL Generator reads and validates the graphical
+process definition, and then generates the BPEL XML
+file from the database representation as well as
+associated files used for deployment.
+ The BPEL process is dynamically deployed on the
+Oracle BPEL Process Manager Server.
+ Just-In-Time compilation can be used to convert BPEL
+process to executable.
+
+
+Y. Chen
+
+52
+
+IBM SOA Foundation Lifecycle Model
+(Based on Service Oriented Computing)
+
+Y. Chen
+
+53
+
+IBM SOA Foundation Lifecycle Model
+with its Application Architecture and ESB
+
+Logic view
+
+Physical view
+
+Y. Chen
+
+54
+
+IBM Enterprise Service Bus (ESB)
+
+SAP
+Application
+
+ESB
+
+•
+•
+•
+•
+•
+•
+•
+
+Translate message formats;
+Adapt different interaction patterns;
+Convert transport protocols;
+Analyze and share the service interface;
+Propagate the security content;
+Provide WS-* support, including WS-RM, WS-Security, and WS-Transaction;
+Track and monitor service activities
+Y. Chen
+
+What Next?
+From Dynamic to On Demand Business
+
+55
+
+
+
+Dynamic Business Composition
+Changing environment and changing partners
+ Reconfiguring business without stopping
+operations
+ Manual reconfiguration
+
+
+
+
+On Demand Business with Artificial
+Intelligence
+Proactive discovery
+ Responsive reconfiguration in real-time
+ Resilient around the world and around the clock
+ Automated reconfiguration
+
+
+On Demand
+eBusiness
+with AIbased realtime
+reconfiguration,
+resilient &
+automated
+evolution
+
+Web 5.0*
+with
+proactive
+artificial
+intelligent
+services and
+applications
+
+2020 Y. Chen
+
+

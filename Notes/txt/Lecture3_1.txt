@@ -1,0 +1,865 @@
+CSE 446 / 598
+Software Integration and
+Engineering
+
+Unit 3
+Business Process and Integration
+Unit 3-1
+
+Dr. Yinong Chen
+
+Unit 3 Outline
+
+2
+
+
+
+3-1
+
+
+
+3-2
+
+Software Development by
+Composition and Integration
+
+Antigravity
+
+
+Getting Started
+
+
+
+Agent-based development
+
+
+
+Use cases and examples
+
+BPEL (Business Process Execution Language)
+
+
+Overview of Workflow and Orchestration
+
+
+
+WSDL in BPEL
+
+
+
+BPEL constructs and BPEL Process Definition
+
+3-3
+
+
+
+Message-Based Integration
+
+3-4
+
+
+
+Web Caching and Recommendation
+
+Y. Chen
+
+3
+
+Traditional vs. Agent-based Development
+Development using
+Antigravity Agentic
+Mission Control
+Development using
+Traditional IDE
+
+Next lecture
+
+Control
+Data
+Y. Chen
+
+4
+
+Download Google Antigravity
+https://antigravity.google/download
+
+Y. Chen
+
+5
+
+Setting Up Antigravity
+
+Terminal Execution Policy
+• Always Proceed: Agent
+never asks for review
+• Agent Decides: Agent
+will decide when to ask
+for review
+• Request Review: Agent
+always asks for review
+Controllability
+to AI Agents
+
+Y. Chen
+
+6
+
+Review Policy
+• Agent-driven
+development
+• Agent-assisted
+development
+• Review-driven
+development
+• Custom
+configuration
+A balanced and the recommended
+one since it allows the Agent to
+make a decision and come back to
+the human user for approval.
+Y. Chen
+
+7
+
+Configure the Editor for Code Editing
+
+Y. Chen
+
+8
+
+Sign into Google (Gmail)
+
+Y. Chen
+
+Editor vs. Agent Manager
+
+9
+
+Antigravity allows developers to:
+ Use a code editor, such as VS Code, Vim, etc., to
+type/edit code in traditional way.
+ Use an agent manager to orchestrate agents (who
+can generate the code automatically based on the
+requirement/need in conversation) and other
+components.
+ Mission Control dashboard. It is designed for highlevel orchestration, allowing developers to spawn new
+agent, monitor, and interact with multiple agents
+operating asynchronously across different workspaces
+or tasks.
+
+
+Y. Chen
+
+Editor vs. Agent Manager
+
+10
+
+Mission Control Dashboard
+
+Editor for
+editing
+agent’s
+code
+
+Agent
+Manager
+
+Spawn a new
+agent instance
+
+Y. Chen
+
+Agent Model vs. Chatbot-Based IDE
+
+11
+
+Chatbot-Based IDE: Development workflow is linear
+and synchronous: a developer must wait for the AI to
+finish generating code before asking the next
+question.
+ Antigravity’s Agent Manager: a developer can
+dispatch multiple different agents to work on multiple
+different tasks, such as fixing multiple bugs
+simultaneously, effectively multiplying their
+throughput.
+
+
+Y. Chen
+
+12
+
+Setting Up Your Workspace / Project Folder
+
+Create/Select a folder for
+storing your projects:
+“my-agy-projects”
+
+Y. Chen
+
+13
+
+Start new conversation
+Now, you can start
+your project in the
+Agent Manager
+through typing your
+conversation in English
+
+You can choose
+LLM model to
+support your
+conversation
+Y. Chen
+
+14
+
+Select Conversation Mode
+ Planning Mode: An Agent can plan before executing tasks.
+• Use for deep research, complex tasks, or collaborative work.
+• In this mode, the Agent organizes its work in task groups,
+produces Artifacts, and takes other steps to thoroughly
+research, think through, and plan its work for optimal
+quality. You will see a lot more output here.
+ Fast Mode: An Agent will execute tasks directly.
+• Use for simple tasks that can be completed faster, such as
+renaming variables, kicking off a few bash commands, or
+other smaller, localized tasks.
+• This mode is helpful when speed is an important factor, and
+the task is simple enough that there is low worry of worse
+quality.
+Y. Chen
+
+15
+
+Conversation Mode
+
+Y. Chen
+
+16
+
+Agent Manager - Mission Control Dashboard
+
+5
+1
+2
+3
+4
+
+6
+Y. Chen
+
+17
+
+Mission Control Dashboard Explained
+1. Inbox: Track all your conversations in one place.
+ List all tasks you sent to each agent;
+ Tap on any of the conversations will lead you to all the
+messages that have been exchanged, status of the tasks,
+what the Agent has produced or even if it is waiting for an
+approval from your side on the tasks.
+ A way to come back later to a previous task that you were
+working on.
+2. Start Conversation: Each click starts a new conversation.
+3. Workspaces: You can work across any workspace. You can
+add more workspaces at any time and can select any
+workspace while starting the conversation.
+Y. Chen
+
+18
+
+Mission Control Dashboard Explained
+4. Playground: A scratch area. You can simply start a
+conversation without choosing a space first. Later, you can
+convert that into a workspace when you need to save files.
+5. Editor View: You can switch from Agent Manager view to
+Editor view, which will show you your workspace folder and
+any files generated. You can directly edit the files, or even
+provide inline guidance, command in the editor, so that the
+Agent can do something or change as per your modified
+recommendations/instructions. We will cover it in detail later.
+6. Browser: Browser integration is one of the key advantages
+that makes Antigravity directly display and interact with your
+application. We will cover it in detail later.
+Y. Chen
+
+19
+
+Open Inbox (Example)
+
+Y. Chen
+
+Setting up Antigravity Browser
+
+20
+
+When an agent wants to interact with the browser, it
+invokes a browser subagent to handle the task. The
+browser subagent operates on the pages that are open
+within the Antigravity-managed browser.
+ This subagent has access to a variety of tools that are
+necessary to control your browser, including clicking,
+scrolling, typing, reading console logs, etc. It can also
+read your open pages, screenshots, or markdown
+parsing, as well as taking videos.
+ This means that we need to launch and install the
+Antigravity browser extension.
+
+
+Y. Chen
+
+Adding Browser Extension through Conversation
+
+21
+
+
+We can do it by starting a conversation in the Playground
+and going through the steps.
+
+Y. Chen
+
+22
+
+Bring up browser for installing the extension
+
+Y. Chen
+
+23
+
+Switch back to the Agent Manager
+
+Y. Chen
+
+24
+
+Revisit Conversations in Inbox
+
+Y. Chen
+
+25
+
+Unit 3-1 Outline
+
+
+
+Software Development by
+Composition and Integration
+
+Antigravity
+
+
+Getting Started
+
+
+
+Agent-based development
+
+
+
+Use cases and examples
+
+Y. Chen
+
+Use Case (1) News Highlights
+
+26
+
+This simple use case uses the web browser to visit web sites,
+extract information, takes some actions, and then return data to
+the user.
+ The page visit the Google News site and extract information
+from there. You can choose any site.
+ Enter Agent Manager and select the Playground
+
+
+Y. Chen
+
+27
+
+Start a Conversation
+
+Visit all popular news sites and
+get me all ASU related news!
+
+Y. Chen
+
+28
+
+A Sample Execution Results by the Agent
+
+Y. Chen
+
+Use Case (2) Generate a Dynamic Website with Python+Flask
+
+29
+
+To generate a complete web application:
+Creating a template for 1-day technical event/conference,
+ With talks across the day by multiple speakers
+
+
+To implement it, we
+Enter the Agent Manager
+ Select the Playground
+ Give the following (on next page) prompt in conversation
+
+
+As result, it generates:
+1.
+2.
+3.
+4.
+
+Task Artifact
+Implementation Artifact
+Walkthrough Artifact
+The website generated
+
+Y. Chen
+
+30
+
+Give the following prompt in conversation
+I would like to generate a website that is a 1-day technical conference
+informational site. The website should have the following functionality:
+1. A home page that shows the current date, location, schedule and timetable.
+2. The 1-day event is a list of 8 talks in total.
+3. Each talk has 1 or 2 max. speakers.
+4. A talk has ID, Title, Speakers, Category, Description and time of the talk.
+5. Each speaker has a First Name, Last Name and LinkedIn url.
+6. Allow for users to search by category, speaker, title.
+7. Give a lunch break of 60 minutes.
+8. Use dummy data for events and speakers, come up with a schedule, the
+event topic is about Google Cloud Technologies.
+9. Tech Stack: Python and Flask framework on server side. Front-end is basic
+HTML, CSS and JavaScript.
+10. Test out the site on your own for all functionality and provide a detailed
+README on how to setup, run and make any further changes.
+11. Launch the web application for me to review.
+Y. Chen
+
+31
+
+1. Task Artifact
+
+Y. Chen
+
+32
+
+2. Implementation Plan artifact
+
+Y. Chen
+
+33
+
+3. Walkthrough artifact
+
+Y. Chen
+
+34
+
+4. Website Generated
+
+Y. Chen
+
+35
+
+Review and Editing Code if Needed
+
+Y. Chen
+
+Adding More Talks in the Conference
+
+36
+
+We can easily edit the code to do so
+ We can also give the agent an instruction like:
+“Add two more talks to the schedule.”
+
+
+Y. Chen
+
+Use Case (3) Generate a Pomodoro timer web application
+
+37
+
+To implement, a Pomodoro timer web application,
+we
+Enter the Agent Manager
+ Select the Playground
+ Give the following prompt in conversation
+
+
+Create a productivity app that features a Pomodoro timer. Give a calm
+and aesthetic look to the application.
+
+Y. Chen
+
+38
+
+Execution
+
+Y. Chen
+
+39
+
+Web App Created in Browser
+
+Y. Chen
+
+Add a timer image to the application
+
+40
+
+We want to add a nice timer image to the application.
+ All we need to do is issue a follow up instruction /
+conversation as given below:
+
+
+Generate and add an image to the application that displays a timer.
+
+Y. Chen
+
+41
+
+Generate and add an image
+
+Y. Chen
+
+42
+
+New Web App Generated
+
+Y. Chen
+
+Use Case (4): Generate Unit Tests Using Mocks Stubs
+
+43
+
+Test Cases (Inputs)
+Call from UUT
+
+Unit Under Test Return value
+(UUT)
+Call from UUT
+
+...
+
+Mock / Stub
+provides
+functions to be
+called by UUT
+
+Return value
+
+
+
+
+
+
+
+Test cases provide inputs to test UUT
+Mocks and Stubs are both types of objects needed for conducting unit test
+that stand in for real dependencies during a test). The fundamental
+difference lies in how they verify results: stubs use state verification, while
+mocks use behavior verification..
+Antigravity: Generating unit tests for a specific code file (UUT) is for the
+Agent to generate mocks and stubs, so that it can execute the tests and
+validate return values from UUT.
+We use a workspace that has a single Python file as the UUT.
+Y. Chen
+
+Use Case (4): UUT in Unit Tests
+
+44
+
+
+
+Case Study: Place the following Python UUT (order_service.py)
+locally in a Workspace folder
+
+# order_service.py
+from typing import Dict
+# --- Custom Exceptions --class InventoryShortageError(Exception):
+"""Raised when there is not enough item stock."""
+pass
+class PaymentFailedError(Exception):
+"""Raised when the payment gateway rejects the transaction."""
+pass
+class InvalidOrderError(Exception):
+"""Raised when the order violates business rules."""
+pass
+Y. Chen
+
+45
+
+Code Under Test (Contd.)
+
+# --- External Service Interfaces (To be Mocked) --Mock Stub
+class InventoryService:
+def get_stock(self, product_id: str) -> int:
+"""Connects to DB to check stock."""
+raise NotImplementedError("Real connection required")
+def decrement_stock(self, product_id: str, quantity: int):
+"""Connects to DB to reduce stock."""
+raise NotImplementedError("Real connection required")
+class PaymentGateway:
+def charge(self, amount: float, currency: str) -> bool:
+"""Connects to Stripe/PayPal."""
+raise NotImplementedError("Real connection required")
+
+Mock Stub
+
+Mock Stub
+
+# --- Main Business Logic ---
+
+Y. Chen
+
+46
+
+Code Under Test (Contd.)
+# --- Main Business Logic --class Order:
+def __init__(self,
+inventory_service: InventoryService,
+payment_gateway: PaymentGateway,
+customer_email: str,
+is_vip: bool = False):
+self.inventory = inventory_service
+self.payment = payment_gateway
+self.customer_email = customer_email
+self.is_vip = is_vip
+self.items: Dict[str, Dict] = {} # {product_id: {'price': float, 'qty': int}}
+self.is_paid = False
+self.status = "DRAFT"
+
+Y. Chen
+
+47
+
+Code Under Test (Contd.)
+
+def add_item(self, product_id: str, price: float, quantity: int = 1):
+"""Adds items to the cart. Rejects invalid prices or quantities."""
+if price < 0:
+raise ValueError("Price cannot be negative")
+if quantity <= 0:
+raise ValueError("Quantity must be greater than zero")
+if product_id in self.items:
+self.items[product_id]['qty'] += quantity
+else:
+self.items[product_id] = {'price': price, 'qty': quantity}
+def remove_item(self, product_id: str):
+"""Removes an item entirely from the cart."""
+if product_id in self.items:
+del self.items[product_id]
+
+Y. Chen
+
+48
+
+Code Under Test (Contd.)
+@property
+def total_price(self) -> float:
+"""Calculates raw total before discounts."""
+return sum(item['price'] * item['qty'] for item in self.items.values())
+def apply_discount(self) -> float:
+"""
+Applies business logic:
+1. VIPs get flat 20% off.
+2. Regulars get 10% off if total > 100.
+3. No discount otherwise.
+"""
+total = self.total_price
+if self.is_vip:
+return round(total * 0.8, 2)
+elif total > 100:
+return round(total * 0.9, 2)
+return round(total, 2)
+
+Y. Chen
+
+49
+
+Code Under Test (Contd.)
+def checkout(self):
+"""
+Orchestrates the checkout process:
+1. Validates cart is not empty.
+2. Checks stock for all items.
+3. Calculates final price.
+4. Charges payment.
+5. Updates inventory.
+"""
+if not self.items:
+raise InvalidOrderError("Cannot checkout an empty cart")
+# 1. Check Inventory Logic
+for product_id, data in self.items.items():
+available_stock = self.inventory.get_stock(product_id)
+if available_stock < data['qty']:
+raise InventoryShortageError(f"Not enough stock for {product_id}")
+# 2. Calculate Final Price
+Y. Chen
+
+50
+
+Code Under Test (Contd.)
+# 2. Calculate Final Price
+final_amount = self.apply_discount()
+# 3. Process Payment
+try:
+success = self.payment.charge(final_amount, "USD")
+if not success:
+raise PaymentFailedError("Transaction declined by gateway")
+except Exception as e:
+# Catching generic network errors from the gateway
+raise PaymentFailedError(f"Payment gateway error: {str(e)}")
+# 4. Decrement Stock (Only occurs if payment succeeded)
+for product_id, data in self.items.items():
+self.inventory.decrement_stock(product_id, data['qty'])
+self.is_paid = True
+self.status = "COMPLETED"
+return {"status": "success", "charged_amount": final_amount}
+
+Y. Chen
+
+Understanding the Code Under Test
+
+51
+
+The code mimics a simple Order service that has the following
+key functionality in the checkout function:
+1. Validates cart is not empty.
+2. Check stock for all items.
+3. Apply discounts
+4. Calculates final price.
+5. Charges payment.
+6. Updates inventory.
+ Now, we assign an Agent the task of generating unit test cases,
+providing Mock Stub implementations and executing the tests
+to make sure that they succeed.
+
+
+Y. Chen
+
+Understanding the Code Under Test
+
+52
+
+The code file name is: order_service.py
+ We will open our workspace folder and you will
+notice that we can now use the @ symbol to reference
+the file. For example, we could do the following:
+
+
+Y. Chen
+
+53
+
+The Agent Analyzes and Explains the Code (1)
+
+Y. Chen
+
+54
+
+The Agent Analyzes and Explains the Code (2)
+
+Y. Chen
+
+55
+
+Ask Agent to generate a better visualization via prompt
+Can you visually show this class for better understanding.
+
+Y. Chen
+
+56
+
+Ask Agent to generate unit tests and to test it out.
+generate unit tests for this module and test it out with mock implementations.
+
+You can also see the details of the tests that it ran:
+
+Y. Chen
+
+57
+
+Test Output (Contd.)
+Generate different test
+cases (inputs) to test
+different functions
+
+Y. Chen
+
+58
+
+Use Case (5): Generate a Combined Calendar
+Calendar 2
+
+Calendar 1
+
+Integrated Calendar
+
+Y. Chen
+
+59
+
+Use Case (5): Generate a Calendar Combing Outlook and
+Google Calendars
+
+
+Open Agent Manager and enter:
+Generate a new Calendar Combing my Outlook Calendar and
+Google Calendar
+
+Y. Chen
+
+After Submitting Conversation
+60
+
+Y. Chen
+
+After Submitting Conversation
+61
+
+Y. Chen
+
+After Proceeding with the Plan
+
+62
+
+Y. Chen
+
+After Accepting:
+Required App Generated
+63
+
+Y. Chen
+
+Final Walkthrough
+
+64
+
+Y. Chen
+
+Summary of the Lecture
+
+65
+
+Antigravity is an AI-LLM-based IDE
+ Installation and setting up policies
+ Using conversation to state requirements/instructions
+ Review the plan
+ Proceed
+ Review the generated artifacts (code, website, etc.)
+ Test runs
+ Review and walkthrough the results
+ For developing more complex systems, architecture work –
+break the systems into smaller subsystems – Ask Antigravity
+to develop each subsystem – Ask Antigravity to integrate the
+subsystem – manually setting up configurations and
+modifying code are required.
+
+
+Y. Chen
+
+

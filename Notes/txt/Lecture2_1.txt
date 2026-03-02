@@ -1,0 +1,1409 @@
+CSE 446/598
+Software Integration
+and Engineering
+
+Unit 2
+Software Architecture and Integration
+
+Lecture 2-1
+Advanced Web App Architecture and Platforms
+Dr. Yinong Chen
+https://myasucourses.asu.edu/
+
+2
+
+Unit 2 Outline
+
+Software Development by
+Composition and Integration
+
+Unit 2-1 Advanced Web App Architecture
+Unit 2-2 Enterprise Architecture and Business Process
+Unit 2-3 Workflow Concepts and Workflow Foundation
+Unit 2-4 Software Integration Using Power Platform
+
+Y. Chen
+
+Unit 2-1 Lecture Outline
+
+3
+
+
+
+ASP .Net Web Application Architecture
+Evolution of Web Technologies from OO to Web
+ ASP .Net (Core) Framework
+
+
+
+
+HTML5 Application Architecture
+Platforms
+ Case Study
+
+
+
+
+MVC Web Application Architecture
+Platforms
+ Case Study
+
+
+Y. Chen
+
+WCF
+SOAP
+Service
+
+ASP .Net
+MVC 1
+Application
+
+Web API
+RESTful
+Service
+
+ASP .Net
+Core Web
+Application
+MVC 2 +
+
+ASP .Net
+Framework
+Web
+Application
+
+HTML5
+Single Page Application
+with Client-Side, plus
+server-side Computing
+
+Desktop-based Forms
+Application
+
+JavaHTML Script Canvas
+SVG
+CSS
+&
+JQuery WebGL
+
+ASP .Net
+SOAP
+Service
+
+ASP .Net
+Framework
+
+ASP .Net Core
+Framework
+
+Other Frameworks
+on Mac & Linux
+
+Web oriented and
+HTML-based
+
+WCF
+RESTful
+Service
+Object-oriented and
+Desktop-based
+
+4
+
+Evolution of Web Technologies: Started from OO
+
+Y. Chen
+
+Review: ASP .Net Web Application Architecture
+
+5
+
+ASP .Net Framework comes from object-oriented programming environment.
+It makes it easier for developers with OO development experience.
+It places the presentation layer files (.aspx) and the controller file (.aspx.cs) together.
+It generates html file based on .aspx file.
+•
+
+The advantages
+•
+•
+
+•
+
+MyWebApp root
+
+Related items are placed together.
+It matches OO and is easy to develop based on
+OO principles.
+
+The disadvantages:
+•
+•
+•
+
+Mix two tiers together (View and Controller)
+and add dependency.
+ViewState is not well supported in server
+farms/cloud computing environments
+Development on Windows platforms only
+
+ASP .Net
+Framework
+Web
+Application
+
+User defined dir
+.aspx
+&
+.aspx
+.aspx&&
+aspx.cs
+aspx.cs
+aspx.cs
+files
+files
+files
+
+Global.asax
+
+Web.config
+
+.aspx
+&&&
+.aspx
+.aspx
+aspx.cs
+aspx.cs
+aspx.cs
+files
+files
+files
+
+.ascx
+&
+.ascx
+.ascx&&
+ascx.cs
+ascx.cs
+ascx.cs
+files
+files
+files
+
+bin
+
+App_Data
+Web
+.config
+
+.aspx
+.aspx
+DB file
+files
+files
+
+XML
+XML
+file
+XML
+file
+file
+
+.exe
+.aspx
+.aspx
+file
+files
+files
+
+.dll
+.aspx
+.aspx
+file
+files
+files
+
+Y. Chen
+
+The Evolution Web Technologies: Move to HTML
+
+WCF
+RESTful
+Service
+WCF
+SOAP
+Service
+
+ASP .Net
+MVC 1
+Application
+
+Web API
+RESTful
+Service
+
+ASP .Net
+Core Web
+Application
+MVC 2 +
+
+ASP .Net
+Web
+Application
+
+HTML5
+Single Page Application
+with Client-Side
+Computing
+
+Desktop-based Forms
+Application
+
+JavaHTML Script Canvas
+SVG
+CSS
+&
+JQuery WebGL
+
+ASP .Net
+SOAP
+Service
+
+ASP .Net
+Framework
+
+ASP .Net Core
+Framework
+
+Other Frameworks
+on Mac & Linux
+
+Web oriented and
+HTML-based
+
+6
+
+Y. Chen
+
+From HTML to HTML5
+
+7
+
+Reference: http://www.w3schools.com/html/html5_intro.asp
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> Doc Title </title>
+</head>
+<body>
+Content of the document......
+</body>
+</html>
+
+• New semantic elements like
+<header>, <footer>, <article>, and
+<section>.
+• New form control attributes like
+number, date, time, calendar, and
+range.
+• New graphic elements like: <svg>
+and <canvas>.
+• New multimedia elements like:
+<audio> and <video>.
+
+JavaScript and JQuery API Calls
+HTML5
+Single Page Application with
+Client-Side Computing
+JavaCanvas
+HTML
+Script &
+SVG
+CSS
+JQuery WebGL
+
+Become a Web Application
+Development Language
+
+Y. Chen
+
+HTML5 JavaScript API Library
+
+8
+
+Reference: http://html5index.org/
+
+
+Web communication protocols
+
+
+
+
+Web Sockets (Connection-oriented)
+Messaging, and
+WebRTC
+(Web Real-Time Communication)
+
+Example: Robotics Simulator on Web
+http://venus.sod.asu.edu/VIPLE/Websimulator/
+
+It works in browser on any
+Drag and Drop, Fullscreen
+platform, even on phones.
+ Canvas, SVG, WebGL
+ Animation Timing, Media, Pointer Lock, Web Audio
+ File API, File System API, Indexed DB, Offline, Web Storage
+ Browser, Shadow DOM, Typed Arrays, Web Workers
+ DOM and JQuery
+ CSS Object Model, Selectors
+
+
+Y. Chen
+
+Canvas, SVG, or WebGL? Choose the right API
+
+9
+
+https://msdn.microsoft.com/en-us/library/dn265058%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396
+
+Canvas graphic library is the typical choice for most
+HTML5 applications. It's simple and speedy,
+particularly for games with many objects.
+ SVG: While Canvas provides simplicity and speed,
+SVG provides flexibility. For example: Each graphic
+object is part of the DOM tree for flexible access, and
+each graphic object in the application can have one or
+more associated event handlers for processing.
+ WebGL: If you are already familiar with OpenGL,
+you can use WebGL for a simple 2D application. If
+you are not, this API is more complex than you need
+for a simple graphic application.
+Y. Chen
+
+
+Creating HTML5 Applications
+
+10
+
+
+
+Using Visual Studio
+
+
+
+
+For HTML5 application development
+
+Using NetBeans
+ For HTML5 application development
+
+Y. Chen
+
+11
+
+HTML5 Applications in Visual Studio 2019/2022
+
+Y. Chen
+
+12
+
+Choose Single Page Application (HTML5)
+
+HTML5 app
+is considered
+a special case
+of MVC, with
+a single page
+only!
+
+Y. Chen
+
+13
+
+Adding an HTML Page as the Index Page
+
+Y. Chen
+
+14
+
+Index.html Page Created
+
+Y. Chen
+
+15
+
+
+Hello HTML5
+Right Click and choose View in Browser
+
+Right Click,
+choose View
+in Browser
+
+Y. Chen
+
+Adding CSS Stylesheet to HTML5 Page
+
+16
+
+
+
+Right Click Project  Add  Style Sheet
+Name the page StyleSheet1, and link it into Index.html page
+
+View in Web Browser
+
+Y. Chen
+
+17
+
+GUI Design
+
+There is no
+“Design” view
+in HTML GUI
+design
+
+View in Web Browser
+
+Y. Chen
+
+18
+
+Adding JavaScript Code in HTML
+
+Y. Chen
+
+Adding a JavaScript File
+
+19
+
+
+
+Right Click Project  Add  JavaScript File
+Name the file JsCode, and link it into Index.html page
+
+View in Web Browser
+
+Y. Chen
+
+20
+
+Calling a RESTful Service in JS
+https://venus.sod.asu.edu/WSRepository/html5/add2/
+
+The ServiceCall is asynchronous:
+(1) Start request asynchronously,
+not block waiting here; Waiting
+for WS result;
+(2) Call the service and obtain the
+result;
+(3) Send the result as return value
+You could do
+Y. Chen
+other work
+here
+
+W3C: Cross-Origin Resource Sharing (CORS)
+
+21
+
+
+Testing: Disable Web browser security for testing XMLHttpRequest in Visual Studio
+Click
+1
+2
+3
+
+2
+
+--user-data-dir="C:/Chrome dev session" --disable-web-security
+
+https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf
+
+
+
+Browser security policy prevents a web page from making AJAX requests to
+another domain.
+RESTful Service
+/ Web API
+
+
+
+
+
+CORS request
+XMLHttpRequest
+
+Web Client HTML
+
+Balance of
+capacity &
+security
+
+CORS is a W3C standard that allows a server to relax the same-origin policy
+(https://www.w3.org/TR/cors/).
+Deployment, follow: https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api
+
+Y. Chen
+
+CORS on IIS
+
+22
+
+
+
+https://enable-cors.org/server_iis7.html
+
+If you are receiving a service or AJAX call error, try
+to add the following element in your Web.config file:
+
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+<system.webServer>
+<httpProtocol>
+<customHeaders>
+<add name="Access-Control-Allow-Origin" value="*" />
+</customHeaders>
+</httpProtocol>
+</system.webServer>
+</configuration>
+For more detail, read:
+https://docs.microsoft.com/en-us/iis/extensions/cors-module/cors-module-configuration-reference#cors-configuration
+
+Y. Chen
+
+23
+
+Calling A RESTful Service in jQuery
+Source: https://spring.io/guides/gs/consuming-rest-jquery/
+
+Warning: Making service calls in
+html5 is possible but is restricted
+for security reason. It is better to
+make service calls on server-side
+using MVC architecture.
+// hello.js
+
+Making asynchronous
+call in jQuery
+
+http://venus.sod.asu.edu/WSRepository/html5/hello/
+
+Y. Chen
+
+24
+
+HTML5 Example with
+Animation Definition
+
+Where will the JS code be executed?
+(A) They will be executed in the browser.
+(B) They will be executed in the server.
+(C) They will be executed in the browser if they
+are embedded in the HTML file.
+(D) They will be executed in the server if they
+are in a separate .js file linked to the HTML
+file.
+Y. Chen
+
+Preparation for NetBeans
+
+25
+
+
+
+Please check if the following recourses have been
+installed/included:
+
+
+
+
+
+
+
+
+NetBeans IDE (pick either HTML5/JavaScriptpackage or all package
+included) https://netbeans.org/downloads/index.html
+Java Development Kit (JDK) version 7 or 8 (NetBeans 8.2 does not run
+JDK9!) or later version.
+Chrome Browser
+
+Add NetBeans Connector Extensions into Chrome Browser:
+
+
+Go to the Chrome browser
+
+(https://chrome.google.com/webstore/detail/netbeansconnector/hafdlehgocfcodbgjnpecfajgkeejnaa?utm_source=chrome-ntp-icon)
+and click Add the NetBeans Connector page. Click Add when you are
+prompted to confirm that you want to add the extension
+
+Y. Chen
+
+26
+
+NetBeans Connector
+https://chrome.google.com/webstore/detail/netbeansconnector/hafdlehgocfcodbgjnpecfajgkeejnaa?utm_source=chrome-ntp-icon
+
+Y. Chen
+
+27
+
+Add to Chrome
+
+Y. Chen
+
+28
+
+Now, Start NetBeans IDE
+
+Y. Chen
+
+Creating HTML5 Applications
+
+29
+
+Using Visual Studio
+ NetBeans
+ was originally used for developing objectoriented software
+ was extended for developing web services
+ can also be used for developing HTML5 web
+applications
+
+
+Y. Chen
+
+HTML5 Case Study: ASU IoT Maze Simulator
+http://venus.sod.asu.edu/VIPLE/Web2DSimulator/
+
+Y. Chen
+
+31
+
+HTML5 Case Study: ASU IOT Maze Simulator
+http://venus.sod.asu.edu/VIPLE/Web2DSimulator/
+
+Right-click the page
+
+Study the source code to
+learn Canvas-based
+animation
+Y. Chen
+
+HTML5 References from MSDN
+
+32
+
+Creating User Interface Elements with Canvas or
+SVG
+https://msdn.microsoft.com/enus/library/gg589494(v=vs.85).aspx#creating_UI_elem
+ents_drawingUI
+ Introducing the HTML5 Canvas
+https://msdn.microsoft.com/enus/magazine/hh708752.aspx
+
+
+Y. Chen
+
+Why MVC Architecture
+
+33
+
+ASP .Net
+MVC 1 is a
+simple reorganization
+of ASP .Net
+Web
+Application.
+
+WCF
+RESTful
+Service
+WCF
+SOAP
+Service
+ASP .Net
+SOAP
+Service
+
+ASP .Net
+MVC 1
+Application
+
+Web API
+RESTful
+Service
+
+HTML5
+Single Page Application
+with Client-Side
+Computing
+
+ASP .Net
+Framework
+Web
+Application
+
+JavaHTML Script Canvas
+SVG
+CSS
+&
+JQuery WebGL
+
+Desktop-based Forms
+Application
+•
+
+ASP .Net Web Application mixes two
+
+•
+
+tiers together and add dependency.
+ViewState is not well supported in
+server farms/cloud computing
+
+ASP .Net
+Core Web
+Application
+MVC Core
+
+MVC
+Core
+addresses
+all these
+issues
+
+•
+
+HTML5 is mainly for one-page
+
+•
+•
+
+application. Service calls are restricted.
+Data are hard to transfer between pages.
+Code viewable: Proprietary and security
+issues
+Y. Chen
+
+MVC as an Architecture Pattern
+
+34
+
+Hardware Patterns
+Patterns
+Software Patters
+
+Architecture Patterns (Client-server, tiered, MVC)
+Computing Patterns (Computing paradigms)
+Design Patterns (Creational, structural, behavioral,
+and currency patterns)
+
+The MVC pattern was originally formulated in the late 1970s by
+Trygve Reenskaug at Xerox PARC, as part of the Smalltalk.
+[http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller].
+ In MVC, the system is divided into three groups of components:
+ Model: contains the components representing data and
+application logic for data processing;
+ View: Display the results from model;
+ Controller: It is between the Model and View. It takes input
+from the user, provides handlers of the inputs (simple
+processing), and let the model to process more complex
+Y. Chen
+functions.
+
+
+35
+
+J2EE’s MVC Architecture
+Client Browser page
+
+View:
+What is sent to client browser
+JSP Pages
+Controller:
+Servlet
+
+Java2EE
+Server
+
+Model:
+Enterprise Java Bean (EJB)
+States and Data Sources
+
+Enterprise Information
+System Database Server
+Y. Chen
+
+Model, View, and Controller in ASP .Net
+
+36
+
+View: A directory contains the components that will
+generate the application's display (GUI) or the
+presentation layer of the application (output part).
+ Controller: A directory contains the components that
+handle user inputs, work with the model, and
+ultimately select a view to render the displays in GUI.
+ Model: A directory contains objects that that
+implement the part of the application logic related to
+the application's data domain. Often, model objects
+retrieve and store model state in a date sets, files, and
+database.
+
+
+Y. Chen
+
+Automatically Generate Unit Test
+
+37
+
+http://msdn.microsoft.com/en-us/library/dd410597%28v=vs.100%29.aspx
+
+In the project, right-click the Controllers folder,
+click Add, and then click Class.
+ In the Name text box, type MapsControllerTest.
+ Click Add.
+
+
+namespace MvcBasicWalkthrough.Tests.Controllers {
+[TestClass]
+public class MapsControllerTest {
+[TestMethod] public void ViewMaps() {
+// Arrange
+MapsController controller = new MapsController();
+// Act
+ViewResult result = controller.ViewMaps() as ViewResult;
+// Assert
+Assert.IsNotNull(result);
+}
+}
+}
+
+Y. Chen
+
+38
+
+Benefits of MVC Architecture
+The loosely coupled feature (compared with ASP .Net architecture)
+among the tiers in Views, Models, and Controllers:
+ Allow team members to develop different parts of the application
+with reduced interactions: GUI and code are separated;
+ The template can generate unit tests by automatically adding
+mock objects (simulated objects) that mimic the behavior of other
+objects in controlled ways in the application;
+ The restricted use of the view state, page postback, and related
+server controls, such as Gridview, allows the framework to render
+the XHTML page less dependent on the server features;
+ The MVC applications are more friendly with URI-based access
+used for RESTful services, the feed data formats, and cloud
+computing environment (Unit 5).
+Y. Chen
+
+39
+
+The Evaluation Web Technologies
+WCF
+RESTful
+Service
+WCF
+SOAP
+Service
+
+ASP .Net
+MVC 1
+Application
+
+Web API
+RESTful
+Service
+
+ASP .Net
+Core Web
+Application
+MVC Core
+
+ASP .Net
+Framework
+Web
+Application
+
+HTML5
+Single Page Application
+with Client-Side
+Computing
+
+Desktop-based Forms
+ApplicationHTML5
+
+JavaHTML Script Canvas
+SVG
+CSS
+&
+JQuery WebGL
+
+ASP .Net
+SOAP
+Service
+
+ASP .Net
+Framework
+
+ASP .Net Core
+Framework
+
+Other Frameworks
+on Mac & Linux
+
+Y. Chen
+
+40
+
+MVC in ASP .Net: A Four Tier Architecture
+with loosely coupling among the tiers
+View: The files that will generate the HTML files for
+client: the .aspx pages without .cs files
+Controller: The aspx.cs files
+Model: Objects that are process
+domain data for business logic
+
+Other controls
+and Computing
+Components
+and Services
+
+States and Data Sources
+Y. Chen
+
+41
+
+ASP .Net MVC Architecture (MVC 1)
+Reading: Text Chapter 5, Section 5.7
+
+ASP .Net offers MVC as an alternative project template;
+ It is available for Web Apps, Mobile Apps, and Cloud Apps, without
+using any View State!
+ Once selected the MVC template, the main components of the
+application will be organized in three directories: Models, Views,
+and Controllers.
+
+
+Y. Chen
+
+42
+
+MVC can be applied for developing different apps
+
+Y. Chen
+
+43
+
+An MVC 1 Project: Organized Differently
+
+.aspx.cs files,
+are moved to
+here
+
+Put any
+business logic
+not related I/O
+are here
+
+.aspx files,
+without .aspx.cs
+files
+Y. Chen
+
+44
+
+Add my Controller
+Right click
+
+Y. Chen
+
+45
+
+New Items are Added to the MVC 1 Project
+
+MVC user control’s
+.cs file is added
+separately here.
+A View Page
+is added here
+A MVC user
+control. Only
+.ascx file is added
+A traditional User
+control with both
+.ascx and .cs files
+
+Y. Chen
+
+How are View and Controller Connected?
+
+46
+
+In ASP .Net Framework, the .aspx files and .aspx.cs
+files are placed together in the same folder. The links
+are implicit. You must double-click the buttons to
+create the implicit links. It works because the two
+pages are tied together.
+ In MVC, the links are explicit.
+ Each View component (.aspx file) in browser
+contains a list of JavaScript calls.
+ The Controller of the component contains the
+methods to be called. View page and .cs page can
+be completely separated.
+
+
+Y. Chen
+
+47
+
+ChangePassword in ChangePassword.aspx,
+making JS calls
+
+Y. Chen
+
+48
+
+ChangePassword method in AccountController.cs
+To be called
+
+// POST: /Account/ChangePassword
+from JavaScript
+[Authorize]
+[HttpPost]
+public ActionResult ChangePassword(ChangePasswordModel model) {
+if (ModelState.IsValid) {
+// ChangePassword will throw an exception rather than return false in certain failure scenarios.
+bool changePasswordSucceeded;
+try {
+MembershipUser currentUser = Membership.GetUser(User.Identity.Name, true /* userIsOnline */);
+changePasswordSucceeded = currentUser.ChangePassword(model.OldPassword, model.NewPassword);
+}
+catch (Exception){
+changePasswordSucceeded = false;
+}
+To call function
+if (changePasswordSucceeded) {
+in Model
+return RedirectToAction("ChangePasswordSuccess");
+}
+else {
+ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+}
+}
+// If we got this far, something failed, redisplay form
+return View(model);
+}
+
+Y. Chen
+
+49
+
+ChangePassword method in AccountModels.cs
+
+public bool ChangePassword(string userName, string oldPassword, string newPassword) {
+if (String.IsNullOrEmpty(userName)) throw new ArgumentException("Value cannot be
+null or empty.", "userName");
+if (String.IsNullOrEmpty(oldPassword)) throw new ArgumentException("Value cannot be
+null or empty.", "oldPassword");
+if (String.IsNullOrEmpty(newPassword)) throw new ArgumentException("Value cannot be
+null or empty.", "newPassword");
+// The underlying ChangePassword() will throw an exception rather
+Access
+database
+// than return false in certain failure scenarios.
+try {
+MembershipUser currentUser = _provider.GetUser(userName, true /* userIsOnline */);
+return currentUser.ChangePassword(oldPassword, newPassword);
+}
+catch (ArgumentException) {
+return false;
+}
+catch (MembershipPasswordException) {
+return false;
+}
+}
+Y. Chen
+
+50
+
+From MVC 1 to MVC 2 (or later version)
+WCF
+RESTful
+Service
+WCF
+SOAP
+Service
+
+ASP .Net
+MVC 1
+Application
+
+Web API
+RESTful
+Service
+
+ASP .Net
+Core 2+ Web
+Application
+MVC Core
+
+ASP .Net
+Web
+Application
+
+HTML5
+Single Page Application
+with Client-Side
+Computing
+
+Desktop-based Forms
+ApplicationHTML5
+
+JavaHTML Script Canvas
+SVG
+CSS
+&
+JQuery WebGL
+
+ASP .Net
+SOAP
+Service
+
+ASP .Net
+Framework
+
+ASP .Net Core
+Framework
+
+Other Frameworks
+on Mac & Linux
+
+Y. Chen
+
+Case Study: Summer Camp Registration
+
+51
+
+https://venus.sod.asu.edu/WSRepository/MVC/SummerCampMVC/Home/Index
+
+Create an ASP .Net Core Web Application
+ Create the main page for information
+ Inviting for enrollment
+ Signup form
+ Store student list in a List structure
+ Showing Controllers  View
+ Showing Controllers  Model
+
+
+Y. Chen
+
+52
+
+Getting Started with MVC on ASP .Net Core
+
+Y. Chen
+
+53
+
+Creating a NewASP .Net Core Project
+
+Y. Chen
+
+54
+
+MVC Project in ASP .Net Core
+
+MVC Controllers
+with .cs files
+
+Models with
+.cs files
+
+MVC Views with
+.cshtml files for html
+and binding with
+models:
+@{ ViewData["Title"]
+= "Home Page"; }
+
+Y. Chen
+
+55
+
+Program Starting Point
+System Generated
+Main() method
+is the program
+starting point
+
+Y. Chen
+
+56
+
+HomeController: System Generated
+
+Y. Chen
+
+57
+
+Correlation Between Controller and View
+
+Define “Title”
+
+Y. Chen
+
+58
+
+
+
+Modify the Index.cshtml Page
+
+Write your code in Index page:
+
+Define a variable
+
+A page to be added
+
+Y. Chen
+
+Modify HomeController.cs
+
+59
+
+
+Link the code to the
+SemesterView page
+
+Y. Chen
+
+Add a New MVC View Page
+
+60
+
+
+Right Views-Home and Choose Add  New Item:
+
+Y. Chen
+
+61
+
+MVC View Page SignupForm Added
+
+Y. Chen
+
+Add a Model to deal with Student Signup
+
+62
+
+
+Right-click Project  Add  Class
+
+Y. Chen
+
+63
+
+Define the Signup Information in Model Page
+
+Start the Program and
+click Signup Now:
+Take to the response form
+
+Y. Chen
+
+Receive & Store Signed up Student Information
+
+64
+
+
+Add a Model for storing student list:
+
+Y. Chen
+
+65
+
+Use a List Type to Hold the Student List
+
+Y. Chen
+
+66
+
+Demo:
+https://venus.sod.asu.edu/WSRepository/MVC/SummerCampMVC/Home/Index
+
+Y. Chen
+
+Summary
+
+67
+
+WCF
+RESTful
+Service
+Advanced
+WCF
+Services
+
+ASP .Net
+MVC 1
+Application
+
+Web API
+RESTful
+Service
+
+ASP .Net
+Core Web
+Application
+MVC Core
+
+ASP .Net
+Web
+Application
+
+HTML5
+Single Page Application
+with Client-Side
+Computing
+
+Desktop-based Forms
+Application
+
+JavaHTML Script Canvas
+SVG
+CSS
+&
+JQuery WebGL
+
+ASP .Net
+SOAP
+Service
+
+ASP .Net
+Framework
+
+ASP .Net Core
+Framework
+
+Other Frameworks
+VS and Netbeans
+
+Server-side
+computing, full
+distributed and
+service-oriented
+computing
+Client-side
+computing,
+light-weight,
+animation and
+gaming
+
+Y. Chen
+
+

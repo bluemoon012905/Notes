@@ -27,7 +27,7 @@ This folder includes:
 Install:
 
 ```bash
-cd /home/moonbox/school/Notes/A3
+cd /A3
 python3 -m pip install -r requirements.txt
 ```
 
@@ -36,7 +36,7 @@ python3 -m pip install -r requirements.txt
 Start the service:
 
 ```bash
-cd /home/moonbox/school/Notes/A3/messaging_service
+cd /A3/messaging_service
 python3 app.py
 ```
 
@@ -93,11 +93,3 @@ Output JSON array:
 - Returns only new/unread messages for the receiver on each call.
 - If `purge=true`, deletes all messages for that receiver after processing.
 
-## Submission Notes
-
-Per assignment instructions:
-
-1. Include both service (`Question 5.1`) and web client (`Question 5.2`) in one folder.
-2. Zip the entire solution folder.
-3. Include screenshots showing end-to-end testing (service + sender + receiver sessions).
-4. Ensure the project runs after unzip in a different directory/machine.

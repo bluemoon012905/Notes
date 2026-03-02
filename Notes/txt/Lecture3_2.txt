@@ -1,0 +1,1854 @@
+CSE446 / CSE598
+Software Integration and
+Engineering
+
+Unit 3
+Business Process and Integration
+
+Unit 3-2
+Business Process and Execution
+Reading: Textbook Sections 8.3 through 8.5
+
+Dr. Yinong Chen
+
+Unit 3 Outline
+
+2
+
+
+
+3-1
+
+
+
+3-2
+
+Software Development by
+Composition and Integration
+
+Antigravity
+
+
+Getting Started
+
+
+
+Agent-based development
+
+
+
+Use cases and examples
+
+BPEL (Business Process Execution Language)
+
+
+Overview of Workflow and Orchestration
+
+
+
+WSDL in BPEL
+
+
+
+BPEL constructs and BPEL Process Definition
+
+3-3
+
+
+
+Message-Based Integration
+
+3-4
+
+
+
+Web Caching and Recommendation
+
+Y. Chen
+
+Organization of SOC-Enabling Technologies
+
+3
+
+Data and Resource Representation
+
+Management
+
+Service Implementation and
+Development Platforms
+
+Policy Exchange
+
+Knowledge
+Organization
+
+Introspection
+
+Service
+Protocols
+
+Message Correlation
+
+Knowledge
+Description
+
+Coordination & Transaction
+
+Service
+Description
+
+Reliability
+
+Composition and Integration
+
+Security
+
+Service Broker
+
+Cloud Computing
+
+Technologies supporting the functionality
+
+Infrastructure
+Computing and Communication Resources
+Y. Chen
+
+Instances of the SOC-Enabling Technologies
+
+XML, URI, Unicode
+
+WS Management
+
+C#, C++, Java, VB
+Netbeans, Eclipse, Visual Studio
+
+WS-Policy Exchange
+
+Ontologies and
+Frameworks
+
+WS-inspection
+
+SOAP,
+HTTP
+
+WS-Addressing
+
+RDF, Prolog,
+OWL
+
+WS-Coordination, WS-Transaction
+
+WSDL
+
+WS-Reliable Messaging
+
+C#, Java, BPEL, BPSS, OWL-S,
+WF, WS-DCL, VIPLE, LLM
+
+WS-Security
+
+UDDI / ebXML
+
+Technologies supporting the functionality
+
+AWS Cloud Computing, Google Cloud
+IBM Clouds, Microsoft Azure,
+
+4
+
+Intel SOI, Web Operating Systems
+Y. Chen
+
+5
+
+Composition and Business Process Languages
+ 2023
+LLM-based
+Power Apps
+Antigravity
+
+2019
+
+Amazon
+SWF Workflow Microsoft
+CUDA-X 2015
+2014 Foundation VPL PSML-S
+Microservices ASU
+ASU SCA/SDO
+2007
+AI and ML VIPLE
+2006
+2005/11
+IBM
+2005/07
+2004/12
+2004/11 WS-CDL
+2003/03 OWL-S W3C
+2002/08 BPEL1.1 W3C
+2002/06 BPEL1.0 OASIS
+2002/03 WSCI BEA
+2001/06 WSCL W3C
+IBM
+2001/05 BPSS
+Microsoft
+Web
+HP
+2001/03 WSFL ebXML
+Service Oracle
+Choreography
+2000/05 BPMN
+IBM
+Interface
+XLang by BPMI
+Y. Chen
+Microsoft
+
+6
+
+BPEL vs. other Composition Languages
+
+Language /
+Environment
+
+Architecture
+Style
+
+Other features
+
+BPEL 2002
+
+orchestration
+
+Based on SOAP, WSDL, UDDI directory,
+widely used by large corps
+
+BPSS 2001 BP
+Spec. Schema
+
+choreography
+
+Business Process Specification Schema
+Based on SOAP, ebXML repository, CPP/CPA
+collaboration, for small biz
+
+BPMN 2001 BP
+Modeling
+Notation
+
+orchestration
+
+A superset of BPEL, supports advanced
+semantics & complex structures, by BPMI which
+merged with OMG in 2005
+
+WSCI 2002
+
+choreography
+
+WS Choreography Interface: Complementary to
+BPEL, submitted to W3C, not widely used
+
+WS-CDL 2004
+
+choreography
+
+Complementary to BPEL, W3C own proposal
+
+PSML-S 2005
+
+choreography
+
+From ASU. Focus on dynamic behaviors:
+dynamic discovery, matching, cooperation
+
+Antigravity 2025 orchestration
+
+Google agent-based business process processing
+Y. Chen
+
+Review: Business Process vs. Workflow
+
+7
+
+A business process is a sequence or a collection of
+business activities, involving actors (humans or
+machines) and actions, to perform on business inputs and
+generated business results.
+ A workflow is a composition (programming) or flow
+management technology that organizes the components
+and services and defines their order of execution.
+ Workflow frameworks are designed to describe business
+processes, so that business process can be
+Business Process
+ precisely described or specified
+ executed automatically
+
+
+Workflow from
+Developer’s view
+Y. Chen
+
+Composition Style: Orchestration
+
+8
+
+
+A central process, which can be a service itself, takes control over
+the involved services and coordinates the execution of different
+operations
+ Involved services communicate with the central process only,
+within the application;
+ How service functionality is achieved by aggregating other
+Web services
+ Useful for private business process, using independent
+services
+ BPEL uses this style
+WS1
+
+WS2
+WS
+Coordinator
+
+WS3
+
+WS4
+Orchestration
+
+Y. Chen
+
+Composition Style: Choreography
+
+9
+
+
+There is no central coordinator.
+ Each service involved can communicate with multiple
+partners within the application;
+ Each service decide how to interact with other services to
+consume their functionality
+ Useful for public business process involving coordinated
+design of distributed services
+ WS-CDL uses this style
+WS1
+
+WS2
+WS5
+
+WS3
+
+
+WS4
+
+Increasing complexity of composition, the line between the two
+styles is vanishing, and the styles are not emphasized.
+
+Y. Chen
+
+Orchestration Vs. Choreography
+
+10
+
+Encoder
+Serializer
+
+Buffer
+classes
+
+Object
+
+String
+
+Main
+
+Object
+
+String
+
+Store1
+Producer
+threads
+
+...
+StoreN
+center
+
+Queue of
+strings
+Buffer queue
+
+Bank
+
+Consumer
+thread
+
+center
+Y. Chen
+
+Amazon Simple Workflow (SWF)
+
+11
+
+https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-welcome.html
+
+Amazon SWF provides a high-level way for developers
+to compose distributed and asynchronous workflow
+applications.
+ It is a programming environment that simplifies the
+process of defining workflow and thus simplifies the
+implementation of a business process using Amazon
+SWF.
+ It can be used for implementing a broad range of
+applications, including business processes, media
+encoding, long-running tasks (persistent), and
+background processing.
+
+
+Y. Chen
+
+12
+
+Amazon SWF Application Structure
+
+5. SWF monitors,
+manages, coordinates,
+synchronizes the
+execution
+
+Three-Party Model
+
+4. Workflow
+developer registers
+app to SWF
+3. Workflow
+developer writes
+the workflow that
+connects the
+activities, and host
+them as app
+
+6. Client (end
+user) accesses
+SWF without
+knowing its
+provider
+
+2. Activity
+developer registers
+activities to SWF
+1. Activity
+developer writes
+the activity
+methods and host
+them anywhere on
+workers as
+services
+
+End user
+
+Developers
+
+Y. Chen
+
+13
+
+Creating Your Workflow in Amazon SWF
+1. Write or discover existing activity methods that are needed in
+Service Provider
+your workflow. Host your own services.
+2. Write a decider to implement the coordination logic of your
+Service Consumer
+workflow.
+3. Register your activities and workflow with Amazon SWF.
+You can do this step programmatically or by using the AWS
+Service Broker
+Management Console.
+4. Start your activity workers and decider. Service Hosting
+5. Start one or more executions of your workflow.
+6. View workflow executions using the AWS Management
+Console.
+Note: The above process shows that you develop both activities
+and the workflow. Normally, you do not do both.
+Y. Chen
+
+14
+
+Amazon Workflow Example in E-Commerce
+http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-about-workflows.html
+https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg.pdf#swf-dev-about-workflows
+
+Actions
+
+Actors
+or robots
+
+Partnership
+Y. Chen
+
+15
+
+AWS Free Tier
+•
+•
+
+https://aws.amazon.com/free/?all-free-tier.sortby=item.additionalFields.SortRank&all-free-tier.sort-order=asc
+https://aws.amazon.com/free/free-tier-faqs/
+
+Y. Chen
+
+BPEL versus Workflow Foundation
+
+16
+
+
+Similarities (Considering the graphic view of BPEL)
+Architecture-driven approach
+ Add another layer of abstraction to programming
+ Workflow/Process languages
+ Graphic tools for visual development, e.g., Oracle SOA Suite
+ Similar constructs
+ Executable
+
+
+
+
+Differences
+BPEL is more towards enterprise level software integration
+and is closer to the business architecture;
+ WF is closer to programming languages and allows to mix
+with programming languages, e.g., CodeActivity.
+
+
+Y. Chen
+
+BPEL, BPEL4WS, WS-BPEL
+
+17
+
+http://download.boulder.ibm.com/ibmdl/pub/software/dw/specs/ws-bpel/ws-bpel.pdf
+
+
+A BPEL process defines the structure of the
+interaction in terms of
+ participant services (partners)
+ Characterize partners
+ Provide support to partner conversation
+ business logic.
+ Data
+ Control flow
+ Error handling and recovery mechanisms
+Y. Chen
+
+BPEL Partners: Input / Output of a Process
+
+18
+
+Partners:
+ A composition defines a new service that interacts with one
+or more partners.
+ A partner is characterized by the WSDL interface portType
+ Interactions between partners can be unidirectional or
+bidirectional. You may define
+ Synchronous and asynchronous interactions.
+ Stateless and Stateful.
+ How is the state maintained in stateful services?
+ BPEL correlation mechanism uses business data to maintain
+the state of the interaction.
+ Other middleware mechanisms are possible.
+
+
+Y. Chen
+
+19
+
+Client
+
+Example: Developing a Business Process with BPEL
+Partner
+Link
+
+WSDL
+portTpye
+
+<receive>
+
+Partner
+Bi-Directional / Link
+Synchronous
+
+WS 1
+
+<invoke>
+<invoke>
+
+WS 2
+Partner
+Link
+
+processing
+WSDL
+portTpye
+
+<invoke>
+<receive>
+
+WS 3
+Uni-Directional /
+Asynchronous
+
+processing
+<reply>
+BPEL process as a composite Web service
+
+Y. Chen
+
+20
+
+BPEL Basic Activities
+A BPEL process consists of steps, each step is an activity:
+<invoke>
+Invoking a service
+<receive> Waiting for receiving a message
+<reply>
+Generating response to a synchronized
+service call
+<assign>
+Modifying data variables
+<throw>
+Jumping to an exception handler
+<catch>
+Handling an exception
+<wait>
+Waiting for a certain amount of time
+<terminate> Terminating the entire process
+Y. Chen
+
+21
+
+BPEL Constructs
+A BPEL process can use constructs to define complex activities:
+<sequence> Define a set of activities that will be executed in the
+given order of sequence.
+<flow>
+Define a set of activities that will (can) be executed
+in parallel.
+<switch>
+Define a selection (if-then-else)
+<while>
+Define a while-loop
+<while condition="expr" standard-attributes>
+standard-elements
+activities
+</while>
+<pick>
+Define a list of activities. Execute the first activity
+that is available, e.g., can be used to block wait for a
+response, or timeout, whichever comes first.
+<partnerLink> Define a partner link
+<variable>
+Declare a variable
+
+Y. Chen
+
+22
+
+Process Example: Select the Best Insurance
+
+<?xml version= "1.0" encoding="utf-8"?>
+<process name="insuranceSelectionProcess"
+
+Root element
+
+targetNamespace="http://bpelexample.com/bpel/example/"
+xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+xmlns bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+xmlns:ins="http://bpelexample.com/bpel/insurance/"
+xmlns:com="http://bpelexample.com/bpel/company/">
+
+<partnerLinks>
+name = "client"
+ <partnerLink
+partnerLinkType = "com:selectionLT"
+One role myRole = "insuranceSelectionService"/>
+<partnerLink name = "insuranceA"
+
+partnerLinkType ="ins:insuranceLT"
+myRole = "insuranceSelectionRequester"
+Two roles
+partnerRole = "insuranceSelectionService"/>
+<partnerLink name = "insuranceB"
+
+partnerLinkType= "ins:insuranceLT"
+myRole = "insuranceSelectionRequester"
+Two roles
+partnerRole = "insuranceSelectionService"/>
+</partnerLinks>
+
+This business
+process has 3
+partners:
+Client,
+insureanceA,
+and
+insuranceB
+
+Y. Chen
+
+23
+
+Example (contd.): Variables
+<variables>
+<!-- input for BPEL process -->
+<variable name="InsuranceRequest"
+messageType="ins:InsuranceRequestMessage"/>
+<!-- output from insurance A -->
+<variable name="InsuranceAResponse"
+messageType="ins:InsuranceResponseMessage"/>
+<!-- output from insurance B -->
+<variable name="InsuranceBResponse"
+messageType="ins:InsuranceResponseMessage"/>
+<!-- output from BPEL process -->
+<variable name="InsuranceSelectionResponse"
+messageType="ins:InsuranceResponseMessage"/>
+</variables>
+Y. Chen
+
+24
+
+Example (contd.): Sequence and Flow
+<sequence>
+<!-- Receive the initial request from client -->
+<receive partnerLink="client"
+partner link
+portType="com:InsuranceSelectionPT"
+is used
+operation="Selectlnsurance"
+variable="InsuranceRequest"
+createlnstance= "yes" />
+<!-- Make concurrent invocations to Insurance A and B -->
+<flow>
+partner link
+<!-- Invoke Insurance A web service -->
+is used
+<invoke partnerLink="insuranceA"
+portType="ins:ComputelnsurancePremiumPT"
+operation="computelnsurancePremium"
+inputvariable= "InsuranceRequest"
+outputVariable="InsuranceAResponse"/>
+<!-- Invoke Insurance B web service -->
+<invoke partnerLink="insuranceB"
+portType="ins:ComputelnsurancePremiumPT"
+partner link
+operation="computelnsurancePremium"
+is used
+inputvariable= "InsuranceRequest"
+outputVariable="InsuranceBResponse"/>
+Y. Chen
+</flow>
+
+25
+
+Example (contd.): Switch (if-then-else)
+<!-- select the best offer and construct the response -->
+<switch>
+<case condition="bpws:getvariableData(‘InsuranceAResponse’,
+‘confirmationData’, ‘/confirmationData/ins:Amount’)
+&lt;= bpws:getvariableData(‘InsuranceBResponse’,
+‘confirmationData’, ‘/confirmationData/ins : Amount’)">
+<!-- select Insurance A -->
+<assign>
+<copy>
+<from variable="InsuranceAResponse" />
+<to variable="insuranceSelectionResponse" />
+</copy>
+</assign>
+</case>
+Y. Chen
+
+26
+
+Example (contd.): Switch
+
+<otherwise>
+<!-- select Insurance B -->
+<assign>
+<copy>
+<from variable="InsuranceBResponse" />
+<to variable="InsuranceSelectionResponse" />
+</copy>
+</assign>
+</otherwise>
+</switch>
+<!-- send a response to the client -->
+<reply partnerLink="client"
+portType="com:insuranceselectionPT"
+operation="selectInsurance"
+partner link
+is used
+variable="InsuranceSelectionResponse"/>
+</sequence>
+</process>
+
+Y. Chen
+
+The Root Element “process”
+
+27
+
+Define the qualifiers and namespaces of the process
+Read text chapter 4 if
+• Target namespace
+not familiar with XML
+• Default namespace
+• Additional namespaces in which other names are defined
+<?xml version="1.0" encoding="utf-8"?>
+<process name="insuranceSelectionProcess"
+Default
+
+targetNamespace="http://bpelexample.com/bpel/example/"
+xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+xmlns bpws="http://schemas.xmlsoap.org/ws/2003/03/businessprocess/"
+xmlns:ins="http://bpelexample.com/bpel/insurance/"
+xmlns:com="http://bpelexample.com/bpel/company/">
+Y. Chen
+
+28
+
+Invoking Web Services in BPEL Process
+BPEL supports two methods of two-way communication:
+ Synchronous:
+ Send a request to a WS, and block-wait for receiving the
+response;
+ Suitable for the situation where the result is expected in little
+time.
+ Asynchronous:
+ Send a request to a WS and start to take other activities.
+ Let the callee WS to call back;
+ Suitable for the situation where the result may take a long time
+ The caller must be a service, with a portType
+Y. Chen
+
+29
+
+Invoking Web Services in BPEL Process
+portType
+Synchronous request
+Synchronous response
+
+WS
+of BPEL
+process
+
+Bi-Directional /
+Synchronous
+
+Require one role in
+Partner Link Type
+
+Asynchronous request
+
+WS
+of BPEL
+process
+
+Client
+
+Client
+
+Uni-Directional /
+Asynchronous
+
+Require two roles in
+Partner Link Type
+
+Y. Chen
+
+30
+
+Invoking WS Sequentially
+<process>
+<!– waiting for request to start processing -->
+<receive … />
+...
+<!– Start to process the request by calling multiple WS one by one -->
+<sequence>
+<!-- Invoke Insurance web services -->
+<invoke …/>
+<invoke …/>
+<invoke …/>
+...
+</sequence>
+</process>
+
+Y. Chen
+
+31
+
+Invoking WS in Parallel
+<process>
+<!– waiting for request to start processing -->
+<receive … />
+...
+<!– Start to process the request by calling multiple WS in parallel -->
+<flow>
+<!-- Invoke Insurance web services -->
+<invoke …/>
+<invoke …/>
+<invoke …/>
+...
+</flow>
+</process>
+
+Y. Chen
+
+32
+
+Invoking WS Sequentially and in Parallel
+<process>
+<!-- waiting for request to start processing -->
+<receive … />
+...
+<!-- Start to process the request by calling multiple WS sequentially and in
+parallel -->
+<sequence>
+<flow>
+<invoke …/>
+<invoke …/>
+...
+<invoke ../> <invoke ../>
+<invoke ../>
+</flow>
+<flow>
+<invoke …/>
+<invoke …/>
+...
+</flow>
+</sequential>
+<invoke ../> <invoke ../>
+<invoke ../>
+</process>
+Y. Chen
+
+Each Business Process is a Web Service
+
+33
+
+Each BPEL process is typically a composite Web
+service, with the following features
+
+
+
+
+
+
+
+Clients will call the process as a WS;
+At least one WS will be called by the process
+(otherwise, it is not a composite WS)
+A process will have a WSDL file to define how the
+clients or other WS can call the process
+A process can offer synchronous and asynchronous
+communication methods to the clients or other WS.
+Y. Chen
+
+WSDL portType of the BPEL Process
+
+34
+
+portType
+A
+
+Async request
+
+portType
+
+BPEL Process
+portType
+B
+
+Web Service
+
+Consider the WSDL portType: A and B
+ The BPEL process offers portType A to the client
+ The BPEL process offers portType B for the WS to callBack
+ The BPEL process will access the portType offered by WS
+Y. Chen
+
+35
+
+PartnerLinkType for BPEL Process in WSDL
+A new element, called PartnerLinkType is added into the WSDL file of the process,
+using the extensibility of WSDL.
+This element does not have to be in the services that interact with the BPEL process.
+
+BPEL Process’s WSDL
+PartnerLinkType
+
+BPEL Process
+(Executable Code)
+
+Role 1
+portTypeA
+portType
+Role 2
+portTypeB
+portType
+
+portType
+
+Web Service
+
+Y. Chen
+
+36
+
+WSDL File of the BPEL Process
+
+<?xml version= "l.0" encoding="UTF-8"?>
+<definitions
+xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+xmlns:soap="http://schemas xmlsoap.org/wsdl/soap/"
+xmlns:xs= "http://www.w3.org/2001/XMLschema"
+xmlns: soapenc="http://schemas.xml soap.org/soap/encoding/"
+xmlns :ins="http://bpelexample.com/bpel/insurance/"
+xmlns : com="http://bpelexample.com/bpel /company/"
+targetNamespace ="http://bpelexample.com/bpel/company/"
+xmlns="http://schemas.xmlsoap.org/wsdl/"
+xmlns : plnk= "http://schemas.xmlsoap.org/ws/2003/05/partner-link/" >
+Default
+<types>
+<xs:schema ... >
+</xs:schema>
+Additional
+namespace
+</types>
+<message ... >
+<part ... />
+</message>
+Y. Chen
+
+37
+
+WSDL File of the BPEL Process (contd.)
+<portType name="computeInsurancePremiumPT">
+<operation name="...">
+<input message="..." />
+<output message="..." />
+</operation>
+</portType>
+<portType name="ComputeInsurancePremiumCal1backPT">
+<operation name="...">
+<input message="..."/>
+Next
+page
+</operation>
+</portType>
+<plnk:partnerLinkType name=insuranceLT>
+…
+</plnk: partnerLinkType>
+Y. Chen
+
+38
+
+WSDL File of the BPEL Process (contd.)
+
+<plnk:partnerLinkType name=insuranceLT>
+
+For client to call
+
+<plnk:role name= "insuranceService">
+<plnk:portType name="ins:computeInsurancePremiumPT"/>
+</plnk: role>
+<plnk: role name="insuranceRequester">
+<plnk:portType name="ins:ComputeInsurancePremiumCallbackPT"/>
+</plnk: role>
+</plnk: partnerLinkType>
+</definitions>
+
+For insurance
+company to call back
+Y. Chen
+
+39
+
+WSDL with the plnk extension
+definitions, service name, namespaces
+Service
+port
+binding
+
+port
+binding
+...
+
+partnerLinkType
+
+partnerLinkType
+
+portType
+
+portType
+
+operation
+
+operation
+message, in
+
+...
+
+message, in
+
+type
+
+type
+
+message, out
+
+message, out
+
+Type
+
+type
+Y. Chen
+
+40
+
+Define the process with the partnerLink
+using partnerLinkType
+
+<?xml version="1.0" encoding="utf-8"?>
+<process name="insuranceSelectionProcess"
+targetNamespace="http://bpelexample.com/bpel/example/"
+xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+xmlns bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+xmlns:ins="http://bpelexample.com/bpel/insurance/"
+Partner
+xmlns:com="http://bpelexample.com/bpel/company/">
+Link
+
+Client
+
+<partnerLinks>
+<partnerLink name= "client"
+partnerLinkType = "com:selectionLT"
+myRole="insuranceSelectionService"/>
+One role
+<partnerLink name = "insuranceA"
+partnerLinkType = "ins:insuranceLT"
+myRole = "insuranceSelectionRequester"
+Two roles
+partnerRole = "insuranceSelectionService"/>
+<partnerLink name = "insuranceB"
+partnerLinkType = "ins:insuranceLT"
+myRole = "insuranceSelectionRequester"
+Two roles
+partnerRole = "insuranceSelectionService"/>
+</partnerLinks>
+
+Partner
+Link
+
+<>
+
+portTpye
+
+portTpye
+
+WS
+1
+
+<>
+<>
+Partner
+Link
+portTpye
+
+WS
+2
+
+<>
+<>
+
+<>
+
+Y. Chen
+
+41
+
+Using the partnerLink in the BPEL Process
+<receive partnerLink="client"
+portType="com:InsuranceSelectionPT"
+operation="Selectlnsurance"
+variable="InsuranceRequest" createlnstance= "yes" />
+<flow>
+<invoke partnerLink= "insuranceA"
+portType= "ins:ComputelnsurancePremiumPT"
+operation= "computelnsurancePremium"
+inputvariable= "InsuranceRequest"
+outputVariable= "InsuranceAResponse"/>
+<invoke partnerLink= "insuranceB"
+portType= "ins:ComputelnsurancePremiumPT"
+operation= "computelnsurancePremium"
+inputvariable= "InsuranceRequest"
+outputVariable="InsuranceBResponse"/>
+</flow>
+Y. Chen
+
+BPEL Variables
+
+42
+
+BPEL business processes model the exchange of
+messages between involved web services.
+ Messages are exchanged as operations are invoked.
+ When the business process invokes an operation and
+receives the result, we often want to store that result
+for subsequent invocations, use the result as is, or
+extract certain data.
+ BPEL provides variables to store and maintain the
+state.
+ Variables can also hold data that relates to the state of
+the process, but will never be exchanged with
+partners.
+
+
+Y. Chen
+
+Declaration of Variables
+
+43
+
+
+BPEL Variables are typed. Variables can be declared in one of
+the following kinds:
+
+
+messageType: A variable that can hold a WSDL message;
+
+
+
+element: A variable that can hold an XML Schema element;
+
+
+
+type: A variable that can hold an XML Schema simple type.
+<variables>
+<variable name = "InsuranceRequest"
+messageType = "ins:InsuranceRequestMessage"/>
+<variable name = "PartialInsuranceDescription"
+element ="ins:InsuranceDescription"/>
+<variable name= "LastName"
+type="xs:string" />
+</variables>
+Y. Chen
+
+Global Variables
+
+44
+
+
+
+
+
+You can declare variables globally at the beginning of a BPEL process declaration
+document.
+The following example shows the structure of a BPEL process that uses variables:
+BPEL Process
+
+<process ...>
+<partnerLinks>
+…
+</partnerLinks>
+<variables>
+<variable ... />
+As the direct
+<variable .../>
+child of the
+</variables>
+root element
+<sequence>
+<process>
+…
+</sequence>
+</process>
+
+BPEL Process’s WSDL
+PartnerLinkType
+Role 1
+portTypeA
+portType
+Role 2
+portTypeB
+portType
+
+Y. Chen
+
+45
+
+Scope and Local Variables and Handlers
+Scopes
+ provide a way to divide a complex business
+process into hierarchically organized parts;
+ provide behavioral contexts for activities;
+ allow us to define different fault handlers for
+different activities;
+ can be defined within <sequence> or <flow>.
+ provide a way to declare local variables that are
+visible only within the scope.
+ allow us to define local correlation sets,
+compensation handlers, and event handlers
+Y. Chen
+
+46
+
+Local variables within the given “scope”
+
+The scope
+does not
+apply to these
+faultHandlers
+
+<sequence>
+<scope>
+<variables>
+<!-- variable definitions local to the scope -->
+</variables>
+<correlations>
+<!-- correlation sets -->
+</correlations>
+<compensationHandler>
+<!-- Compensation handlers local to the scope -->
+</compensationHandler>
+<eventHandlers>
+<!-- Event handlers local to the scope -->
+</eventHandlers>
+</scope>
+<faultHandlers>
+<!-- Fault handlers local to the scope -->
+</faultHandlers>
+…
+</sequence>
+
+Y. Chen
+
+47
+
+Exception Handlers
+
+<process>
+<partnerLinks>
+…
+</partnerLinks >
+<variables>
+…
+</variables>
+<faultHandlers>
+<catch ...>
+<!– perform an activity -->
+</catch>
+<catch ...>
+<!– perform an activity -->
+</catch>
+<catchAll>
+<!– perform activity.
+catchAll is optional -->
+</catchAll>
+</faultHandlers>
+…
+</process>
+
+<faultHandlers>
+<catch faultName="trv:TicketNotApproved" >
+<!-- First fault handler -->
+<!-- Perform an activity -->
+</catch>
+<catch faultName="trv:TicketNotApproved"
+faultvariable="TravelFault" >
+<!-- Second fault handler -->
+<!-- Perform an activity -->
+</catch>
+<catch faultvariable="TravelFault" >
+<!-- Third fault handler -->
+<!-- Perform an activity -->
+</catch>
+<catchAll>
+<!-- Perform an activity -->
+</catchAll>
+</faultHandlers>
+Y. Chen
+
+BPEL Case Study
+Employee Travel Booking System
+
+Client
+
+BPEL
+Process
+–
+Composite
+Web Service
+
+Web
+Service 1
+Web
+Service 2
+
+Case Study, also read Text Section 8.3.5
+
+49
+
+Source: https://www.oracle.com/technical-resources/articles/matjaz-bpel.html
+
+
+
+Design a BPEL Process for a company’s travel
+request, which interacts with the following services:
+Client: Access the BPEL process as a Web service
+ Employee Travel Status Web service: provides the
+regulations on travel;
+ Two airlines companies: are used for requesting ticket
+prices
+
+
+
+
+More case studies online and in YouTube video:
+
+
+Next Lecture (not required)
+
+Y. Chen
+
+Where to Find Airlines Services? E.g., FlightStats Web Services
+50
+
+https://developer.flightstats.com/api-docs
+
+Y. Chen
+
+51
+
+WSDL File
+https://en.wikipedia.org/wiki/List_of_airline_codes
+
+https://en.wikipedia.org/wiki/IATA_airport_code
+
+Y. Chen
+
+BPEL Process for Business Travels
+
+52
+
+Client
+
+1. Request
+6. Reply
+
+portType
+
+<<receive>>
+Receive initial data from client
+
+3. Reply
+
+<<invoke(sync)>>
+Retrieve the employee
+Travel status
+<<invoke/receive(sync)>>
+Get plane ticket offer
+From American Airlines
+[American.price
+<= Delta.price]
+<<assign>>
+Select the American
+Airlines ticket
+
+Case Study
+Diagram
+
+2. Request
+
+<<invoke/receive(sync)>>
+Get plane ticket offer
+From Delta Airlines
+
+4.1. Invoke
+5.1.
+Callback
+
+[American.price
+> Delta.price]
+<<assign>>
+Select the Delta
+Airlines ticket
+
+<<rely>>
+Return the best
+offer
+
+portType
+
+5.2.
+Callback
+
+4.2. Invoke
+
+Employee
+Travel
+Status Web
+Service
+
+America
+Airlines
+Web
+Services
+
+Delta
+Airlines
+Web
+Services
+Y. Chen
+
+Employee Travel Status WS (Synchronous)
+
+53
+
+WSDL
+
+EmployeeTravelStatusRequestMessage
+
+EmployeeTravelStatusResponseMessage
+
+Employee Travel
+Employee
+StatusPT:
+Travel
+EmployeeTravelStatus
+Status
+operation
+Web Services
+
+in WSDL
+<portType name="EmployeeTravelStatusPT">
+<operation name= "EmployeeTravelStatus">
+<input message= "tns : EmployeeTravelStatusRequestMessage" />
+<output message= "tns: EmployeeTravelStatusResponseMessage" />
+</operation>
+</portType>
+Y. Chen
+
+BPEL Process for Business Travels
+
+54
+
+Client
+
+1. Request
+6. Reply
+
+portType
+
+<<receive>>
+Receive initial data from client
+
+3. Reply
+
+<<invoke(sync)>>
+Retrieve the employee
+Travel status
+<<invoke/receive(sync)>>
+Get plane ticket offer
+From American Airlines
+[American.price
+<= Delta.price]
+<<assign>>
+Select the American
+Airlines ticket
+
+Case Study
+Diagram
+
+2. Request
+
+<<invoke/receive(sync)>>
+Get plane ticket offer
+From Delta Airlines
+
+4.1. Invoke
+5.1.
+Callback
+
+[American.price
+> Delta.price]
+<<assign>>
+Select the Delta
+Airlines ticket
+
+<<rely>>
+Return the best
+offer
+
+portType
+
+5.2.
+Callback
+
+4.2. Invoke
+
+Employee
+Travel
+Status Web
+Service
+
+America
+Airlines
+Web
+Services
+
+Delta
+Airlines
+Web
+Services
+Y. Chen
+
+Airline Web Services (Asynchronous)
+
+55
+BPEL
+Process’s
+WSDL
+
+WSDL
+FlightTicketRequestMessage
+
+FlightCallbackPT:
+FlightTicketCallback
+operation
+
+FlightAvailabilityPT:
+FlightAvailability
+operation
+
+TravelResponseMessage
+
+Airline
+Web
+Services
+
+<portType name="FlightCallbackPT">
+<operation name= "FlightTicketCallback">
+<input message=
+"tns : TravelResponseMessage"/>
+in WSDL
+</operation>
+<portType name="FlightAvailabilityPT">
+</portType>
+<operation name= "FlightAvailability">
+in WSDL
+<input message=
+"tns : FlightTicketRequestMessage"/>
+</operation>
+</portType>
+Y. Chen
+
+BPEL Process for Business Travels
+
+56
+
+Client
+
+1. Request
+6. Reply
+
+portType
+
+<<receive>>
+Receive initial data from client
+
+3. Reply
+
+<<invoke(sync)>>
+Retrieve the employee
+Travel status
+<<invoke/receive(sync)>>
+Get plane ticket offer
+From American Airlines
+[American.price
+<= Delta.price]
+<<assign>>
+Select the American
+Airlines ticket
+
+Case Study
+Diagram
+
+2. Request
+
+<<invoke/receive(sync)>>
+Get plane ticket offer
+From Delta Airlines
+
+4.1. Invoke
+5.1.
+Callback
+
+[American.price
+> Delta.price]
+<<assign>>
+Select the Delta
+Airlines ticket
+
+<<rely>>
+Return the best
+offer
+
+portType
+
+5.2.
+Callback
+
+4.2. Invoke
+
+Employee
+Travel
+Status Web
+Service
+
+America
+Airlines
+Web
+Services
+
+Delta
+Airlines
+Web
+Services
+Y. Chen
+
+WSDL of the BPEL Process
+
+57
+
+TravelRequestMessage
+Client
+
+TravelResponseMessage
+
+BPEL
+Process’s
+WSDL
+TravelApprovalPT
+TravelApproval
+operation
+
+FlightCallbackPT:
+FlightTicketCallback
+operation
+
+<portType name="TravelApprovalPT">
+<operation name= "TravelApproval">
+<input message=
+"tns: TravelRequestMessage"/>
+<output message=
+"tns: TravelResponseMessage"/>
+in WSDL
+</operation>
+<portType name="FlightCallbackPT">
+</portType>
+<operation name= FlightTicketCallback>
+in WSDL
+
+<input message=
+"tns: TravelResponseMessage"/>
+</operation>
+</portType>
+Y. Chen
+
+BPEL Process for Business Travels
+
+58
+
+Client
+
+1. Request
+6. Reply
+
+portType
+
+<<receive>>
+Receive initial data from client
+
+3. Reply
+
+<<invoke(sync)>>
+Retrieve the employee
+Travel status
+<<invoke/receive(sync)>>
+Get plane ticket offer
+From American Airlines
+
+Case Study
+Diagram:
+It can be
+implemented
+in a similar
+way given in
+the previous
+Example.
+
+2. Request
+
+[American.price
+<= Delta.price]
+<<assign>>
+Select the American
+Airlines ticket
+
+<<invoke/receive(sync)>>
+Get plane ticket offer
+From Delta Airlines
+
+4.1. Invoke
+5.1.
+Callback
+
+[American.price
+> Delta.price]
+<<assign>>
+Select the Delta
+Airlines ticket
+
+<<rely>>
+Return the best
+offer
+
+portType
+
+5.2.
+Callback
+
+4.2. Invoke
+
+Employee
+Travel
+Status Web
+Service
+
+America
+Airlines
+Web
+Services
+
+Delta
+Airlines
+Web
+Services
+Y. Chen
+
+59
+
+Oracle JDeveloper: BPEL Process of the StockQuoteService
+
+Y. Chen
+
+

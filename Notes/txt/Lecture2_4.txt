@@ -1,0 +1,698 @@
+CSE 446 / 598
+Software Integration and
+Engineering
+
+Unit 2
+Software Architecture and Integration
+Unit 2-4
+Software Integration Using Power Platform
+
+Dr. Yinong Chen
+
+2
+
+Unit 2 Outline
+
+Software Development by
+Composition and Integration
+
+Unit 2-1 Advanced Web App Architecture
+Unit 2-2 Enterprise Architecture and Business Process
+Unit 2-3 Workflow Concepts and Workflow Foundation
+Unit 2-4 Software Integration Using Power Platform
+Power Apps
+ Power Automate
+ Power BI
+ Power Pages
+ Copilot Studio
+
+
+Y. Chen
+
+3
+
+Power Platform Stack (YouTube Video)
+https://www.youtube.com/watch?v=iNdYZMFfcr0
+
+Applications
+Independent Software Vendors
+
+Power
+Platform
+Composition
+Tools
+Data and
+Services
+
+Infrastructure
+Y. Chen
+
+Microsoft Power Platform:
+Low-Code Application Development Platform
+
+4
+
+https://learn.microsoft.com/en-us/power-platform/
+
+Easily develop desktop, web and mobile apps —
+with Power Platform based on data, services, AI
+and Copilot.
+ Quickly create apps in days — without having to
+write code — using prebuilt code blocks / services
+and drag-and-drop functionality.
+ It needs minimal hand-coding and generally
+involves moving existing code blocks into a
+workflow to build apps.
+ Benefits: Efficiency, Flexibility, Responsiveness,
+Iterability.
+
+
+Y. Chen
+
+5
+
+Microsoft Power Platform
+https://learn.microsoft.com/en-us/power-platform/
+
+https://www.youtube.com/channel/UCGfWR2ekfRFckLjev6eQYLg
+
+Y. Chen
+
+What is Microsoft Power Apps?
+
+6
+
+https://powerapps.microsoft.com/en-us/low-code-platform/
+https://learn.microsoft.com/en-us/power-apps/powerapps-overview
+
+Power Apps is a suite of apps, services, and connectors, as
+well as a data platform.
+ It provides a rapid development environment to build custom
+apps for your personal and business needs.
+ It allows you to quickly build custom business apps that
+connect to your data stored either in the underlying data
+platform or in many online and on-premises data sources,
+such as
+ Excel
+ SharePoint,
+ Microsoft 365, Dynamics 365,
+ SQL Server, and so on.
+
+
+Y. Chen
+
+Power Apps Development Templates
+
+7
+
+You can write code to extend business app creation and
+customization.
+ You can use code to create data and metadata, apply serverside logic using Azure functions, plug-ins, and workflow
+extensions. You can apply client-side logic using JavaScript,
+ You can integrate external data using virtual tables and
+webhooks, build custom connectors, and embed apps into your
+website experiences to create integrated solutions of different
+types of templates:
+
+
+
+
+Dataverse apps development template
+
+
+
+Canvas apps development template
+
+
+
+Model-driven apps development template
+Y. Chen
+
+Dataverse Development Template
+
+8
+
+https://learn.microsoft.com/en-us/power-apps/maker/data-platform/data-platform-intro
+
+
+
+
+This template focus on data-oriented app development.
+Microsoft Dataverse: is a virtual cloud datastore
+consisting of tables of rows and columns.
+
+
+
+
+
+
+It is seamlessly integrated in all components of Power
+Platform, as well other platforms, such as Microsoft Azure
+and Microsoft 365 infrastructure and Dynamic 365 apps.
+It allows the integration of different data sources at datastore
+layer, instead of dealing them at application logic layer.
+Note: Excel and SQL are concrete stores. Dataverse presents
+an abstract layer above the concrete stores.
+Y. Chen
+
+Canvas Apps Development Template
+
+9
+
+https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/dev-enterprise-intro
+
+
+
+
+
+
+
+
+
+Canvas Apps template: provides a GUI-based
+template using drag-and-drop style to draw the UI.
+Its design style is similar to ASP .Net framework web
+page (.aspx pages) design.
+It uses Connectors to connect your organization’s data
+and web services, as well as connect to Microsoft
+partners or Independent Software Vendors (ISV).
+You have flexibility to design your apps anyway you
+want, while the model-driven template will automate
+many steps for you.
+Y. Chen
+
+Model-Driven Apps Development Template
+
+10
+
+https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/model-driven-app-components
+
+
+
+Model-driven apps typically consists of the following
+components: Data, UI, logic, and visualization:
+Data: Tables, relationship among tables, columns of a table.
+Dataverse is applied in this model.
+ UI: It determines how human users interact with the app,
+e.g., Site map, Form, View, Custom page, …
+ Logic: Business process flow, workflow, actions, business
+rules. Power Automate can be applied for model-driven
+logic.
+ Visualization: It determines what type of data visualizations
+and reporting that the app will have available, e.g., Chart,
+Dashboard. Power BI can be applied here.
+
+
+Y. Chen
+
+Model-Driven vs. Canvas Apps
+
+11
+
+https://learn.microsoft.com/en-us/power-apps/maker/model-driven-apps/model-driven-app-overview
+
+Category
+Data platform
+
+Model-driven apps
+Dataverse only
+
+Design experience
+
+Migration between
+environments
+
+No-code component
+focused design
+Limited, predominantly
+customization of
+generated design
+High – differs
+Often low, given the significant control
+predominantly based on the the designers have of the user experience
+tables and views chosen
+Simple
+Potentially complex given that the data
+sources might need to be updated
+
+Speed of creation
+
+Rapid
+
+Relative to the complexity of the design
+
+Responsive
+
+Automatically responsive
+
+Only responsive if designed in this way
+
+UI control
+
+App consistency
+
+Navigation through Automatic, provided
+relationships
+relationships exist
+
+Canvas apps
+Dataverse + many others using
+connectors
+Manipulation of control properties using
+Power Fx formula language expressions
+Full control of design and choices
+
+Only where designed and applied using
+Power Fx formula language expressions
+Y. Chen
+
+Power Apps Example 1: Quality Assurance Process
+https://rikkeisoft.com/blog/examples-of-power-apps/
+
+Y. Chen
+
+Power Apps Example 2: Virtual Personal Assistant
+https://rikkeisoft.com/blog/examples-of-power-apps/
+
+Y. Chen
+
+14
+
+Power Apps Example 3: CSE446 Honor’s Enrichment Project
+
+Y. Chen
+
+15
+
+Getting Started with Power Apps
+Power Apps Developer Plan | Microsoft Power Platform
+
+Y. Chen
+
+16
+
+Free Account Created
+
+Y. Chen
+
+17
+
+Admin Center
+
+Y. Chen
+
+18
+
+Admin User Required
+
+You
+need
+admin
+to save
+
+It is OK without
+creating environment.
+You can still develop
+testing apps.
+
+Y. Chen
+
+19
+
+Start Creating an App: Choose a Type
+
+Y. Chen
+
+20
+
+Start Creating an App: From a Template
+
+Y. Chen
+
+21
+
+Example
+
+Y. Chen
+
+22
+
+Start Creating an App: Choose Cost Estimator
+
+Y. Chen
+
+23
+
+Start Creating Selected Template
+
+Y. Chen
+
+24
+
+Canvas or Phone App?
+
+Y. Chen
+
+25
+
+Start Creating Selected Template
+
+Y. Chen
+
+26
+
+Editing/Change App into Your Own
+
+Y. Chen
+
+27
+
+Microsoft Power Platform
+https://learn.microsoft.com/en-us/power-platform/
+
+https://www.youtube.com/channel/UCG98S4lL7nwlN8dxSF322bA
+
+https://learn.microsoft.com/en-us/training/modules/get-started-flows/1-introduction
+
+Y. Chen
+
+What is Power Automate?
+
+28
+
+Power Apps create individual apps using composition
+constructs and data sources.
+ Power Automate is a workflow service that automates
+actions across the most common apps and services.
+ For example, you can create a flow that posts a message
+on a Microsoft Teams channel whenever an selected
+event occurs in your favorite planning tool. These types
+of integrations can help the various tools you use
+everyday work better together.
+ You can connect to hundreds of services and can
+manage data in the cloud or in on-premises sources.
+
+
+Y. Chen
+
+What can you do with Power Automate?
+
+29
+
+
+
+Automate workflows between your favorite
+applications and services, sync files, get notifications,
+collect data, etc.
+Instantly respond to high-priority notifications or emails.
+ Capture, track, and follow up with new sales leads.
+ Copy all email attachments to your OneDrive for Business
+account.
+ Collect data about your business and share that information
+with your team.
+ Automate approval workflows.
+ …
+
+
+Y. Chen
+
+30
+
+Creating Your Workflow in Desktop Flow
+1. Create a new desktop flow in Power Automate Desktop
+(https://learn.microsoft.com/en-us/power-automate/desktop-flows/introduction)
+2. Add actions and set up configuration.
+3. Define inputs and outputs.
+4. Test the desktop flow you created.
+5. If needed, set up triggers and links between cloud
+flows and Power Automate Desktop.
+Y. Chen
+
+31
+
+Creating Your Workflow in Cloud
+1. Create a cloud flow in Power Automate
+(https://make.powerautomate.com/)
+2. Specify an event or trigger to start the flow
+with connectors. Based on the way you want to
+trigger the automation: You'll specify what event you
+want to use to trigger your Power Automate flow.
+3. Add actions and conditions.
+
+Y. Chen
+
+32
+
+Create a Your Own Workflow Using Copilot
+
+Choose an
+example
+description
+
+Y. Chen
+
+33
+
+Type Your Own Description to Start
+
+Choose your
+own description
+
+Y. Chen
+
+34
+
+Co-Pilot Suggested Workflow
+
+Y. Chen
+
+35
+
+Review Your Connected Apps and Services
+
+Y. Chen
+
+36
+
+Workflow Generated
+
+Y. Chen
+
+Set Up Parameters and Environment
+
+37
+
+
+
+
+
+Creating and running automation systems in Microsoft Power Automate
+requires that you have access to make changes to the environments in your
+tenant and that you have the appropriate licenses and permissions.
+If you don't already have admin access to a valid tenant, you can start a free
+trial (https://www.microsoft.com/microsoft-365/enterprise/office-365-e3?activetab=pivot%3Aoverviewtab).
+Y. Chen
+
+38
+
+Workflow Generated
+
+Y. Chen
+
+39
+
+Workflow Generated
+
+Y. Chen
+
+Workflow Generated
+
+40
+
+Add new
+item into
+workflow
+Add new
+item into
+workflow
+Add new
+item into
+workflow
+
+Y. Chen
+
+41
+
+Create a Your Own Workflow from Blank
+
+Y. Chen
+
+42
+
+Create a Your Own Workflow from a Template
+
+Y. Chen
+
+43
+
+Create a Your Own Workflow from a Connector
+
+Y. Chen
+
+44
+
+Microsoft Power Platform
+https://learn.microsoft.com/en-us/power-platform/
+
+https://app.powerbi.com/home?experience=power-bi
+
+Y. Chen
+
+What is Power BI?
+
+45
+
+https://learn.microsoft.com/en-us/power-bi/fundamentals/power-bi-overview
+
+
+Power BI is a collection of software services, apps, and
+connectors that work together to turn your data into
+coherent, visually immersive, and interactive insights.
+A Windows desktop application called Power BI Desktop.
+ A software as a service (SaaS) called the Power BI service.
+ For mobile devices: Power BI Mobile
+
+
+Your data might be an Excel spreadsheet, or a
+collection of cloud-based and on-premises hybrid data
+warehouses.
+ Power BI connects to your data sources, visualize and
+discover what's important, and share that with anyone
+or everyone you want.
+Y. Chen
+
+
+46
+
+Power BI Desktop, Service, and Mobile
+
+Y. Chen
+
+47
+
+Power BI Desktop, Service, and Mobile
+
+Y. Chen
+
+48
+
+Microsoft Power Platform
+https://learn.microsoft.com/en-us/power-platform/
+
+https://www.microsoft.com/en-us/power-platform/products/power-pages
+
+Y. Chen
+
+What is Power Pages?
+
+49
+
+https://learn.microsoft.com/en-us/power-pages/capabilities
+
+
+
+
+
+
+
+
+Microsoft Power Pages allows you to create and design a
+business website using templates quickly without a
+professional developer.
+It is a secure, enterprise-grade, low-code software as a service
+(SaaS) platform for creating, hosting, and administering
+modern external-facing business websites.
+Whether you are a low-code maker or a professional
+developer, Power Pages empowers you to rapidly design,
+configure, and publish websites that work across web browsers
+and devices.
+It is based on Bootstrap (https://getbootstrap.com/), which
+natively provides support for building websites that are
+responsive, mobile-friendly, and available in various platforms.
+Y. Chen
+
+50
+
+Create from a Template Using Power Pages
+
+Y. Chen
+
+51
+
+Microsoft Power Platform
+https://learn.microsoft.com/en-us/power-platform/
+
+https://www.microsoft.com/en-us/microsoft-copilot/microsoft-copilot-studio
+
+Y. Chen
+
+Copilot Studio
+
+52
+
+Copilot Studio is a graphical and low-code tool.
+ It can be used for creating agents (AI services).
+ An agent is a powerful AI companion that can handle
+a range of interactions and tasks, e.g., resolving issues
+requiring complex conversations, autonomously
+determining the best action to take based on its
+instructions and context.
+ Agents can engage with customers and employees and
+coordinate a collection of language models, along
+with instructions, context, knowledge sources, topics,
+actions, inputs, and triggers to accomplish your
+desired goals.
+
+
+Y. Chen
+
+53
+
+Copilot Studio
+https://www.microsoft.com/en-us/microsoft-copilot/microsoft-copilot-studio
+
+Y. Chen
+
+54
+
+Large Language Model Services
+Power Platform uses Copilot and OpenAI services and data as its components
+Copilot Studio: https://learn.microsoft.com/en-us/microsoft-copilot-studio/
+
+OpenAI APIs: https://platform.openai.com/
+
+Y. Chen
+
+Summary of the Lecture
+
+55
+
+
+
+Power Platform:
+Build apps using Power Apps, automate tasks using
+Power Automate, analyze data using Power BI, and
+create websites using Power Pages, Copilot Studio
+helps the other power tools.
+Power Apps: Build apps using different components
+ Power Automate: Automate tasks using workflow
+ Power BI: Combine different data sources and visualize
+them.
+ Power Pages: Build different websites and using all the data
+sources and components.
+ Copilot Studio: It can be applied to the four power tools
+using AI.
+Y. Chen
+
+
+
