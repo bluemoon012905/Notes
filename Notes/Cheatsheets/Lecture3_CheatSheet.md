@@ -16,6 +16,12 @@ Use this as a searchable reference for Unit 3 style quiz/exam questions.
 - Terminal execution policy options include `Always Proceed`, `Agent Decides`, and `Request Review`.
 - Review policy options include agent-driven, agent-assisted, review-driven, and custom.
 
+Terminal execution policy mapping (exact wording often tested):
+- `Always Proceed` = agent never asks for review.
+- `Agent Decides` = agent decides when to ask for review.
+- `Request Review` = agent always asks for review.
+- "super agent performs review only" = not listed as a terminal execution policy in lecture.
+
 Recommended in slides:
 - Balanced review policy where agent decides and asks for human approval when needed.
 
@@ -28,6 +34,8 @@ Recommended in slides:
 - Workspace selection allows multi-project work.
 - Playground allows scratch tasks before promoting to workspace.
 - Browser subagent can browse, click, scroll, inspect logs, parse page content, and capture evidence.
+- Agents directly interact with developers through conversation.
+- Agents can directly interact with browser via browser subagent.
 
 ## Use Cases Covered
 - News extraction/highlights.
@@ -40,6 +48,12 @@ Recommended in slides:
 - `Mock`: behavior verification oriented.
 - Agent can generate mocks/stubs to isolate dependencies and validate UUT behavior.
 
+Unit testing use-case count point:
+- In the provided `order_service.py` example, two external dependencies are mocked/stubbed:
+- `InventoryService`
+- `PaymentGateway`
+- => expected mock/stub count in quiz wording: `2`.
+
 ## Lecture 3-2 Business Process and Execution (BPEL)
 
 ## Business Process vs Workflow
@@ -51,6 +65,10 @@ Recommended in slides:
 - `Orchestration`: central coordinator controls involved services; strong fit for private process integration.
 - `Choreography`: no central coordinator; peers coordinate with each other; fit for public/distributed collaboration.
 - BPEL is presented as orchestration-style.
+
+Orchestration wording in Antigravity context:
+- Human user orchestrates by instructing Agent Manager and coordinating agent tasks.
+- It does not mean terminal auto-changing agent behavior.
 
 ## BPEL Positioning
 - `BPEL/WS-BPEL`: enterprise process composition language centered on service interaction.
@@ -87,11 +105,28 @@ Recommended in slides:
 - Process may expose multiple `portType`s (e.g., client-facing + callback-facing).
 - `partnerLinkType` is an extension element used in BPEL process WSDL to map partner roles to port types.
 
+Partner link quiz-critical details:
+- A `partnerLink` is defined between the BPEL process and an interacting party.
+- Valid patterns:
+- client <-> BPEL process
+- service <-> BPEL process
+- Not defined as direct link between two external clients.
+- Not typically modeled as direct link between two external services "used by BPEL" without the BPEL process as the partner in that link.
+
+Where `partnerLinkType` is defined:
+- In the WSDL file of the BPEL process (with `plnk` extension), not in client code and not necessarily in partner services' WSDL files.
+
 ## Variables, Scope, and Fault Handling
 - BPEL variables maintain process/intermediate state.
 - Variable declaration types: `messageType` (WSDL message), `element` (XML schema element), `type` (XML schema simple type).
 - `scope` enables local variables, local correlations, compensation handlers, and event handlers.
 - Fault handling uses `faultHandlers` with `catch` and optional `catchAll`.
+
+WSDL synchronous interface recognition (very common MCQ):
+- If a `portType` operation has both `<input .../>` and `<output .../>`, it defines request/response interface (synchronous two-way interface) in WSDL.
+- Example pattern:
+- `<portType ...><operation ...><input .../><output .../></operation></portType>`
+- This is interface definition in WSDL, not a BPEL call statement by itself.
 
 ## Lecture 3-3 Message-Based Integration
 - `Lecture3_3.pdf` in this repository is corrupted/unreadable (broken xref/trailer), so content could not be extracted in this workspace.
@@ -162,12 +197,49 @@ Caching vs recommendation:
 - BPEL = orchestration-centric process composition.
 - Choreography has no central coordinator.
 - Composite process typically has its own WSDL and partner mappings.
+- SWF three-party model (from lecture slide):
+- Activity developer writes/registers activities.
+- Workflow developer writes/registers workflow/decider.
+- Client is end user side consumer of workflow execution.
+- Quiz answer: SWF workflow client is for `End user`.
 
 ## BPEL Mechanics
 - Core activity trio in many processes: `receive -> invoke(s) -> reply`.
 - `sequence` = ordered; `flow` = parallel.
 - `partnerLinkType` connects roles to `portType`s.
 - `scope` controls local variables/handlers/correlation boundaries.
+- BPEL language composition style = `orchestration`.
+- `partnerLink` anchors around BPEL process interactions (client-BPEL or service-BPEL).
+- `partnerLinkType` location = BPEL process WSDL.
+- WSDL `portType` with input+output = synchronous interface definition.
+
+## Antigravity Quiz Bank
+- Antigravity does not work exactly like a plain chatbot IDE; key difference is multi-agent async orchestration and Mission Control.
+- Agents are used for:
+- implementation planning
+- direct interaction with developer conversation
+- code generation
+- direct browser interaction through browser subagent
+- Terminal policies: never ask / decide / always ask.
+- Orchestration in Antigravity quiz context = instructing and coordinating through agent manager.
+
+## Rapid Q/A (Exam Style)
+- Q: In SWF, workflow client is designed for?
+- A: End user.
+- Q: BPEL composition style?
+- A: Orchestration.
+- Q: Where is `partnerLinkType` defined?
+- A: WSDL file of the BPEL process.
+- Q: `partnerLink` can be defined between?
+- A: Client and BPEL process, or service and BPEL process.
+- Q: WSDL `portType` + `operation` + `input` + `output` defines?
+- A: Synchronous interface in WSDL.
+- Q: In unit-testing use case, how many mock/stub dependency interfaces in given program?
+- A: 2.
+- Q: Antigravity terminal policies supported?
+- A: Always Proceed / Agent Decides / Request Review.
+- Q: “Antigravity works the same as plain LLM chatbot IDE.”
+- A: False.
 
 ## Caching + Recommendation
 - Output vs fragment vs data caching differ by granularity.
